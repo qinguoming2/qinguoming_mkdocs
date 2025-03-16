@@ -1,0 +1,1643 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../CNC_Cpp%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">
+      
+      
+        <link rel="next" href="../Note_Abaqus_%E5%A4%B9%E8%8A%AF%E6%9D%BF%E5%BB%BA%E6%A8%A1/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.2.7">
+    
+    
+      
+        <title>Abaqus CompositeLayup - Qinguoming Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#note_abaqus_compositelayup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Qinguoming Notes" class="md-header__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Qinguoming Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Abaqus CompositeLayup
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Qinguoming Notes" class="md-nav__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Qinguoming Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    数值分析算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            数值分析算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    蒙特卡洛实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数值积分+微分方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95code%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法CODE实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E6%B1%82%E6%A0%B9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    非线性方程求根
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E5%88%9D%26%E8%BE%B9%E5%80%BC%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    常微分方程初&边值问题数值解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_Crout%E5%88%86%E8%A7%A3%E8%BF%BD%E8%B5%B6%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crout分解追赶法的线性方程组求解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    FEM算法原理及编程
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            FEM算法原理及编程
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Mindlin%E6%9D%BFQ4%E5%8D%95%E5%85%83%E6%8E%A8%E5%AF%BC-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mindlin Q4单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Kirchhoff%E6%9D%BF%E7%90%86%E8%AE%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基尔霍夫板理论
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E5%B1%82%E5%90%88%E6%9D%BF%E5%8D%95%E5%85%83%E6%A0%BC%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    层合板单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FEM边界条件处理方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E7%BB%93%E6%9E%84%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%95%99%E6%9D%90%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    结构动力学教材笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python数值计算
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Python数值计算
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_%E6%9D%90%E6%96%99%E5%88%9A%E5%BA%A6%E8%BD%AC%E6%8D%A2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    材料刚度矩阵转换
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Vtk%E6%96%87%E4%BB%B6%E8%A7%84%E5%88%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vtk文件规则
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_2%263%E7%BB%B4%E9%AB%98%E6%96%AF%E7%A7%AF%E5%88%86py%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2&3维高斯积分Python实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Mpmath%E5%BA%93%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mpmath库
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    multiprocessing多线程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Matlab2Python%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Matlab2Python索引
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CNC_Cpp%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cpp数值计算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Abaqus 建模
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Abaqus 建模
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Abaqus CompositeLayup
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus CompositeLayup
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-composite-layups-and-orientations" class="md-nav__link">
+    1. composite layups and orientations
+  </a>
+  
+    <nav class="md-nav" aria-label="1. composite layups and orientations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-layup-orientation" class="md-nav__link">
+    1.1 layup orientation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-ply-orientation" class="md-nav__link">
+    1.2 ply orientation
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 ply orientation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-case-determining-the-orientation-of-each-ply" class="md-nav__link">
+    1.2.1 Case: Determining the orientation of each ply.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-composite-layup" class="md-nav__link">
+    2. 从composite layup中获得输出
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 从composite layup中获得输出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 从特定的积分点获得输出
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-composite-layup" class="md-nav__link">
+    3. 可视化composite layup结果
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 可视化composite layup结果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-ply-stack-plot" class="md-nav__link">
+    3.1 Ply stack plot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-ply-based-results" class="md-nav__link">
+    3.2 Ply-based results
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Ply-based results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ply" class="md-nav__link">
+    查看单个ply的结果云图
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#envelope-plots" class="md-nav__link">
+    Envelope plots(包络云图)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#through-thickness-xy-plots" class="md-nav__link">
+    Through thickness X–Y plots
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-composite-layup" class="md-nav__link">
+    4. 三种 composite layup的建模
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 三种 composite layup的建模">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-conventional-shell-composite-layup" class="md-nav__link">
+    4.1 conventional shell composite layup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-continuum-shell-composite-layup" class="md-nav__link">
+    4.2 continuum shell composite layup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-solid-composite-layup" class="md-nav__link">
+    4.3 solid composite layup
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考链接
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%A4%B9%E8%8A%AF%E6%9D%BF%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus Sandwich建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%A4%B1%E6%95%88/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材失效建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E7%A6%BB%E6%95%A3%E5%A2%9E%E5%BC%BA%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材离散增强建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_SolidSection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus SolidSection KeyWord
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E8%BE%93%E5%87%BA%E6%80%BB%E4%BD%93%E5%88%9A%E5%BA%A6%E7%9F%A9%E9%98%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 输出总体刚度矩阵
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复合材料分析基础
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%8E%8B%E7%94%B5%E5%88%86%E6%9E%90%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 压电分析入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    其他
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            其他
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git常用命令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_%E5%87%A0%E7%AF%87%E6%A8%A1%E6%80%81%E5%BA%94%E5%8F%98%E8%83%BD%E8%AE%BA%E6%96%87/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    几篇模态应变能论文
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../About/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Me
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-composite-layups-and-orientations" class="md-nav__link">
+    1. composite layups and orientations
+  </a>
+  
+    <nav class="md-nav" aria-label="1. composite layups and orientations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-layup-orientation" class="md-nav__link">
+    1.1 layup orientation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-ply-orientation" class="md-nav__link">
+    1.2 ply orientation
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 ply orientation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-case-determining-the-orientation-of-each-ply" class="md-nav__link">
+    1.2.1 Case: Determining the orientation of each ply.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-composite-layup" class="md-nav__link">
+    2. 从composite layup中获得输出
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 从composite layup中获得输出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 从特定的积分点获得输出
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-composite-layup" class="md-nav__link">
+    3. 可视化composite layup结果
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 可视化composite layup结果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-ply-stack-plot" class="md-nav__link">
+    3.1 Ply stack plot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-ply-based-results" class="md-nav__link">
+    3.2 Ply-based results
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Ply-based results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ply" class="md-nav__link">
+    查看单个ply的结果云图
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#envelope-plots" class="md-nav__link">
+    Envelope plots(包络云图)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#through-thickness-xy-plots" class="md-nav__link">
+    Through thickness X–Y plots
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-composite-layup" class="md-nav__link">
+    4. 三种 composite layup的建模
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 三种 composite layup的建模">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-conventional-shell-composite-layup" class="md-nav__link">
+    4.1 conventional shell composite layup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-continuum-shell-composite-layup" class="md-nav__link">
+    4.2 continuum shell composite layup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-solid-composite-layup" class="md-nav__link">
+    4.3 solid composite layup
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考链接
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="note_abaqus_compositelayup">Note_Abaqus_CompositeLayup建模</h1>
+<blockquote>
+<p>来源:https://www.cnblogs.com/aksoam/p/18369061</p>
+</blockquote>
+<p>abaqus 的3个复合材料建模途径:
++ 传统的material-&gt;section-&gt;orientation-&gt;step-&gt;job的建模方式
++ Composite Layup建模方式
++ Composite Modeler (CM) 插件-建模方式</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240602171258220-671630875.png" /></p>
+<blockquote>
+<p>本文是我对composite layup复合材料建模的理解和回顾,仅供参考.</p>
+</blockquote>
+<p>composite layup manager支持三种单元类型:
++ conventional shells(2d shells)
++ comtinuum shells(3d shells)
++ solid (solid elements)</p>
+<h2 id="1-composite-layups-and-orientations">1. composite layups and orientations</h2>
+<p>复合材料建模最关键的点是: 确定铺层顺序(layup sequence)和铺层方向(layup orientation).</p>
+<p>在Abaqus/CAE中,通过从三个相对的参数(layup orientation、ply orientation和额外的旋转)中导出纤维的方向,使复合铺层过程更易于管理</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820104426271-818717515.png" /></p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240822094318539-948295072.png" /></p>
+<h3 id="11-layup-orientation">1.1 layup orientation</h3>
+<p>layup orientation定义了layup中所有ply的基准方向(base orientation).</p>
+<p>在 conventional and continuum shell layups,abaqus会将选择的Datums坐标系投影到shell单元面,使得<strong>layup orientation的stacking direction</strong>和shell的<strong>normal</strong>方向一致.默认情况下是,3方向和normal方向一致.</p>
+<p>In solid composite layups, the orientation is not projected.</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820105418471-226366541.png" /></p>
+<p>ABaqus定义layup orientation的式:</p>
+<ol>
+<li>使用part global coordinate system</li>
+<li>指定一个基准坐标系( Coordinate system)</li>
+<li>使用Discrete orientation,可以为每个单元指定一个orientation</li>
+<li>使用Discrete field,定义 orientation discrete field来指定空间变化的orienation</li>
+<li>
+<p>使用子程序<code>ORIEN</code>,但对EXPLICIT求解器无效</p>
+</li>
+<li>
+<p>Normal direction: 指定哪个坐标轴为复材的3-方向,默认是axis-3.</p>
+</li>
+<li>additional rotation:如果使用2,3,4方式来定义layup orientation,则可以指定一个角度(以度为单位),该角度定义了整个层叠围绕指定法线方向的附加旋转.可以使用标量离散场来指定空间变化的附加旋转角度.</li>
+</ol>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820110011450-1580967804.png" /></p>
+<h3 id="12-ply-orientation">1.2 ply orientation</h3>
+<p>ply orientation定义了每个ply在layup中的相对方向.和layup 同理,在conventional and continuum shell layups,ply orientation会被投影到shell单元面,使得<strong>ply orientation的stacking direction</strong>和shell的<strong>normal</strong>方向一致.see <a href="https://abaqus-docs.mit.edu/2017/English/SIMACAEELMRefMap/simaelm-c-shelloverview.htm#simaelm-c-shelloverview-stackingdirection">Defining the stacking and thickness direction</a></p>
+<p>In solid composite layups , the orientation is not projected.就像下图:</p>
+<blockquote>
+<p>Plies and ply orientations for shell and solid composite layups.</p>
+</blockquote>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820111210056-612410695.png" /></p>
+<p>abaqus会根据CSYS和rotation angle来确定ply orientation.</p>
+<ul>
+<li>CSYS的选项:</li>
+<li>Layup : 使用layup orientation作为ply的坐标系</li>
+<li>引用一个Datums坐标系,并指定normal direnction,e.g. <code>Datum csys1.3</code>  indicates that you chose Datum csys-1 to define the coordinate system of the ply, and you chose the 3-axis to define the normal.</li>
+<li>rotation angle: 这个选项用来定义每个层内纤维相对于层坐标系统的旋转角度
+  1.如果指定一个旋转角度,则ply绕坐标系法线逆时针旋转,并且角度相对于1轴进行测量.</li>
+</ul>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820111319417-237442139.png" /></p>
+<h4 id="121-case-determining-the-orientation-of-each-ply">1.2.1 Case: Determining the orientation of each ply.</h4>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820112330688-902675894.png" /></p>
+<p>上图中说明:</p>
+<ul>
+<li>VerticalTape-1的铺层角度为0°,方位坐标系和layup一致,得到的ply方向是沿着layup orientation方向的1轴.</li>
+<li>VerticalTape-2d的铺层角度为90°,方位坐标系和layup一致,layup基准绕3轴逆时针(有手定则)转90度,得到ply方向</li>
+<li>DiagonalTape-1 的铺层角度为0°,方位坐标系选择<code>Datum csys-1</code>,Datums csys-1绕3轴逆时针转0度,得到ply方向</li>
+<li>DiagonalTape-2 的铺层角度为90°,方位坐标系选择<code>Datum csys-1</code>,Datums csys-1绕3轴逆时针转90度,得到ply方向</li>
+</ul>
+<h2 id="2-composite-layup">2. 从composite layup中获得输出</h2>
+<p>众所周知,应力,应变等输出变量是在积分点上输出的.在composite layup中,可以指定<strong>ply厚度方向上的积分点数</strong>;</p>
+<p>使用 <mark>shell sections integrated during the analysis==时,shell or continuum shell composite layup默认每个ply有3个积分点;solid composite layup默认每个ply只有1个积分点.==可以修改,但需要是奇数</mark></p>
+<p>使用 pre-integrated shell sections时,每个ply有3个积分点,<mark>不可修改</mark></p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820115154636-999744031.png" /></p>
+<p>具有三层的复合层的集成点编号规律如下:</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820115635079-474977090.png" /></p>
+<p>如果不创建输出请求,Abaqus只从复合层的顶部和底部(最高和最低积分点)计算场变量输出;所以,如果需要从composite layup获得场变量输出,<strong>必须新建一个输出请求</strong>,并且<strong>指定输出域(Domain)为composite layup</strong>.e.g 从一个composite layup中获得应力,应变输出,输出位置为积分点2,3:</p>
+<blockquote>
+<p>新建一个输出请求,输出域为composite layup,默认的<mark>输出位置为ply-middle</mark></p>
+</blockquote>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820120227941-1142119713.png" /></p>
+<h3 id="21">2.1 从特定的积分点获得输出</h3>
+<p>Abaqus/CAE从指定的积分点计算输出.<strong>积分点从底层的底部到顶层的顶部依次编号</strong>,其中底层是layup中的第一层.例如: 如果希望从下图中所示的<strong>每一ply的中间积分点输出应力,则需要输入2、5、8</strong></p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820120832380-1082079807.png" /></p>
+<h2 id="3-composite-layup">3. 可视化composite layup结果</h2>
+<h3 id="31-ply-stack-plot">3.1 Ply stack plot</h3>
+<p>ply stack plot可以用来可视化composite layup的铺层顺序.</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820121149453-2050167297.png" /></p>
+<p>进入property模块,选择<code>tools</code>-&gt;<code>Query</code>-&gt;<code>Ply Stack Plot</code>,选中要查询铺层的区域,然后选择<code>ply stack plot options</code>可以定义可视化的选项.<mark>比如下图,可以显示每个ply的角度,厚度,材料,坐标系,积分点等信息.</mark></p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820121745498-1348558718.png" /></p>
+<h3 id="32-ply-based-results">3.2 Ply-based results</h3>
+<p>abaqus后处理支持查看composite layup的各个层的结果云图.也可以查看 envelope contour plot(maximum or minimum values across all of the plies in the layup.)</p>
+<h4 id="ply">查看单个ply的结果云图</h4>
+<p>进入后处理模块,<code>results</code>-&gt;<code>Section Points</code>,选中ply,然后指定输出的积分点位置.</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820180128525-902465842.png" /></p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820180221543-1548432088.png" /></p>
+<p>abaqus可以同时查看layup的顶面/底面位置的结果云图.<code>conventional shell composite layup</code>表现为双面壳的云图,<mark>两侧的云图并不相同,分别为顶/底面位置的结果</mark>;<code>continuum shell composite layup or solid composite layup</code>则是分别在顶面,底面绘制云图.[see <a href="https://abaqus-docs.mit.edu/2017/English/SIMACAECAERefMap/simacae-t-resvisvariableshelldb.htm">Selecting section point data by category</a>]</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820180826119-123981443.png" /></p>
+<h4 id="envelope-plots">Envelope plots(包络云图)</h4>
+<p>包络云图显示了复合材料layup的最大值或最小值变量分布.例如,单元100含有3个ply,每个ply的应力S11值分别为10,20,30.包络云图中显示的值则是10或者30.</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820181828742-1124062208.png" /></p>
+<p>此外,也可以输出<code>quilt contour plot</code>来展示每个单元中的临界层(critical ply)名称</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820182053013-686898224.png" /></p>
+<blockquote>
+<p>想要绘制包络图,必须创建一个输出请求,并选择输出所有ply位置的变量</p>
+</blockquote>
+<h4 id="through-thickness-xy-plots">Through thickness X–Y plots</h4>
+<p>abaqus可以绘制厚度方向上的变量值分布,比如以下是通过13层复合材料铺层在纤维方向上的应变的贯穿厚度图.<strong>应变是不连续的,因为纤维的取向在层之间发生了变化</strong></p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240820182618407-911158150.png" /></p>
+<h2 id="4-composite-layup">4. 三种 composite layup的建模</h2>
+<blockquote>
+<p>三种方式的选项,如果前文已经说明,后续不会重复说明.</p>
+</blockquote>
+<h3 id="41-conventional-shell-composite-layup">4.1 conventional shell composite layup</h3>
+<p>conventional shell composite layup是由不同方向的不同材料组成的layup.这种方式使用传统的2d shell单元(常用的是S4R,S3R等)来模拟composite layup.</p>
+<ul>
+<li>section integration选项</li>
+</ul>
+<p>可选:during 和before analysis两种方式.<mark>采用默认值(during analysis)即可,适用于绝大多数情况</mark>;如果分析涉及nonlinear material behavior和heat transfer,必须使用<code>during analysis</code>.(see <a href="https://abaqus-docs.mit.edu/2017/English/SIMACAEELMRefMap/simaelm-c-usingshellsection.htm">Using a shell section integrated during the analysis to define the section behavior</a>)</p>
+<p>使用<code>before analysis</code>选项可以定义<code>Linear moment-bending</code> 和<code>force-membrane strain relationships</code>(<strong>我猜大概是复合材料的CLT理论</strong>)此时所有的计算都是根据截面力和力矩的关系来进行的.section 属性通过<code>弹性行为</code>定义;此外在<code>befor analysis</code>的前提下还可以对壳的行为进行==<em>理想化处理( idealization)</em>==(see <a href="https://abaqus-docs.mit.edu/2017/English/SIMACAEELMRefMap/simaelm-c-usingshellgensect.htm">Using a general shell section to define the section behavior</a>)</p>
+<blockquote>
+<p>You should use pre-integrated composite layups if the response of the layup is linear elastic and its behavior is not dependent on changes in temperature or predefined field variables</p>
+</blockquote>
+<p>四种理想化选项(pre-integrated),详见<a href="https://abaqus-docs.mit.edu/2017/English/SIMACAEELMRefMap/simaelm-c-usingshellgensect.htm#simaelm-c-usingshellgensect-ideal">Idealizing the section response</a>:
++ No idealization,顾名思义
++  Smeared properties,用于并不明确具体的铺层顺序的情况,比如设计方案中只说明了==45度,90度,0度分别占比10%,50%,40%==
++  Membrane only,忽略弯曲刚度,只考虑in-plane行为
++  Select Bending only,表示结构是<code>pure-bending</code>的</p>
+<p>以下是定义conventional shell composite layup的界面,表格数据含义已在之前说明,<mark><em>需要注意: 这里的Thickness一列需要输入真实的厚度值</em></mark>,在<code>Shell Parameters</code>中,可以定义<code>Shell thickness</code>和<code>Shell thickness variation</code>等壳属性,在<code>Offset</code>下可以指定壳单元的refference surface.</p>
+<!-- ![img](https://img2023.cnblogs.com/blog/2026433/202408/2026433-20240820205543688-1673406172.png) -->
+
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240822094208151-184098313.png" /></p>
+<ul>
+<li>定义<code>reference surface</code>的偏移值,偏移值是单元面到中面之距离与单元厚度值的比值</li>
+</ul>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240821101547712-1805711990.png" /></p>
+<ul>
+<li>Section Poisson's ratio选项</li>
+</ul>
+<p><code>Section Poisson's ratio</code>用于定义shell thickness behavior,在<code>conventional shell element</code>在大变形分析中允许有限的膜应变,截面泊松比能够使<code>膜厚度</code>随<code>膜应变</code>的变化而变化.</p>
+<p>在Abaqus/Standard中,默认值为<em>0.5</em>,这使得对于<code>membrane strains</code>来说,单元强制<strong><em>不可压缩</em></strong>.在Abaqus/Explicit中,默认是基于元素材料定义来改变厚度.==<strong>Section Poisson's ratio <span class="arithmatex">\(\nu_p\)</span></strong>==的值必须在<code>-1.0~0.5</code>之间.<code>0.0</code>表示shell<strong>单元厚度为常数</strong>;<code>$\nu_p&lt;0$</code>表示tensile membrane strains导致的shell thickness上升;</p>
+<h3 id="42-continuum-shell-composite-layup">4.2 continuum shell composite layup</h3>
+<p>Abaqus的<code>continuum shell composite layup</code>使用<code>comtinuum shell element</code>离散,该单元类型具有基于壳理论的运动学行为,但却是<strong>3D单元</strong>,如SC6R,SC8R.</p>
+<p>这种建模方式需要特别注意的是:
++ comtinuum shell composite layup在<strong><em>厚度方向上应该只有一个单元</em></strong>,这个单元含有layup定义的所有plys;如果layup赋予的region在厚度上有多个单元,那么每个单元中都含有相应的plys;
++ 在网格划分时,应该注意<code>mesh stack direction</code>,<code>comtinuum shell composite layup</code>可以模拟双面接触,以及厚度变化,因此相比于<code>conventional shell composite layup</code>在接触分析中<strong>精度更高</strong>.
++ 对于section integration选项,<mark>使用默认即可</mark>.和<code>conventianal shell composite layup</code>一致的意思</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240821105206248-2123167461.png" /></p>
+<h3 id="43-solid-composite-layup">4.3 solid composite layup</h3>
+<blockquote>
+<p>Composite solid elements are primarily intended for modeling convenience. They usually ==do not provide a more accurate solution ==than composite shell elements</p>
+</blockquote>
+<p>大多数情况下,使用前两种建模方式已经满足需要.但如果有以下需求,建议使用<strong>solid composite layup</strong>:
+1. 当横向剪切效应占主导地位时
+2. 法向压力不能忽视
+3. 需要精确的层间应力时,例如复杂载荷或几何形状的局部区域附近</p>
+<p>建模时需要注意的有:</p>
+<ul>
+<li>
+<p>同样的,solid composite layup在==厚度方向上应该只有一个单元==;如果layup赋予的region在厚度上有多个单元,那么每个单元中都含有相应的plys.</p>
+</li>
+<li>
+<p>在Abaqus/Standard中,<mark>实体单元可以含有几层不同的材料</mark>,用于分析<code>laminated composite solids</code>.在Abaqus/Explicit中,<mark>一个实体单元只能有一种均质材料</mark>;</p>
+</li>
+<li>
+<p><code>solid composite layup</code>只用和具有位移自由度(1~6)的3d brick单元(如C3D8R,C3D6等),</p>
+</li>
+</ul>
+<p>更多理解see <a href="https://abaqus-docs.mit.edu/2017/English/SIMACAEELMRefMap/simaelm-c-solidcont.htm#simaelm-c-solidcont-compshell">Defining composite solid elements in Abaqus/Standard</a>,<a href="https://abaqus-docs.mit.edu/2017/English/SIMACAEELMRefMap/simaelm-c-solidcont.htm#simaelm-c-solidcont-compthick">Modeling thick composites with solid elements in Abaqus/Standard</a></p>
+<p><img alt="img" src="../FILES/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1.md/2026433-20240821110645318-1789915146.png" /></p>
+<h2 id="_1">总结</h2>
+<p>三种建模方式,从精度来说,comtinuum shell composite layup 已经足够高了,使用solid composite layup并不能提供更高的精度.实际应用中,前两种方式已经足够</p>
+<h2 id="_2">参考链接</h2>
+<ul>
+<li><a href="https://abaqus-docs.mit.edu/2017/English/SIMACAECAERefMap/simacae-c-conconceptcompute.htm">Understanding how contour values are computed</a></li>
+<li><a href="https://abaqus-docs.mit.edu/2017/English/SIMACAECAERefMap/simacae-m-ResVariable-sb.htm">Selecting the field output to display</a></li>
+<li><a href="https://abaqus-docs.mit.edu/2017/English/SIMACAECAERefMap/simacae-t-xypreadthickness.htm">Reading X–Y data through the thickness of a shell</a></li>
+<li><a href="https://abaqus-docs.mit.edu/2017/English/SIMACAECAERefMap/simacae-m-PrpComposites-sb.htm">Creating and editing composite layups</a></li>
+<li><a href="https://abaqus-docs.mit.edu/2017/English/SIMACAEELMRefMap/simaelm-c-shellsectionbehavior.htm#simaelm-c-shellsectionbehavior-t-NodalMassAndRotaryInertiaForCompositeSections-sma-topic7">Shell section behavior</a></li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "content.code.copy"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

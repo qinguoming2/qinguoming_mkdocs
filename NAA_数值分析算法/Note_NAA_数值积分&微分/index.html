@@ -1,0 +1,1980 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Note_NAA_%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0/">
+      
+      
+        <link rel="next" href="../Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.2.7">
+    
+    
+      
+        <title>数值积分+微分方法 - Qinguoming Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#note_naa_" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Qinguoming Notes" class="md-header__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Qinguoming Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              数值积分+微分方法
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Qinguoming Notes" class="md-nav__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Qinguoming Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    数值分析算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            数值分析算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_NAA_%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    蒙特卡洛实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    数值积分+微分方法
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95code%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法CODE实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_NAA_%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E6%B1%82%E6%A0%B9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    非线性方程求根
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_NAA_%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E5%88%9D%26%E8%BE%B9%E5%80%BC%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    常微分方程初&边值问题数值解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_NAA_Crout%E5%88%86%E8%A7%A3%E8%BF%BD%E8%B5%B6%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crout分解追赶法的线性方程组求解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    FEM算法原理及编程
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            FEM算法原理及编程
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Mindlin%E6%9D%BFQ4%E5%8D%95%E5%85%83%E6%8E%A8%E5%AF%BC-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mindlin Q4单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Kirchhoff%E6%9D%BF%E7%90%86%E8%AE%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基尔霍夫板理论
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E5%B1%82%E5%90%88%E6%9D%BF%E5%8D%95%E5%85%83%E6%A0%BC%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    层合板单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FEM边界条件处理方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E7%BB%93%E6%9E%84%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%95%99%E6%9D%90%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    结构动力学教材笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python数值计算
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Python数值计算
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_%E6%9D%90%E6%96%99%E5%88%9A%E5%BA%A6%E8%BD%AC%E6%8D%A2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    材料刚度矩阵转换
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Vtk%E6%96%87%E4%BB%B6%E8%A7%84%E5%88%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vtk文件规则
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_2%263%E7%BB%B4%E9%AB%98%E6%96%AF%E7%A7%AF%E5%88%86py%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2&3维高斯积分Python实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Mpmath%E5%BA%93%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mpmath库
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    multiprocessing多线程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Matlab2Python%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Matlab2Python索引
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CNC_Cpp%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cpp数值计算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Abaqus 建模
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Abaqus 建模
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus CompositeLayup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%A4%B9%E8%8A%AF%E6%9D%BF%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus Sandwich建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%A4%B1%E6%95%88/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材失效建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E7%A6%BB%E6%95%A3%E5%A2%9E%E5%BC%BA%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材离散增强建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_SolidSection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus SolidSection KeyWord
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E8%BE%93%E5%87%BA%E6%80%BB%E4%BD%93%E5%88%9A%E5%BA%A6%E7%9F%A9%E9%98%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 输出总体刚度矩阵
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复合材料分析基础
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%8E%8B%E7%94%B5%E5%88%86%E6%9E%90%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 压电分析入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    其他
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            其他
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git常用命令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_%E5%87%A0%E7%AF%87%E6%A8%A1%E6%80%81%E5%BA%94%E5%8F%98%E8%83%BD%E8%AE%BA%E6%96%87/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    几篇模态应变能论文
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../About/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Me
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="note_naa_">Note_NAA_数值积分&amp;微分</h1>
+<blockquote>
+<p>https://www.cnblogs.com/aksoam/p/18332123</p>
+</blockquote>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240730125437069-2102425550.png" /></p>
+<h1 id="_1">数值积分</h1>
+<h2 id="1">1. 引言</h2>
+<p>高数中计算积分思路基本是牛顿莱布尼兹法:</p>
+<div class="arithmatex">\[I[f]=\int_{a}^{b}f(x)\mathrm{d}x=F(b)-F(a),\]</div>
+<div class="arithmatex">\[F^{\prime}(x)=f(x).\]</div>
+<p>实际计算中,原函数一般无法求出.给不出解析解,只能求出数值解.</p>
+<p>设在区间 [a,b], (不妨先设 a,b 为有限数 ) 上 ,<span class="arithmatex">\(f(x) ≈ P_n (x), P_n (x)\)</span> 为某个较"简单"的函数 , 则显然有</p>
+<div class="arithmatex">\[\int_a^bf(x)\mathrm{d}x\approx\int_a^bP_n(x)\mathrm{d}x.\]</div>
+<p>如果<span class="arithmatex">\(\operatorname*{max}_{a\leqslant x\leqslant b}|f(x)-P_{n}(x)|\leqslant\varepsilon\)</span>,则误差估计:</p>
+<div class="arithmatex">\[\left|\int_a^bf(x)\mathrm{d}x-\int_a^bP_n(x)\mathrm{d}x\right|\leqslant(b-a)\varepsilon.\]</div>
+<h2 id="2">2. 几个常用积分公式及其复合公式</h2>
+<ul>
+<li>中点公式</li>
+</ul>
+<p>对f(x),使用<span class="arithmatex">\(f(\frac{a+b}{2})\)</span>近似代替.有:</p>
+<div class="arithmatex">\[\int_a^bf(x)\mathrm{d}x\approx\int_a^bf\left(\frac{a+b}{2}\right)\mathrm{d}x=(b-a)f\left(\frac{a+b}{2}\right).\tag{1}\]</div>
+<p>误差估计:</p>
+<div class="arithmatex">\[\int_a^bf(x)\mathrm{d}x-(b-a)f\left(\frac{a+b}{2}\right)=\frac{1}{12}(b-a)^3f''(\xi).\]</div>
+<ul>
+<li>梯形公式</li>
+</ul>
+<p>拉格朗日插值多项式<span class="arithmatex">\(L_n(x)\)</span>:</p>
+<div class="arithmatex">\[L_n(x)=\sum_{j=0}^ny_jl_j(x)=\sum_{j=0}^ny_j\prod_{\substack{i=0\\i\neq j}}^n\frac{x-x_i}{x_j-x_i}.\]</div>
+<p><span class="arithmatex">\(n=1\)</span>时,<span class="arithmatex">\(L_1(x)=l_0(x)y_0+l_1(x)y_1\)</span>,用<span class="arithmatex">\(L_1(x)\)</span> 近似代替 f(x) 称为线性插值 , 公式(3.9)称为线性插值多项式或一次插值多项式.即:</p>
+<div class="arithmatex">\[L_1(x)=\frac{x-x_1}{x_0-x_1}y_0+\frac{x-x_0}{x_1-x_0}y_1.\]</div>
+<p><span class="arithmatex">\(n=2\)</span>时,<span class="arithmatex">\(L_2(x)=l_0(x)y_0+l_1(x)y_1+l_2(x)y_2\)</span>,用<span class="arithmatex">\(L_2(x)\)</span>近似代替 f(x) 称为二次插值或抛物线插值 , 称式 (3.10) 为二次插值多项式</p>
+<div class="arithmatex">\[L_2(x)=\frac{(x-x_1)(x-x_2)}{(x_0-x_1)(x_0-x_2)}y_0+\frac{(x-x_0)(x-x_2)}{(x_1-x_0)(x_1-x_2)}y_1+\frac{(x-x_0)(x-x_1)}{(x_2-x_0)(x_2-x_1)}y_2\]</div>
+<p>基于<span class="arithmatex">\(x=a,x=b\)</span>两节点构造线性插值函数<span class="arithmatex">\(L_1(x)\)</span>,近似代替原函数<span class="arithmatex">\(f(x)\)</span>,得到梯形公式.</p>
+<div class="arithmatex">\[L_1(x)=\frac{x-b}{a-b}f(a)+\frac{x-a}{b-a}f(b)\]</div>
+<div class="arithmatex">\[\begin{aligned}
+\int_{a}^{b}f(x)\mathrm{d}x&amp; \approx\int_{a}^{b}L_{1}(x)\mathrm{d}x=\int_{a}^{b}\left[{\frac{x-b}{a-b}}f(a)+{\frac{x-a}{b-a}}f(b)\right]\mathrm{d}x \\
+&amp;=\frac{1}{2}(b-a)\left[f(a)+f(b)\right].
+\end{aligned}\tag{2}\]</div>
+<p>误差估计:</p>
+<div class="arithmatex">\[\int_a^bf(x)\mathrm{d}x-\frac{1}{2}(b-a)\left[f(a)+f(b)\right]=-\frac{1}{12}(b-a)^3f''(\xi), \xi\in(a,b)\]</div>
+<ul>
+<li>辛普森 (Simpson) 公式(抛物型公式)</li>
+</ul>
+<p><span class="arithmatex">\(\text{若 }f(x)\text{ 用通过节点 }x_0=a, x_1=\frac{a+b}{2}, x_2=b\text{ 的二次插值多项式 }L_2(x)\text{ 代替}\)</span></p>
+<div class="arithmatex">\[f(x)\approx L_2(x)=\frac{(x-x_1)(x-x_2)}{(x_0-x_1)(x_0-x_2)}f(x_0)+\frac{(x-x_0)(x-x_2)}{(x_1-x_0)(x_1-x_2)}f(x_1)+\frac{(x-x_0)(x-x_1)}{(x_2-x_0)(x_2-x_1)}f(x_2)\]</div>
+<p>可以得到积分公式:</p>
+<div class="arithmatex">\[\int_a^bf(x)\mathrm{d}x\approx\int_a^bL_2(x)\mathrm{d}x=\frac16(b-a)\left[f(a)+4f\left(\frac{a+b}2\right)+f(b)\right].\tag{3}\]</div>
+<p>误差估计:</p>
+<div class="arithmatex">\[\int_a^bf(x)\mathrm dx-\frac{1}{6}(b-a)\left[f(a)+4f\left(\frac{a+b}{2}\right)+f(b)\right]=-\frac{(b-a)^5}{2880}f^{(4)}(\xi),\quad\xi\in(a,b).\]</div>
+<h3 id="21">2.1 求积公式</h3>
+<p>回顾以上三个积分公式,可以看出:一般地 , 若已知函数 f(x) 在区间 [a,b] 内节点<span class="arithmatex">\(x_0 ,x_1 ,··· ,x_n\)</span>上的值<span class="arithmatex">\(f(x_0), f(x_), ···,f(x_n )\)</span>, 则称形如</p>
+<div class="arithmatex">\[\int_a^bf(x)\mathrm{d}x\approx\sum_{i=0}^n\omega_if(x_i)\]</div>
+<p>的式子为求积公式 , 其中 <span class="arithmatex">\(x_i\)</span> 称为求积节点 , <span class="arithmatex">\(\omega_i\)</span>称为求积系数 . 求积节点及求积系数不依赖于被积函数 f(x) 的具体形式 .</p>
+<p>记<span class="arithmatex">\(Q[f]=\sum_{i=0}^n\omega_if(x_i),\)</span>则误差(余项)为:<span class="arithmatex">\(R[f]=I[f]-Q[f].\)</span></p>
+<h3 id="22">2.2 代数精度</h3>
+<p>定义 5.2.1 如果对所有次数小于等于 m 的多项式 f(x), 等式</p>
+<div class="arithmatex">\[\int_a^bf(x)\mathrm{d}x=\sum_{i=0}^n\omega_if(x_i)\]</div>
+<p>成立 , 但对某个次数为 m + 1 的多项式 f(x),等式不精确成立 , 则称求积公式 (5.8) 的代数精度为 m 次 </p>
+<p>代数精度适用于判断求积公式好坏的标准之一.如何计算公式代数精度如下做法:</p>
+<ul>
+<li>以中点公式为例</li>
+</ul>
+<p>中点公式的误差估计(余项)为<span class="arithmatex">\(R[f]=\frac{1}{12}(b-a)^3f''(\xi),\quad\xi\in(a,b),\)</span>,当f(x)分别取<span class="arithmatex">\(1,x,x^2\)</span>时,有</p>
+<div class="arithmatex">\[R[f]=0,0,\frac{1}{6}(b-a)^3\]</div>
+<p>所以,中点公式的代数精度为<span class="arithmatex">\(m=1\)</span>.</p>
+<ul>
+<li>另一种方式</li>
+</ul>
+<p>将<span class="arithmatex">\(1,x,x^2,···,x^{m+1}\)</span>分别代入求积公式两边,分别计算,对比.直到m+1次幂时等式不成立,则称求积公式的代数精度为m次.</p>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240730143645649-558546973.png" /></p>
+<h3 id="23">2.3 复合积分</h3>
+<blockquote>
+<p>在通常情况下 , 积分区间 [a,b] 的长度 b−a 不是非常小 , 因此为了确保计算精度 , 通常采用复合求积公式 </p>
+</blockquote>
+<p>复合积分 , 就是将积分区间分为若干份 , 在每一个 " 小区间 " 上用低阶求积公式 (1),(2) 或 (3) 进行计算 , 再将计算值相加即得原积分的近似值 </p>
+<p>将积分区间 [a,b] 分为 n 等分 , 记步长<span class="arithmatex">\(h=\frac{b-a}{n}\)</span>,节点为 <span class="arithmatex">\(x_{i}=a+ih(i=0,1,\cdots,n),\)</span>并记<span class="arithmatex">\(x_{i+\frac12}=\frac12(x_i+x_{i+1})\)</span>,根据定积分形式</p>
+<div class="arithmatex">\[\int_a^bf(x)\mathrm{d}x=\sum_{i=0}^{n-1}\int_{x_i}^{x_{i+1}}f(x)\mathrm{d}x,\]</div>
+<p>当n取值足够大,即<span class="arithmatex">\(h\)</span>足够小,在每个区间应用低阶积分公式,就得到了复合积分公式.</p>
+<ul>
+<li>复合中点公式</li>
+</ul>
+<div class="arithmatex">\[\int_a^bf(x)\mathrm{d}x\approx\sum_{i=0}^{n-1}hf\left(x_{i+\frac{1}{2}}\right)\triangleq M_n\tag{4}\]</div>
+<ul>
+<li>复合梯形公式</li>
+</ul>
+<div class="arithmatex">\[\begin{aligned}
+\int_{a}^{b}f(x)\mathrm{d}x&amp; \approx\sum_{i=0}^{n-1}\frac{h}{2}\left[f(x_{i})+f(x_{i+1})\right] \\
+&amp;=\frac h2\left[f(a)+2\sum_{i=1}^{n-1}f\left(x_i\right)+f(b)\right]\triangleq T_n.
+\end{aligned}\tag{5}\]</div>
+<ul>
+<li>复合辛普森公式</li>
+</ul>
+<div class="arithmatex">\[\begin{aligned}
+\int_{a}^{b}f(x)\mathrm{d}x&amp; \approx\sum_{i=0}^{n-1}\frac{h}{6}\left[f(x_{i})+4f(x_{i+\frac{1}{2}})+f(x_{i+1})\right] \\
+&amp;=\frac{h}{6}\left[f(a)+4\sum_{i=0}^{n-1}f(x_{i+\frac12})+2\sum_{i=1}^{n-1}f(x_{i})+f(b)\right]\triangleq S_{n}.\tag{6}
+\end{aligned}\]</div>
+<p>三个公式的误差余项分别为:</p>
+<div class="arithmatex">\[\begin{aligned}R_{M}=&amp;\int_{a}^{b}f(x)\mathrm{d}x-M_{n}=\sum_{i=0}^{n-1}\int_{x_{i}}^{x_{i+1}}f(x)\mathrm{d}x-\sum_{i=0}^{n-1}hf(x_{i+\frac{1}{2}})\\=&amp;\sum_{i=0}^{n-1}\frac{1}{12}h^{3}f^{\prime\prime}(\xi).\end{aligned}\]</div>
+<div class="arithmatex">\[R_T=\int_a^bf(x)\mathrm{d}x-T_n=-\frac1{12}(b-a)h^2f''(\eta),\quad\eta\in(a,b),\]</div>
+<div class="arithmatex">\[R_{S}=\int_{a}^{b}f(x)\mathrm{d}x-S_{n}=-\frac{1}{2880}(b-a)h^{4}f^{(4)}(\eta),\quad\eta\in(a,b).\]</div>
+<h3 id="24-python">2.4 常用积分公式的python实现</h3>
+<p>6种常用积分公式的python实现如下:</p>
+<details>
+<summary>展开查看代码</summary>
+
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># -*- coding: utf-8 -*-</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># 数值计算方法实现(python)</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span><span class="n">Union</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1">### y = 4/( 1+x^2 )</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># f= lambda x: 4/( 1+x**2 )</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="k">def</span> <span class="nf">MidPointInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;一维中点积分公式&quot;&quot;&quot;</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">def</span> <span class="nf">ComMidPointInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;一维复合中点积分公式&quot;&quot;&quot;</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">h</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="p">,</span><span class="n">b</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="k">return</span> <span class="n">h</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">x</span><span class="p">])</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="k">def</span> <span class="nf">trapezoidInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;一维梯形积分公式&quot;&quot;&quot;</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">/</span><span class="mf">2.0</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="k">def</span> <span class="nf">ComtrapezoidInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;一维复合梯形积分公式&quot;&quot;&quot;</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="n">h</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="c1"># x_i  (i=0,1,...,n)</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="k">return</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]))</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="k">def</span> <span class="nf">SimpsonInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;一维 Simpson 积分公式&quot;&quot;&quot;</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="n">f</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span><span class="o">+</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">/</span><span class="mf">6.0</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="k">def</span> <span class="nf">ComSimpsonInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;一维复合 Simpson 积分公式&quot;&quot;&quot;</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>    <span class="n">h</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>    <span class="c1"># x_i  (i=0,1,...,n)</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>    <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>    <span class="n">t1</span><span class="o">=</span><span class="nb">sum</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">)])</span>
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>    <span class="n">t2</span><span class="o">=</span><span class="nb">sum</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)])</span>
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mf">6.0</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="n">t1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">t2</span><span class="p">)</span>
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="k">def</span> <span class="nf">integ1d</span><span class="p">(</span><span class="n">f</span><span class="p">:</span><span class="nb">object</span><span class="p">,</span> 
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>            <span class="n">a</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> 
+</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>            <span class="n">b</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span>
+</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>            <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;一维数值积分&quot;&quot;&quot;</span>
+</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>    <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>        <span class="k">return</span> <span class="n">MidPointInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>    <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>        <span class="k">return</span> <span class="n">trapezoidInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>    <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>        <span class="k">return</span> <span class="n">SimpsonInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>
+</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="k">def</span> <span class="nf">ComInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> 
+</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>                <span class="n">a</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> 
+</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>                <span class="n">b</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> 
+</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>                <span class="n">n</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>                <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;一维复合积分&quot;&quot;&quot;</span>
+</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>    <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>        <span class="k">return</span> <span class="n">ComMidPointInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</span><span id="__span-0-63"><a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>    <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+</span><span id="__span-0-64"><a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>        <span class="k">return</span> <span class="n">ComtrapezoidInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</span><span id="__span-0-65"><a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>    <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+</span><span id="__span-0-66"><a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>        <span class="k">return</span> <span class="n">ComSimpsonInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</span><span id="__span-0-67"><a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>
+</span><span id="__span-0-68"><a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a><span class="k">def</span> <span class="nf">showError</span><span class="p">(</span><span class="n">Numerical</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">Exact</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span><span class="o">-&gt;</span><span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-69"><a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;显示误差&quot;&quot;&quot;</span>
+</span><span id="__span-0-70"><a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;数值解: </span><span class="si">{</span><span class="n">Numerical</span><span class="si">}</span><span class="s2">, 精确解: </span><span class="si">{</span><span class="w"> </span><span class="n">Exact</span><span class="si">}</span><span class="s2">, 误差: </span><span class="si">{</span><span class="mf">0.01</span><span class="o">*</span><span class="p">(</span><span class="n">Exact</span><span class="o">-</span><span class="n">Numerical</span><span class="p">)</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+</details>
+
+<p>验证:</p>
+<details>
+<summary>展开查看代码</summary>
+
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># f(x)=e^(-x)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">f</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">accVal</span><span class="o">=</span><span class="mf">0.6321</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># 积分范围</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># 计算积分</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">integ1</span><span class="o">=</span><span class="n">integ1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">integ2</span><span class="o">=</span><span class="n">integ1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">integ3</span><span class="o">=</span><span class="n">integ1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;中点积分:</span><span class="si">{</span><span class="n">integ1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">showError</span><span class="p">(</span><span class="n">integ1</span><span class="p">,</span><span class="n">accVal</span><span class="p">)</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;梯形积分:</span><span class="si">{</span><span class="n">integ2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="n">showError</span><span class="p">(</span><span class="n">integ2</span><span class="p">,</span><span class="n">accVal</span><span class="p">)</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simpson积分: </span><span class="si">{</span><span class="n">integ3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="n">showError</span><span class="p">(</span><span class="n">integ3</span><span class="p">,</span><span class="n">accVal</span><span class="p">)</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="n">输出</span><span class="p">:</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="n">中点积分</span><span class="p">:</span><span class="mf">0.6065306597126334</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="n">数值解</span><span class="p">:</span> <span class="mf">0.6065306597126334</span><span class="p">,</span> <span class="n">精确解</span><span class="p">:</span> <span class="mf">0.6321</span><span class="p">,</span> <span class="n">误差</span><span class="p">:</span> <span class="mf">0.0404514163698253</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="n">梯形积分</span><span class="p">:</span><span class="mf">0.6839397205857212</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="n">数值解</span><span class="p">:</span> <span class="mf">0.6839397205857212</span><span class="p">,</span> <span class="n">精确解</span><span class="p">:</span> <span class="mf">0.6321</span><span class="p">,</span> <span class="n">误差</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.08201189777839135</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="n">Simpson积分</span><span class="p">:</span> <span class="mf">0.6323336800036626</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="n">数值解</span><span class="p">:</span> <span class="mf">0.6323336800036626</span><span class="p">,</span> <span class="n">精确解</span><span class="p">:</span> <span class="mf">0.6321</span><span class="p">,</span> <span class="n">误差</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.0003696883462468591</span>
+</span></code></pre></div>
+</details>
+
+<p>步长数目越多,误差越小.</p>
+<details>
+<summary>展开查看代码</summary>
+
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">f2</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># 积分范围</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">n</span> <span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)]</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">extract</span><span class="o">=-</span><span class="mf">0.122122499</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">e1</span><span class="p">,</span><span class="n">e2</span><span class="p">,</span><span class="n">e3</span><span class="o">=</span><span class="p">[],[],[]</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># 复合积分计算</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="k">for</span> <span class="n">ni</span> <span class="ow">in</span> <span class="n">n</span><span class="p">:</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">integ_mid</span><span class="o">=</span><span class="n">ComInteg1d</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">ni</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="n">integ_trap</span><span class="o">=</span><span class="n">ComInteg1d</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">ni</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="n">integ_simpson</span><span class="o">=</span><span class="n">ComInteg1d</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">ni</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="n">e1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">integ_mid</span><span class="o">-</span><span class="n">extract</span><span class="p">))</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    <span class="n">e2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">integ_trap</span><span class="o">-</span><span class="n">extract</span><span class="p">))</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="n">e3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">integ_simpson</span><span class="o">-</span><span class="n">extract</span><span class="p">))</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">e1</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Midpoint&#39;</span><span class="p">)</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">e2</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Trapezoidal&#39;</span><span class="p">)</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">e3</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Simpson&#39;</span><span class="p">)</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Log_10(n)&#39;</span><span class="p">)</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Log_10(Error)&#39;</span><span class="p">)</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+</details>
+
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240730175635581-2056696787.png" /></p>
+<h2 id="3">3. 变步长方法与外推加速技术</h2>
+<blockquote>
+<p>复合中点公式、梯形公式以及辛普森公式都是有效的求积方法 , 步长 h 越小 ,
+计算精度越高 . 但在实际运用上述求积公式进行计算时须事先选取一个合适的步长 h,**因此在给定计算精度的情形下 , 往往通过不断调整步长的方式进行计算 **</p>
+</blockquote>
+<ul>
+<li>变步长梯形法</li>
+</ul>
+<p>在实际计算中往往会采用让步长逐次折半的方式 , 反复使用复合求积公式进行计算 , 直至相邻两次计算结果之差的绝对值小于给定的计算精度为止 . 这种方法即称为<strong>变步长算法</strong> </p>
+<p>变步长梯形方法的优点是算法简单 , 编程容易 ; 缺点是收敛速度较慢 </p>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240730181806485-18720573.png" /></p>
+<details>
+<summary>python version</summary>
+
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span> <span class="nf">VarStepInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span><span class="n">precision</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                    <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;一维变步长积分&quot;&quot;&quot;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">k</span><span class="o">=</span><span class="mi">0</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">Tn</span><span class="o">=</span><span class="n">ComInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">])</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;第0次积分, 步长: </span><span class="si">{</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">, 结果: </span><span class="si">{</span><span class="n">Tn</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="n">k</span><span class="o">+=</span><span class="mi">1</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="n">T2n</span><span class="o">=</span><span class="n">ComInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">k</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">])</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;第</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">次积分, 步长: </span><span class="si">{</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">, 结果: </span><span class="si">{</span><span class="n">T2n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">T2n</span><span class="o">-</span><span class="n">Tn</span><span class="p">)</span><span class="o">&lt;=</span><span class="n">precision</span><span class="p">:</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;精度要求达到, 迭代次数: </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">, 步长: </span><span class="si">{</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>            <span class="k">return</span> <span class="n">T2n</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>            <span class="n">Tn</span><span class="o">=</span><span class="n">T2n</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="n">f3</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span> <span class="k">if</span> <span class="n">x</span><span class="o">!=</span><span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="c1"># 积分范围</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="c1"># 计算积分</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="n">VarStepInteg1d</span><span class="p">(</span><span class="n">f3</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mf">1e-7</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="c1"># 输出:</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="c1"># 第0次积分, 步长: 1.0, 结果: 0.9207354924039483</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="c1"># 第1次积分, 步长: 0.5, 结果: 0.9397932848061772</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="c1"># 第2次积分, 步长: 0.25, 结果: 0.9445135216653895</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="c1"># 第3次积分, 步长: 0.125, 结果: 0.9456908635827014</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="c1"># 第4次积分, 步长: 0.0625, 结果: 0.945985029934386</span>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="c1"># 第5次积分, 步长: 0.03125, 结果: 0.9460585609627681</span>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="c1"># 第6次积分, 步长: 0.015625, 结果: 0.946076943060063</span>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="c1"># 第7次积分, 步长: 0.0078125, 结果: 0.9460815385431518</span>
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="c1"># 第8次积分, 步长: 0.00390625, 结果: 0.9460826874113473</span>
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="c1"># 第9次积分, 步长: 0.001953125, 结果: 0.9460829746282345</span>
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="c1"># 第10次积分, 步长: 0.0009765625, 结果: 0.9460830464324462</span>
+</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="c1"># 精度要求达到, 迭代次数: 10, 步长: 0.0009765625</span>
+</span></code></pre></div>
+
+</details>
+
+<ul>
+<li>外推加速技术与龙贝格求积方法</li>
+</ul>
+<blockquote>
+<p><a href="https://sites.millersville.edu/rbuchanan/math375/Romberg.pdf">讲义链接</a></p>
+</blockquote>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731104706737-2038621058.png" /></p>
+<h2 id="4-newton-cotes-formula">4. 牛顿-科茨公式(Newton-Cotes formula)</h2>
+<p>中点公式、梯形公式及辛普森公式可分别看成是 f(x) 用常数、线性插值函数和抛物型插值函数代替再积分所得 . 若将此想法进一步推广 , 将 f(x) 用 n + 1 个等距节点上的 n 次拉格朗日插值多项式代替 , 即得所谓的牛顿–科茨 (Newton-Cotes) 公式.</p>
+<p>设 <span class="arithmatex">\(x_i=a+ih, h=\frac{b-a}{n},\)</span>作 f(x) 的 n 次拉格朗日插值多项式 <span class="arithmatex">\(L_n (x)\)</span>.为方便起见 , 令<span class="arithmatex">\(x=a+th, t\in[0,n],\)</span>则 <span class="arithmatex">\(L_n (x)\)</span> 可表示为</p>
+<div class="arithmatex">\[L_n(x)=\sum_{i=0}^n\frac{(-1)^{n-i}}{i!(n-i)!}\prod_{j=0,j\neq i}^n(t-j)f(x_i),\]</div>
+<div class="arithmatex">\[\int_a^bf(x)\mathrm{d}x\approx\int_a^bL_n(x)\mathrm{d}x=\sum_{i=0}^n\omega_if(x_i).\]</div>
+<p>求积系数<span class="arithmatex">\(\omega_i\)</span>的为:</p>
+<div class="arithmatex">\[\begin{aligned}\omega_{i}=&amp;(b-a)\frac{(-1)^{n-i}}{ni!(n-i)!}\int_{0}^{n}\prod_{j=0,j\neq i}^{n}(t-j)\mathrm{d}t\\=&amp;(b-a)C_{i}^{(n)},\end{aligned}\]</div>
+<div class="arithmatex">\[C_i^{(n)}=\frac{(-1)^{n-i}}{ni!(n-i)!}\int_0^n\prod_{j=0,j\neq i}^n(t-j)\mathrm{d}t,\]</div>
+<p><span class="arithmatex">\(C_i^{(n)}\)</span>为科茨系数,仅与区间节点数目及第 i 个节点有关 .</p>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731111812397-431025882.png" /></p>
+<blockquote>
+<p>n &gt; 8 时科茨系数有正有负 , 此时对应的求积公式的稳定性得不到保证 . 且由于对高次插值多项式来说 , 收敛性一般不成立 , <mark>故在实际计算中一般不采用高阶的牛顿 – 科茨公式(n &gt; 8).</mark></p>
+</blockquote>
+<p><strong>定理5.4.1</strong>: 当 n 为奇数时 , 牛顿 – 科茨公式 (5.23) 的代数精度至少为 n 次 ; 而当 n 为偶数时 , 代数精度至少为 n + 1 次 .</p>
+<p>该求积公式是稳定的.而当n&gt;7时,由于求积系数,有正有负,<strong>因此稳定性一般不成立,收敛性一般也不成立</strong>.因此对高阶牛顿科茨公式,</p>
+<p>牛顿 – 科茨公式误差<span class="arithmatex">\(R[f]\)</span>为:</p>
+<div class="arithmatex">\[\begin{aligned}
+R[f]=&amp; h^{n+2}\int_{0}^{n}\prod_{i=0}^{n}(n-i-s)\mathrm{d}s \\
+=&amp; (-1)^{n+1}h^{n+2}\int_{0}^{n}\prod_{i=0}^{n}[s-(n-i)]\mathrm{d}s. 
+\end{aligned}\]</div>
+<blockquote>
+<p>尽管它具有较高的代数精度,一般不采用.常用的是中点公式、梯形公式和抛物型公式的复合求积公式以及下节的采用非等分节点的<mark>高斯(Gauss)公式</mark></p>
+</blockquote>
+<details>
+<summary>newton-cotes 公式的python实现</summary>
+
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span> <span class="nf">Integ1dNewtonCotes</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span><span class="n">b</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span><span class="n">n</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;给定n(&gt;=1)个点,计算一维牛顿-科特斯积分&quot;&quot;&quot;</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">if</span> <span class="n">n</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;牛顿-科特斯积分时,n最小值为1&quot;</span><span class="p">)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">weights</span><span class="o">=</span><span class="n">NewtonCotes_weights</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">h</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># check ok</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="k">def</span> <span class="nf">NewtonCotes_factor</span><span class="p">(</span><span class="n">i</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span><span class="n">n</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;计算牛顿-科特斯积分的第i个权重&quot;&quot;&quot;</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="kn">import</span> <span class="nn">math</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">:</span><span class="nb">float</span><span class="p">):</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>        <span class="n">s</span><span class="o">=</span><span class="mf">1.0</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>            <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="n">i</span><span class="p">:</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>                <span class="k">continue</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>            <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">j</span><span class="p">)</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        <span class="k">return</span> <span class="n">s</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>    <span class="n">t1</span><span class="o">=</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">))</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>    <span class="n">t2</span><span class="o">=</span><span class="n">Integ1dGuassLegendre</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>    <span class="k">return</span> <span class="n">t1</span><span class="o">*</span><span class="n">t2</span>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="k">def</span> <span class="nf">NewtonCotes_weights</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span><span class="n">b</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span><span class="n">n</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;计算牛顿-科特斯积分的权重数组&quot;&quot;&quot;</span>
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>    <span class="n">weights</span><span class="o">=</span><span class="p">[(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">NewtonCotes_factor</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+</span></code></pre></div>
+</details>
+
+<h2 id="5-gauss-formula">5. 高斯公式(Gauss formula)</h2>
+<p>考虑带权函数的求积公式:</p>
+<div class="arithmatex">\[I[f]=\int_a^b\rho(x)f(x)\mathrm{d}x\approx\sum_{i=0}^n\omega_if(x_i)\tag{7}\]</div>
+<p>其中函数 <span class="arithmatex">\(ρ(x) &gt; 0\)</span> 为已知函数 , 称为权函数.</p>
+<p><strong>定义</strong>:若对于节点 <span class="arithmatex">\(x_i\)</span> ∈ [a,b] 及求积系数 <span class="arithmatex">\(\omega_i\)</span> , 求积公式(7)的代数精度为 2n+1, 则称节点 <span class="arithmatex">\(x_i\)</span> 为高斯点 , <span class="arithmatex">\(\omega_i\)</span> 为高斯系数 , 相应的求积公式 (7) 称为带权的高斯公式 </p>
+<p><mark>高斯公式可看成是 f(x) 用高斯点上的n次插值多项式代替所得积分值 . 下面给出了确定高斯点的一种求解方法</mark></p>
+<blockquote>
+<p><strong>定理5.5.2</strong> <span class="arithmatex">\(x_i\)</span> (i = 0,1,··· ,n) 是求积公式 (7) 的高斯点的充分必要条件是 : 多项式 <span class="arithmatex">\(\Pi(x)=\prod_{i=0}^n(x-x_i)\)</span> 与任意次数不超过 n 的多项式 q(x) 关于权函数 ρ(x) 正交:
+<span class="arithmatex">\(<span class="arithmatex">\(\int_a^b\rho(x)\Pi(x)q(x)\mathrm{d}x=0.\)</span>\)</span></p>
+</blockquote>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731113739942-979798861.png" /></p>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731113807632-1777449143.png" /></p>
+<h3 id="51">5.1 常用的高斯型公式</h3>
+<div class="arithmatex">\[I[f]=\int_a^b\rho(x)f(x)\mathrm{d}x\approx\sum_{i=0}^n\omega_if(x_i)\tag{7}\]</div>
+<h4 id="_2">高斯 – 勒让德公式</h4>
+<p>令 <span class="arithmatex">\(\rho(x)\equiv1, [a,b]=[-1,1]\)</span> ,此时关于权函数 <span class="arithmatex">\(\rho(x)=1\)</span> 的区间 [−1,1] 上的正交多项式为<strong>勒让德 (Legendre) 正交多项式</strong>.</p>
+<p>n=0时:</p>
+<div class="arithmatex">\[\int_{-1}^1f(x)\mathrm{d}x\approx2f(0),\]</div>
+<p>n=1时:</p>
+<div class="arithmatex">\[\int_{-1}^1f(x)\mathrm{d}x\approx f\left(-\frac{1}{\sqrt{3}}\right)+f\left(\frac{1}{\sqrt{3}}\right).\]</div>
+<p>n=2时:</p>
+<div class="arithmatex">\[\int_{-1}^1f(x)\mathrm{d}x\approx\frac{5}{9}f\left(-\sqrt{\frac{3}{5}}\right)+\frac{8}{9}f(0)+\frac{5}{9}f\left(\sqrt{\frac{3}{5}}\right).\]</div>
+<p>对于一般区间[a,b]的积分,需要先变换积分区间,然后使用高斯-勒让德公式计算.</p>
+<div class="arithmatex">\[x=\frac{a+b}{2}+\frac{b-a}{2}t\]</div>
+<div class="arithmatex">\[\int_a^bf(x)\mathrm{d}x=\frac{b-a}{2}\int_{-1}^1f\left(\frac{a+b}{2}+\frac{b-a}{2}t\right)\mathrm{d}t.\]</div>
+<div class="arithmatex">\[\int_a^bf(x)\mathrm{d}x\approx\frac{b-a}{2}\sum_{i=0}^n\omega_if\left(\frac{a+b}{2}+\frac{b-a}{2}x_i\right),\]</div>
+<p>其中, <span class="arithmatex">\(\omega_i\)</span> 为高斯系数, <span class="arithmatex">\(x_i\)</span> 为高斯点.</p>
+<p>常用的高斯点及高斯系数表:</p>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731115211049-1607808674.png" /></p>
+<h4 id="_3">高斯 – 切比雪夫公式</h4>
+<p>令 <span class="arithmatex">\(\rho(x) = \frac{1}{\sqrt{1-x^{2}}}, [a,b] = [-1,1].\)</span>,高斯点<span class="arithmatex">\(x_i\)</span>分布和对应高斯系数<span class="arithmatex">\(\omega_i\)</span>为:</p>
+<div class="arithmatex">\[x_i=\cos\frac{2i+1}{2(n+1)}\pi,\quad i=0,1,\cdots,n.\]</div>
+<div class="arithmatex">\[\omega_i=\frac{\pi}{n+1}.\]</div>
+<p>积分区间为[-1,+1]的高斯–切比雪夫公式为:</p>
+<div class="arithmatex">\[\int_{-1}^1\frac{1}{\sqrt{1-x^2}}f(x)\mathrm{d}x\approx\frac{\pi}{n+1}\sum_{i=0}^nf\left(\cos\frac{2i+1}{2(n+1)}\pi\right).\]</div>
+<p>n=2时:</p>
+<div class="arithmatex">\[\int_{-1}^1\frac{1}{\sqrt{1-x^2}}f(x)\mathrm{d}x\approx\frac{\pi}{3}\left[f\left(-\frac{\sqrt{3}}{2}\right)+f(0)+f\left(\frac{\sqrt{3}}{2}\right)\right].\]</div>
+<h4 id="_4">高斯 – 拉盖尔公式</h4>
+<p>令 <span class="arithmatex">\(\rho(x)=\mathrm{e}^{-x}, [a,b]=[0,\infty).\)</span> 此时高斯系数为:</p>
+<div class="arithmatex">\[\omega_i=\frac{x_i}{L_{n+2}^2(x_i)},\quad i=0,1,\cdots,n.\]</div>
+<p>高斯 – 拉盖尔积分公式为:</p>
+<div class="arithmatex">\[\int_0^\infty\mathrm{e}^{-x}f(x)\mathrm{d}x\approx\sum_{i=0}^n\omega_if(x)\]</div>
+<p>n=0时:</p>
+<div class="arithmatex">\[\int_0^\infty\mathrm{e}^{-x}f(x)\mathrm{d}x\approx f(1).\]</div>
+<p>n=1时:</p>
+<div class="arithmatex">\[\int_0^\infty\mathrm{e}^{-x}f(x)\mathrm{d}x\approx\frac{2+\sqrt2}{4}f(2-\sqrt2)+\frac{2-\sqrt2}{4}f(2+\sqrt2).\]</div>
+<p>n=2,3,4时的高斯点和高斯系数:</p>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731120851702-1125485061.png" /></p>
+<ul>
+<li>公式变换</li>
+</ul>
+<p>对于形如 <span class="arithmatex">\(\int_{\alpha}^{\infty}\mathrm{e}^{-\beta x}f(x)\mathrm{d}x (\beta&gt;0)\)</span> 的积分,需要转换为标准高斯-拉盖尔公式的形式:</p>
+<div class="arithmatex">\[x=\frac{1}{\beta}t+\alpha \]</div>
+<div class="arithmatex">\[\begin{aligned}
+\int_{\alpha}^{\infty}\mathrm{e}^{-\beta x}f(x)\mathrm{d}x&amp; ={\frac{1}{\beta}}\mathrm{e}^{-\alpha\beta}\int_{0}^{\infty}\mathrm{e}^{-t}f\left({\frac{1}{\beta}}t+\alpha\right)\mathrm{d}t \\
+&amp;\approx\frac{1}{\beta}\mathrm{e}^{-\alpha\beta}\sum_{i=0}^{n}\omega_{i}f\left(\frac{x_{i}}{\beta}+\alpha\right).
+\end{aligned}\]</div>
+<p>对于形如 <span class="arithmatex">\(\int_0^\infty g(x)\mathrm{d}x\)</span> 的积分,首先确保g(x)是收敛的,其次需要转换为标准高斯-拉盖尔公式的形式:</p>
+<div class="arithmatex">\[\begin{gathered}
+\int_{0}^{\infty}g(x)\mathrm{d}x =\int_{0}^{\infty}\mathrm{e}^{-x}f(x)\mathrm{d}x\approx\sum_{i=0}^{n}\omega_{i}f(x_{i}) \\
+=\sum_{i=0}^{n}\omega_{i}\mathrm{e}^{x_{i}}g(x_{i}). 
+\end{gathered}\]</div>
+<h4 id="gauss-hermite">高斯 – 埃尔米特 (Gauss-Hermite) 公式</h4>
+<p>令 <span class="arithmatex">\(\rho(x) = \mathrm{e}^{-x^{2}}, [a,b] = (-\infty,+\infty).\)</span> ,高斯点为n+1次埃尔米特正交多项式 <span class="arithmatex">\(H_{n+1}(x)\)</span> 的零点, 对应高斯系数为:</p>
+<div class="arithmatex">\[\omega_i=\frac{2^{n+2}(n+1)!\sqrt{\pi}}{\left[H_{n+2}(x_i)\right]^2},\quad i=0,1,\cdots,n.\]</div>
+<p>此时求积公式为:</p>
+<div class="arithmatex">\[\int_{-\infty}^{+\infty}\mathrm{e}^{-x^{2}}f(x)\mathrm{d}x\approx\sum_{i=0}^{n}\omega_{i}f(x_{i}),\]</div>
+<p>n = 1 时的高斯 – 埃尔米特公式为</p>
+<div class="arithmatex">\[\int_{-\infty}^{+\infty}\mathrm{e}^{-x^2}f(x)\mathrm{d}x\approx\frac{\sqrt{\pi}}{2}f\left(-\frac{\sqrt{2}}{2}\right)+\frac{\sqrt{\pi}}{2}f\left(\frac{\sqrt{2}}{2}\right).\]</div>
+<p>n = 2 时的高斯 – 埃尔米特公式为</p>
+<div class="arithmatex">\[\int_{-\infty}^{+\infty}\mathrm e^{-x^2}f(x)\mathrm dx\approx\frac{\sqrt{\pi}}{6}f\left(-\frac{\sqrt{6}}{2}\right)+\frac{2\sqrt{\pi}}{3}f(0)+\frac{\sqrt{\pi}}{6}f\left(\frac{\sqrt{6}}{2}\right)\]</div>
+<p><strong>高斯 – 埃尔米特公式的另一形式如下</strong>,g(x)需要保证广义积分收敛性:</p>
+<div class="arithmatex">\[\int_{-\infty}^{+\infty}g(x)\mathrm{d}x\approx\sum_{i=0}^n\omega_i\mathrm{e}^{x_i^2}g(x_i).\]</div>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731122131075-2033846352.png" /></p>
+<h3 id="52">5.2 高斯积分的应用</h3>
+<details>
+
+<summary>几种积分的python实现</summary>
+
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span> <span class="nf">Integ1dGuassLegendre</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span><span class="nb">float</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;给定积分区间[a,b]和高斯积分点个数n,计算一维高斯-勒让德积分公式&quot;&quot;&quot;</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="c1"># 计算勒让德-高斯积分点及权重</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">roots</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">legendre_gauss_points_and_weights</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="k">if</span> <span class="n">a</span><span class="o">==-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">b</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="c1"># 标准型积分</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="n">result</span><span class="o">=</span><span class="nb">sum</span><span class="p">([</span><span class="n">wi</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="k">for</span> <span class="n">xi</span><span class="p">,</span><span class="n">wi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">roots</span><span class="p">,</span><span class="n">weights</span><span class="p">)])</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        <span class="k">return</span> <span class="n">result</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="c1"># 非标准型积分, 需变换积分区间</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        <span class="n">t</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">a</span><span class="p">)</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        <span class="n">result</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">wi</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">(</span><span class="n">xi</span><span class="p">))</span> <span class="k">for</span> <span class="n">xi</span><span class="p">,</span><span class="n">wi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">roots</span><span class="p">,</span><span class="n">weights</span><span class="p">)])</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        <span class="k">return</span> <span class="n">result</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="k">def</span> <span class="nf">legendre_gauss_points_and_weights</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;给定高斯点个数n,计算[-1,+1]内的勒让德-高斯积分点及权重&quot;&quot;&quot;</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>    <span class="kn">import</span> <span class="nn">scipy.special</span> <span class="k">as</span> <span class="nn">sp</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>    <span class="c1"># 计算勒让德多项式的根(即高斯点)</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>    <span class="n">roots</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">roots_legendre</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>    <span class="c1"># sp.roots_legendre函数会返回勒让德多项式的根(即高斯点)及其对应的高斯系数.</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>    <span class="k">return</span> <span class="n">roots</span><span class="p">,</span> <span class="n">weights</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="k">def</span> <span class="nf">Integ1dGuassHermite</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">n</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">Is_standard</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;给定n(&gt;=1)值,积分范围[-inf,+inf],计算一维高斯-埃尔米特积分&quot;&quot;&quot;</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>    <span class="c1"># 计算埃尔米特-高斯积分点及权重</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>    <span class="k">if</span> <span class="n">n</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;高斯-埃尔米特积分时,n必须大于0&quot;</span><span class="p">)</span>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;积分点个数: </span><span class="si">{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">, 积分范围: [-inf,+inf]&quot;</span><span class="p">)</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>    <span class="n">roots</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">gauss_hermite_points_and_weights</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>    <span class="k">if</span> <span class="n">Is_standard</span><span class="p">:</span>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>        <span class="c1"># 为标准型积分</span>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>        <span class="n">result</span><span class="o">=</span><span class="nb">sum</span><span class="p">([</span><span class="n">wi</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="k">for</span> <span class="n">xi</span><span class="p">,</span><span class="n">wi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">roots</span><span class="p">,</span><span class="n">weights</span><span class="p">)])</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>        <span class="k">return</span> <span class="n">result</span>
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>        <span class="c1"># 计算 \int_{-inf}^{+inf} g(x) dx</span>
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>        <span class="n">result</span><span class="o">=</span><span class="nb">sum</span><span class="p">([</span><span class="n">wi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">xi</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="k">for</span> <span class="n">xi</span><span class="p">,</span><span class="n">wi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">roots</span><span class="p">,</span><span class="n">weights</span><span class="p">)])</span>
+</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>        <span class="k">return</span> <span class="n">result</span>
+</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>
+</span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="k">def</span> <span class="nf">gauss_hermite_points_and_weights</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
+</span><span id="__span-5-40"><a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;给定高斯点个数n,计算[-inf,+inf]内的埃尔米特-高斯积分点及权重&quot;&quot;&quot;</span>
+</span><span id="__span-5-41"><a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a>    <span class="kn">import</span> <span class="nn">scipy.special</span> <span class="k">as</span> <span class="nn">sp</span>
+</span><span id="__span-5-42"><a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a>    <span class="c1"># 计算埃尔米特多项式的根(即高斯点)及其对应的高斯系数</span>
+</span><span id="__span-5-43"><a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a>    <span class="n">roots</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">roots_hermite</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</span><span id="__span-5-44"><a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a>    <span class="k">return</span> <span class="n">roots</span><span class="p">,</span> <span class="n">weights</span>
+</span></code></pre></div>
+
+</details>
+
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731141413163-2006079988.png" /></p>
+<ul>
+<li>Answer:</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">f3</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span> <span class="k">if</span> <span class="n">x</span><span class="o">!=</span><span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span> <span class="nn">formu_lib</span> <span class="kn">import</span> <span class="o">*</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># 积分范围</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># 计算积分</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">r1</span><span class="o">=</span><span class="n">VarStepInteg1d</span><span class="p">(</span><span class="n">f3</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mf">1e-7</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1"># 使用高斯勒让德方法计算积分</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">r2</span><span class="o">=</span><span class="n">Integ1dGuassLegendre</span><span class="p">(</span><span class="n">f3</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;复化梯形积分:</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;高斯勒让德积分:</span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="n">showError</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span><span class="mf">0.9460831</span><span class="p">)</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="n">showError</span><span class="p">(</span><span class="n">r2</span><span class="p">,</span><span class="mf">0.9460831</span><span class="p">)</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="c1"># 输出:</span>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="c1"># 复化梯形积分:0.9460830464324462</span>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="c1"># 高斯勒让德积分:0.9460830703672151</span>
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="c1"># 数值解: 0.9460830464324462, 精确解: 0.9460831, 误差: 5.662034733111406e-08</span>
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="c1"># 数值解: 0.9460830703672151, 精确解: 0.9460831, 误差: 3.132154553076945e-08</span>
+</span></code></pre></div>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731141553013-1970289837.png" /></p>
+<ul>
+<li>Answer:</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span> <span class="nf">f4</span><span class="p">(</span><span class="n">alpha</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">alpha</span><span class="o">+</span><span class="mf">0.75</span><span class="p">)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">r</span><span class="o">=</span><span class="p">{}</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">1000</span><span class="p">]</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]:</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    <span class="n">re</span><span class="o">=</span><span class="p">[]</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="k">for</span> <span class="n">ni</span> <span class="ow">in</span> <span class="n">n</span><span class="p">:</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        <span class="n">re</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Integ1dGuassLegendre</span><span class="p">(</span><span class="n">f4</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">),</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">ni</span><span class="p">))</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="n">r</span><span class="p">[</span><span class="n">alpha</span><span class="p">]</span><span class="o">=</span><span class="n">re</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]:</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">[</span><span class="n">alpha</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;alpha=</span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;gauss points number&#39;</span><span class="p">)</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39; Integrate Value&#39;</span><span class="p">)</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731142849390-1689835535.png" /></p>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731142937925-552720726.png" /></p>
+<ul>
+<li>Answer:</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># %%</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># 例题5.5.8</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">from</span> <span class="nn">formu_lib</span> <span class="kn">import</span> <span class="o">*</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">f5</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">result</span><span class="o">=</span><span class="n">Integ1dGuassHermite</span><span class="p">(</span><span class="n">f5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="n">showError</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">1.3803884470</span><span class="p">)</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1"># 积分点个数: 5, 积分范围: [-inf,+inf]</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="c1"># 数值解: 1.3803900759356564, 精确解: 1.380388447, 误差: -1.1800559906898897e-06</span>
+</span></code></pre></div>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731152408875-2021620065.png" /></p>
+<ul>
+<li>Answer:</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># %%</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># 例题5.5.9</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kn">from</span> <span class="nn">formu_lib</span> <span class="kn">import</span> <span class="o">*</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">g</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">]</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">result</span><span class="o">=</span><span class="p">[</span><span class="n">Integ1dGuassLaguerre</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">ni</span><span class="p">,</span><span class="n">beta</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">ni</span> <span class="ow">in</span> <span class="n">n</span><span class="p">]</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;广义积分结果:</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># 广义积分结果:1.1693599387646283</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">result</span><span class="p">)</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;gauss points number&#39;</span><span class="p">)</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39; Integrate Value&#39;</span><span class="p">)</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Gauss-Laguerre Integration Value VS Points Number&#39;</span><span class="p">)</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="c1"># 收敛于1.2091</span>
+</span></code></pre></div>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731154157304-1551122757.png" /></p>
+<h2 id="6">6. 多重积分</h2>
+<p>本节考虑多重积分的两种计算方法:
++  第一种方法可看成前面几节关于单重积分的推广 ,计算重数较小的积分时有效 . 
++  第二种方法称为蒙特卡罗 (Monte Carlo) 方法 , 是一种随机算法 , 处理高维积分时特别有效</p>
+<h3 id="61">6.1 从一重积分推广到二重积分</h3>
+<p>以二重积分为例,考虑:</p>
+<div class="arithmatex">\[I=\iint_{\Omega}f(x,y)\mathrm{d}x\mathrm{d}y,\]</div>
+<p>其中,<span class="arithmatex">\(\Omega={a\leq x\leq b,\varphi_1(x)\leq y\leq \varphi_2(x)}\)</span></p>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731155253331-1723401440.png" /></p>
+<p>根据二重积分性质:</p>
+<div class="arithmatex">\[I=\iint_\Omega f(x,y)\mathrm{d}x\mathrm{d}y=\int_a^b\mathrm{d}x\int_{\varphi_1(x)}^{\varphi_2(x)}f(x,y)\mathrm{d}y.\]</div>
+<p>令:</p>
+<div class="arithmatex">\[F(x)=\int_{\varphi_1(x)}^{\varphi_2(x)}f(x,y)\mathrm{d}y,\]</div>
+<div class="arithmatex">\[I=\int_a^bF(x)\mathrm{d}x\approx\sum_{i=0}^n\omega_i^{(1)}F(x_i).\]</div>
+<p>为了求出<span class="arithmatex">\(F(x_i)\)</span>,将区间 <span class="arithmatex">\([\varphi_1(x),\varphi_2(x)]\)</span> 分为m份. 利用单重积分求积公式得:</p>
+<div class="arithmatex">\[F(x_i)=\int_{\varphi_1(x_i)}^{\varphi_2(x_i)}f(x_i,y)\mathrm{d}y\approx\sum_{j=0}^m\omega_j^{(2)}f(x_i,y_j).\]</div>
+<p><span class="arithmatex">\(\omega_i^{(1)}\text{ 和 }\omega_j^{(2)}\)</span> 分别是 x 方向和 y 方向的求积系数.记 <span class="arithmatex">\(\omega_{ij}=\omega_i^{(1)}\cdot\omega_j^{(2)}\)</span> ,则有二重积分的求积公式:</p>
+<div class="arithmatex">\[I=\iint_\Omega f(x,y)\mathrm{d}x\mathrm{d}y\approx\sum_{i=0}^n\sum_{j=0}^m\omega_{ij}f(x_i,y_j).\tag{8}\]</div>
+<blockquote>
+<p>以上就是二重积分的思路.</p>
+</blockquote>
+<p>因此一般来说 , 计算高维数值积分用复合辛普森公式以及前几节介绍的方法都失效.</p>
+<h3 id="62">6.2 蒙特卡罗方法</h3>
+<blockquote>
+<p>一般地 , 我们将随机数序列的模拟方法称为蒙特卡罗方法 . </p>
+</blockquote>
+<p>记 <span class="arithmatex">\(X_i (i = 1,2,··· ,N)\)</span> 为相互独立的服从区间 [0,1] 上均匀分布的随机变量,则:</p>
+<div class="arithmatex">\[I_N[f]=\frac{1}{N}\sum_{i=1}^Nf(X_i).\]</div>
+<p><span class="arithmatex">\(X_i\)</span> 可通过 N 次独立实验得到 . 由概率论中的大数定理 , 当 N → ∞ 时 , I N [f] 依概率收敛于 f(x)的积分值, 即:</p>
+<div class="arithmatex">\[I_N[f]\xrightarrow{\mathrm{P}}I[f].\]</div>
+<p>可以估计f的方差 <span class="arithmatex">\(Var(f)\)</span> ,取随机变量X的N个样本值 <span class="arithmatex">\(X_1,X_2,\cdots,X_N\)</span> ,令:</p>
+<div class="arithmatex">\[\overline{I}_N=\frac{1}{N}\sum_{i=1}^{N}f(X_i).\]</div>
+<p>then:</p>
+<div class="arithmatex">\[{\operatorname{Var}(f)}\approx{\frac{1}{N}}\sum_{i=1}^{N}(f(X_{i})-\overline{I}_{N})^{2}\]</div>
+<p>这个思路推广到高维积分:</p>
+<div class="arithmatex">\[I=\int_0^1\cdots\int_0^1f(x_1,x_2,\cdots,x_d)\mathrm{d}x_1\mathrm{d}x_2\cdots\mathrm{d}x_d.\]</div>
+<p>仍可取 N 次独立样本值的算术平均:</p>
+<div class="arithmatex">\[I_N[f]=\frac{1}{N}\sum_{i=1}^Nf(x_1^{(i)},x_2^{(i)},\cdots,x_d^{(i)})\]</div>
+<p>作为多重积分 I 的无偏估计量 , 其方差仍为<span class="arithmatex">\(\frac{\mathrm{Var}(f)}{N}\)</span>,<strong>收敛速度不受积分区域维数 d 的影响</strong>.</p>
+<blockquote>
+<p>在实际计算中,<span class="arithmatex">\(X_i\)</span>一般是程序生成的伪随机数.matlab的rand() 可以产生服从均匀分布U(0,1) 的随机数 ( 实际上是伪随机数 ).python的numpy.random.rand() 可以产生服从均匀分布U(0,1) 的随机数.</p>
+</blockquote>
+<ul>
+<li>推广到[a,b]的积分范围</li>
+</ul>
+<p>那么,如果计算积分:</p>
+<div class="arithmatex">\[I=\int_a^bf(x)dx\]</div>
+<p>对应的蒙特卡洛积分为</p>
+<div class="arithmatex">\[I^N=\frac1N\sum_{i=1}^N\frac{f(X_i)}{pdf(X_i)}\]</div>
+<p>其中, <span class="arithmatex">\(pdf(X_i)\)</span> 是概率密度函数, 它描述了随机变量X的概率分布.之前的X<sub>U(0,1),pdf(X)=1/(1-0),如果X</sub>U(a,b),则pdf(X)=1/(b-a).</p>
+<ul>
+<li>积分范围推广到[-inf,+inf]的蒙特卡洛方法</li>
+</ul>
+<p>积分:</p>
+<div class="arithmatex">\[F=\int_{-\infty}^{+\infty}f(x)\mathrm{d}x.\]</div>
+<p>可以看成是服从于正态分布随机变量 X 的函数 h(X) 的数学期望, 通过 N 次独立取样的算术平均近似计算:</p>
+<div class="arithmatex">\[F\approx F_{N}=\frac{1}{N}\sum_{i=1}^{N}h(x_{i}),\quad h(x)=\sqrt{2\pi}\mathrm{e}^{\frac{x^{2}}{2}}f(x).\]</div>
+<p>可以证明:<span class="arithmatex">\(E(F_N)=F\)</span></p>
+<blockquote>
+<p>资料链接:
++ https://wyman1024.github.io/monte-carlo/
++ https://cosx.org/2010/03/monte-carlo-method-to-compute-integration
++ https://reichtumqian.github.io/ScientificComputingWiKi/</p>
+</blockquote>
+<h1 id="_5">数值微分</h1>
+<blockquote>
+<p>讨论如下问题:已知函数 f(x) 在离散点处的函数值 f(x i )(i = 1,2,··· ,n), 求 f(x)导数. </p>
+</blockquote>
+<p>介绍两种近似方法:
++ 基于拉格朗日插值多项式的求导方法
++ 基于样条函数的求导方法</p>
+<h2 id="7">7.基于拉格朗日插值多项式的求导方法</h2>
+<p>已知 <span class="arithmatex">\(f(x)\)</span> 在离散点处的函数值 <span class="arithmatex">\(f(x_i )(i = 1,2,··· ,n)\)</span>, 可以作出 n 次拉格朗日插值多项式 <span class="arithmatex">\(L_n(x)\)</span> ,再利用 <span class="arithmatex">\(L_n(x)\)</span> 的导数来近似代替 <span class="arithmatex">\(f(x)\)</span> 的导数 , 此方法称为<strong>基于拉格朗日插值多项式的数值求导方法</strong> </p>
+<p>插值余项为:</p>
+<div class="arithmatex">\[R_{n}(x)=f(x)-L_{n}(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}\Pi(x),\quad\xi\in(a,b).\]</div>
+<div class="arithmatex">\[R'_{n}(x)=f'(x_i)-L'_n(x_i)=\frac{f^{(n+1)}(\xi)}{(n+1)!}\Pi'(x_i)=\frac{f^{(n+1)}(\xi)}{(n+1)!}\prod_{j=0,j\neq i}^n(x_i-x_j).\tag{10}\]</div>
+<blockquote>
+<p>基于拉格朗日插值的求导方法的缺点是
++ 只能求出节点处的导数
++ 数据 <span class="arithmatex">\(f(x_j)\)</span> 有一定误差以及h很小时,数值误差较大,即算法不稳定.
++ 高次插值会产生龙格现象,因此实际应用中多采用<strong>低次</strong>拉格朗日插值型求导公式</p>
+</blockquote>
+<p>以下是基于<strong>等距节点的低阶求导计算公式</strong></p>
+<h3 id="_6">两点公式</h3>
+<p>作 f(x) 的线性插值公式:</p>
+<div class="arithmatex">\[L_1(x)=\frac{x-x_1}{x_0-x_1}f(x_0)+\frac{x-x_0}{x_1-x_0}f(x_1),\]</div>
+<p>求导后,令<span class="arithmatex">\(x=x_0, x_1-x_0=h,\)</span>得:</p>
+<div class="arithmatex">\[L_1'(x_0)=\frac{f(x_1)-f(x_0)}h.\]</div>
+<p>根据公式(10),余项为 <span class="arithmatex">\(\frac{f^{\prime\prime}(\xi)}{2}(x_0-x_1)\)</span>,即:</p>
+<div class="arithmatex">\[f^{\prime}(x_{0})=\frac{f(x_{1})-f(x_{0})}{h}-\frac{h}{2}f^{\prime\prime}(\xi),\quad\xi\in(x_{0},x_{1}).\tag{11-1}\]</div>
+<div class="arithmatex">\[f^{\prime}(x_{1})=\frac{f(x_{1})-f(x_{0})}{h}+\frac{h}{2}f^{\prime\prime}(\xi),\quad\xi\in(x_{0},x_{1}).\tag{11-2}\]</div>
+<p>略去余项,(11-1),(11-2)称为计算导数的<strong>两点公式</strong>.分别是向前差商公式和向后差商公式,精度1阶,误差<span class="arithmatex">\(O(h)\)</span>.</p>
+<h3 id="_7">三点及五点公式</h3>
+<blockquote>
+<p>两个公式共同点在于,在一些点处的微分算不出来,微分个数损失.https://www.math.pku.edu.cn/teachers/lidf/docs/statcomp/html/_statcompbook/approx-diff.html</p>
+</blockquote>
+<p>作 f(x) 的二次插值多项式:</p>
+<div class="arithmatex">\[L_2(x)=\frac{(x-x_1)(x-x_2)}{(x_0-x_1)(x_0-x_2)}f(x_0)+\frac{(x-x_0)(x-x_1)}{(x_1-x_0)(x_1-x_2)}f(x_1)+\frac{(x-x_0)(x-x_1)}{(x_2-x_0)(x_2-x_1)}f(x_2).\]</div>
+<p>令 <span class="arithmatex">\(x=x_0+th, x_i=x_0+ih,\)</span> 上式变成:</p>
+<div class="arithmatex">\[L_2(x_0+th)=\frac{1}{2}(t-1)(t-2)f(x_0)-t(t-2)f(x_1)+\frac{1}{2}t(t-1)f(x_2),\]</div>
+<p>求导,并令t=0,1,2,得:</p>
+<div class="arithmatex">\[\begin{aligned}
+&amp;f^{\prime}(x_{0}) = \frac{1}{2h}[-3f(x_{0})+4f(x_{1})-f(x_{2})]+\frac{h^{2}}{3}f^{(3)}(\xi), \\
+&amp;f^{\prime}(x_{1}) = \frac{1}{2h}[-f(x_{0})+f(x_{2})]-\frac{h^{2}}{6}f^{(3)}(\xi), \\
+&amp;f^{\prime}(x_{2}) = \frac{1}{2h}[f(x_{0})-4f(x_{1})+3f(x_{2})]+\frac{h^{2}}{3}f^{(3)}(\xi).\tag{12} 
+\end{aligned}\]</div>
+<p>以上是带余项的计算导数的<strong>三点公式</strong>,精度2阶,误差<span class="arithmatex">\(O(h^2)\)</span>.(12-2)为中心差商公式.</p>
+<p>同理,五点求导公式为:</p>
+<div class="arithmatex">\[\begin{aligned}
+&amp;f'(x_{0}) =\frac{1}{12h}(-25f_{0}+48f_{1}-36f_{2}+16f_{3}-3f_{4})+\frac{h^{4}}{5}f^{(5)}(\xi), \\
+&amp;f'(x_{1}) =\frac{1}{12h}(-3f_{0}-10f_{1}+18f_{2}-6f_{3}+f_{4})-\frac{h^{4}}{20}f^{(5)}(\xi), \\
+&amp;f'(x_{2}) =\frac{1}{12h}(f_{0}-8f_{1}+8f_{3}-f_{4})-\frac{h^{4}}{30}f^{(5)}(\xi), \\
+&amp;f'(x_{3}) =\frac{1}{12h}(-f_{0}+6f_{1}-18f_{2}+10f_{3}+3f_{4})-\frac{h^{4}}{20}f^{(5)}(\xi), \\
+&amp;f'(x_{4}) =\frac{1}{12h}(3f_{0}-16f_{1}+36f_{2}-48f_{3}+25f_{4})+\frac{h^{4}}{5}f^{(5)}(\xi). \tag{13}
+\end{aligned}\]</div>
+<blockquote>
+<p>五点公式一般比三点公式精确 , 三点公式一般比两点公式精确 ;. 但在实际计算中 , 由于数据 <span class="arithmatex">\(f_i\)</span> 有误差 , 并不是h 越小计算效果越好 </p>
+</blockquote>
+<h2 id="8">8. 基于样条函数的求导方法</h2>
+<blockquote>
+<p>本节我们将用样条函数 <span class="arithmatex">\(S(x)\)</span> 代替拉格朗日插值多项式 <span class="arithmatex">\(L_n(x)\)</span>作为函数 <span class="arithmatex">\(f(x)\)</span>的近似.若<span class="arithmatex">\(f(x)\in C^4[a,b],\)</span>则有估计:</p>
+</blockquote>
+<div class="arithmatex">\[\max_{a\leqslant x\leqslant b}|f^{(k)}(x)-S^{(k)}(x)|\leqslant Ch^{4-k},\quad k=0,1,2,3,\]</div>
+<p>其中,<span class="arithmatex">\(h=\max_{0\leqslant i\leqslant n-1}h_i.\)</span></p>
+<blockquote>
+<p>此时不但 f(x) 与 S(x) 的函数值很 " 接近 ", 它们的导数值也很 " 接近 "</p>
+</blockquote>
+<p>设<span class="arithmatex">\(a=x_0&lt;x_1&lt;\cdots&lt;x_n=b, h_i=x_{i+1}-x_i(i=0,1,\cdots,n-1).\)</span>,且样条函数S(x)在<span class="arithmatex">\(x_i\)</span>处的导数为<span class="arithmatex">\(S^{\prime}(x_i)=m_i\)</span>,则在区间<span class="arithmatex">\((x_i,x_{i+1})\)</span>上,S(x)为三次多项式,即:</p>
+<div class="arithmatex">\[\begin{gathered}
+S_i(x) =\frac{h_{i}+2(x-x_{i})}{h_{i}^{3}}(x-x_{i+1})^{2}f_{i}+\frac{h_{i}-2(x-x_{i+1})}{h_{i}^{3}}(x-x_{i})^{2}f_{i+1} \\
++\frac{(x-x_i)(x-x_{i+1})^2}{h_i^2}m_i+\frac{(x-x_{i+1})(x-x_{i+1})^2}{h_i^2}m_{i+1}. 
+\end{gathered}\tag{14}\]</div>
+<p>想要求出<span class="arithmatex">\(m_i(i=0,1,\cdots,n)\)</span>.需要<span class="arithmatex">\(S''(x)\)</span>在<span class="arithmatex">\(x_i\)</span>处连续以及边界条件.</p>
+<ol>
+<li>若<span class="arithmatex">\(S'(x_0)=f_0'=m_0, S'(x_n)=f_n'=m_n\)</span>已知.m_i满足方程组:</li>
+</ol>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731183131324-1876510672.png" /></p>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731183346237-1935177586.png" /></p>
+<p>上述方程组 (5.62), (5.65), (5.66) 称为三转角方程组 . 可用追赶法进行求解 . 再将计算结果代入式 (5.61) 中便得 S(x) 以及 S(x) 在任意点 x 处的导数值</p>
+<p>由于上述求导数的方法需要求解线性方程组 , 因此也称为隐式格式 . 它具有数值计算稳定的特点 , <strong>可以求出任意点 ( 不一定为节点 ) 的导数值 , 而且精度较高 .</strong></p>
+<h1 id="_8">数值实验</h1>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731184731026-1535827967.png" /></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 数值实验t1</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">from</span> <span class="nn">formu_lib</span> <span class="kn">import</span> <span class="o">*</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">def</span> <span class="nf">Com3pGausslengendre</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span><span class="n">b</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span><span class="n">n</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="c1"># 复合三点高斯-勒让德计算积分</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">Integ1dGuassLegendre</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="mi">3</span><span class="p">)</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="c1"># 积分函数</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="n">pi</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">4</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="c1"># 积分范围</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="c1"># 复合simpson计算积分</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="n">r1</span><span class="o">=</span><span class="n">VarStepInteg1d</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mf">1e-8</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="n">r2</span><span class="o">=</span><span class="n">Com3pGausslengendre</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="n">showError</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="n">showError</span><span class="p">(</span><span class="n">r2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="c1"># 数值解: 3.1415926535528365, 精确解: 3.141592653589793, 误差: 1.1763670223853885e-11</span>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="c1"># 数值解: 3.1415926535897927, 精确解: 3.141592653589793, 误差: 1.4135798584282297e-16</span>
+</span></code></pre></div>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731184753166-1869276211.png" /></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># t2</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">from</span> <span class="nn">formu_lib</span> <span class="kn">import</span> <span class="o">*</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># 积分函数</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">f</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="n">r1</span><span class="o">=</span><span class="n">VarStepInteg1d</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mf">1e-6</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="n">showError</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span><span class="mf">1.53439197</span><span class="p">)</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># 数值解: 1.5343920054108953, 精确解: 1.53439197, 误差: -2.3078128678621626e-08</span>
+</span></code></pre></div>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731185007577-435516571.png" /></p>
+<p>求解代码:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">from</span> <span class="nn">formu_lib</span> <span class="kn">import</span> <span class="o">*</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># 积分函数</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">f8</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="n">result</span><span class="o">=</span><span class="p">[]</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="n">accurateVal</span><span class="o">=</span><span class="p">[]</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="n">ns</span><span class="o">=</span><span class="p">[]</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">51</span><span class="p">):</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Integ1dNewtonCotes</span><span class="p">(</span><span class="n">f8</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>    <span class="n">ns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>    <span class="n">accurateVal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span><span class="n">result</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Numerical solution&#39;</span><span class="p">)</span>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span><span class="n">accurateVal</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Accurate solution&#39;</span><span class="p">)</span>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Newton-Cotes points number&#39;</span><span class="p">)</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39; Integrate Value&#39;</span><span class="p">)</span>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Newton-Cotes Integration Value VS Points Number&#39;</span><span class="p">)</span>
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731212956495-321695396.png" /></p>
+<p>从上图可以看出,当随着n的增加, 牛顿-科特斯积分的逐渐不稳定, 但误差也越来越大.不收敛.</p>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731184834437-683637556.png" /></p>
+<p>code:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># t4</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kn">from</span> <span class="nn">formu_lib</span> <span class="kn">import</span> <span class="o">*</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1900</span><span class="p">,</span><span class="mi">1910</span><span class="p">,</span><span class="mi">1920</span><span class="p">,</span><span class="mi">1930</span><span class="p">,</span><span class="mi">1940</span><span class="p">,</span><span class="mi">1950</span><span class="p">,</span><span class="mi">1960</span><span class="p">,</span><span class="mi">1970</span><span class="p">,</span><span class="mi">1980</span><span class="p">,</span><span class="mi">1990</span><span class="p">]</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">fs</span><span class="o">=</span><span class="p">[</span><span class="mf">76.0</span><span class="p">,</span><span class="mf">92.0</span><span class="p">,</span><span class="mf">106.5</span><span class="p">,</span><span class="mf">123.2</span><span class="p">,</span><span class="mf">131.7</span><span class="p">,</span><span class="mf">150.7</span><span class="p">,</span><span class="mf">179.3</span><span class="p">,</span><span class="mf">204.0</span><span class="p">,</span><span class="mf">226.5</span><span class="p">,</span><span class="mf">251.4</span><span class="p">]</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="n">df1</span><span class="o">=</span><span class="n">diff1dForward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">fs</span><span class="p">)</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="n">df2</span><span class="o">=</span><span class="n">diff1dBackward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">fs</span><span class="p">)</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="n">df3</span><span class="o">=</span><span class="n">diff1dCentral</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">fs</span><span class="p">)</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="n">plotLines</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">[:],</span><span class="n">x</span><span class="p">[:],</span><span class="n">x</span><span class="p">],[</span><span class="n">fs</span><span class="p">,</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">,</span><span class="n">df3</span><span class="p">],[</span><span class="s2">&quot;Population&quot;</span><span class="p">,</span><span class="s2">&quot;Population growth rate-forward&quot;</span><span class="p">,</span><span class="s2">&quot;Population growth rate-backward&quot;</span><span class="p">,</span><span class="s2">&quot;Population growth rate-center&quot;</span><span class="p">])</span>
+</span></code></pre></div></p>
+<p><img alt="alt text" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240801114324390-2123047601.png" /></p>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731184902918-1734852619.png" /></p>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240731184919259-483162080.png" /></p>
+<p>资料:<a href="https://zh.wikipedia.org/wiki/%E9%A1%AF%E5%BC%8F%E5%92%8C%E9%9A%B1%E5%BC%8F%E6%96%B9%E6%B3%95">显式和隐式方法 - 维基百科,自由的百科全书</a></p>
+<p>取步长为h,则: <span class="arithmatex">\(x_{i}=a+ih,i=0,1,2,...,n,h=\frac{b-a}{n},x_{i+1}-x_{i}=h.\)</span> 使用向前差商公式,则有: </p>
+<div class="arithmatex">\[y'(x_{i})=\frac{y(x_{i+1})-y(x_{i})}{h}\]</div>
+<p>代入方程后:</p>
+<div class="arithmatex">\[y(x_{i+1})-y(x_{i})=h f[x_{i},y(x_{i})],\]</div>
+<div class="arithmatex">\[y(x_{i+1})=y(x_{i})+h f[x_{i},y(x_{i})],\]</div>
+<p>这是显式格式.</p>
+<p>如果使用向后差商公式,则有: </p>
+<div class="arithmatex">\[y'(x_{i+1})=\frac{y(x_{i+1})-y(x_{i})}{h}\]</div>
+<p>代入方程后:</p>
+<div class="arithmatex">\[y(x_{i+1})-y(x_{i})=h f[x_{i+1},y(x_{i+1})],\]</div>
+<div class="arithmatex">\[y(x_{i+1})-h f[x_{i+1},y(x_{i+1})]=y(x_{i})\]</div>
+<p>这是隐式格式</p>
+<ul>
+<li>验证</li>
+</ul>
+<p>取<span class="arithmatex">\(f(x,y)=-y^2,a=0,y(0)=1,b=5&gt;x&gt;a,n取值为100\)</span>,则:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># t6</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="kn">from</span> <span class="nn">formu_lib</span> <span class="kn">import</span> <span class="o">*</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="n">h</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="n">f</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">x</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="c1"># result var</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="n">ye</span><span class="p">,</span><span class="n">yi</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="n">ye</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">yi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="c1"># explicit method</span>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>    <span class="n">ye</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">ye</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">h</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">ye</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="c1"># implicit method</span>
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>    <span class="n">yi</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">yi</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="n">plotLines</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">],[</span><span class="n">ye</span><span class="p">,</span><span class="n">yi</span><span class="p">],[</span><span class="s2">&quot;y(x)-explictSol&quot;</span><span class="p">,</span><span class="s2">&quot;y(x)-implicitSol&quot;</span><span class="p">])</span>
+</span></code></pre></div>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240801181011461-1716966322.png" /></p>
+<p>精确结果:
+<img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240801173624387-1462548291.png" /></p>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240804150901102-2082893312.png" /></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="n">h</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="c1"># 计算y&#39;(x)=x+y(x) and y(0)=1 ,0&lt;=x&lt;=1</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># 使用向前差商公式离散:y&#39;(x_i)=(y(x_{i+1})-y(x_i))/h</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="c1">#   ==&gt;y(x_{i+1})=(1+h)*y(x_i)+h*x_i</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="c1"># result var</span>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="c1"># explicit method</span>
+</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="n">ye</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="n">ye</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-15-15"><a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-15-16"><a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>    <span class="n">ye</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">ye</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">h</span><span class="p">)</span><span class="o">+</span><span class="n">h</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-15-17"><a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>
+</span><span id="__span-15-18"><a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="c1"># implicit method</span>
+</span><span id="__span-15-19"><a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="c1"># yi=np.zeros(n+1)</span>
+</span><span id="__span-15-20"><a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="c1"># yi[0]=1</span>
+</span><span id="__span-15-21"><a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="c1"># for i in range(n):</span>
+</span><span id="__span-15-22"><a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a><span class="c1">#     yi[i+1]=(-1+np.sqrt(1+4*h*yi[i]))/(2*h)</span>
+</span><span id="__span-15-23"><a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>
+</span><span id="__span-15-24"><a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a><span class="c1"># extract solution</span>
+</span><span id="__span-15-25"><a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a><span class="n">yex</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span><span class="o">-</span><span class="n">xi</span><span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+</span><span id="__span-15-26"><a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>
+</span><span id="__span-15-27"><a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a><span class="n">plotLines</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">],[</span><span class="n">ye</span><span class="p">,</span><span class="n">yex</span><span class="p">],[</span><span class="s2">&quot;y(x)-explictSol&quot;</span><span class="p">,</span><span class="s2">&quot;y(x)-ExtractSol&quot;</span><span class="p">])</span>
+</span></code></pre></div>
+<p><img alt="img" src="../FILES/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86.md/2026433-20240804150939473-234585734.png" /></p>
+<blockquote>
+<p>数值积分微分部分完结</p>
+</blockquote>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "content.code.copy"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

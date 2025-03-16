@@ -1,0 +1,1712 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Note_Abaqus_%E8%BE%93%E5%87%BA%E6%80%BB%E4%BD%93%E5%88%9A%E5%BA%A6%E7%9F%A9%E9%98%B5/">
+      
+      
+        <link rel="next" href="../Note_Abaqus_%E5%8E%8B%E7%94%B5%E5%88%86%E6%9E%90%E5%85%A5%E9%97%A8/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.2.7">
+    
+    
+      
+        <title>Abaqus 复合材料分析基础 - Qinguoming Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#note_fem_" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Qinguoming Notes" class="md-header__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Qinguoming Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Abaqus 复合材料分析基础
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Qinguoming Notes" class="md-nav__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Qinguoming Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    数值分析算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            数值分析算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    蒙特卡洛实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数值积分+微分方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95code%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法CODE实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E6%B1%82%E6%A0%B9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    非线性方程求根
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E5%88%9D%26%E8%BE%B9%E5%80%BC%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    常微分方程初&边值问题数值解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_Crout%E5%88%86%E8%A7%A3%E8%BF%BD%E8%B5%B6%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crout分解追赶法的线性方程组求解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    FEM算法原理及编程
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            FEM算法原理及编程
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Mindlin%E6%9D%BFQ4%E5%8D%95%E5%85%83%E6%8E%A8%E5%AF%BC-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mindlin Q4单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Kirchhoff%E6%9D%BF%E7%90%86%E8%AE%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基尔霍夫板理论
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E5%B1%82%E5%90%88%E6%9D%BF%E5%8D%95%E5%85%83%E6%A0%BC%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    层合板单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FEM边界条件处理方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E7%BB%93%E6%9E%84%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%95%99%E6%9D%90%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    结构动力学教材笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python数值计算
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Python数值计算
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_%E6%9D%90%E6%96%99%E5%88%9A%E5%BA%A6%E8%BD%AC%E6%8D%A2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    材料刚度矩阵转换
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Vtk%E6%96%87%E4%BB%B6%E8%A7%84%E5%88%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vtk文件规则
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_2%263%E7%BB%B4%E9%AB%98%E6%96%AF%E7%A7%AF%E5%88%86py%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2&3维高斯积分Python实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Mpmath%E5%BA%93%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mpmath库
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    multiprocessing多线程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Matlab2Python%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Matlab2Python索引
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CNC_Cpp%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cpp数值计算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Abaqus 建模
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Abaqus 建模
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus CompositeLayup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%A4%B9%E8%8A%AF%E6%9D%BF%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus Sandwich建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%A4%B1%E6%95%88/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材失效建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E7%A6%BB%E6%95%A3%E5%A2%9E%E5%BC%BA%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材离散增强建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_SolidSection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus SolidSection KeyWord
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E8%BE%93%E5%87%BA%E6%80%BB%E4%BD%93%E5%88%9A%E5%BA%A6%E7%9F%A9%E9%98%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 输出总体刚度矩阵
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复合材料分析基础
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%8E%8B%E7%94%B5%E5%88%86%E6%9E%90%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 压电分析入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    其他
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            其他
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git常用命令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_%E5%87%A0%E7%AF%87%E6%A8%A1%E6%80%81%E5%BA%94%E5%8F%98%E8%83%BD%E8%AE%BA%E6%96%87/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    几篇模态应变能论文
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../About/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Me
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="note_fem_">Note_Fem_复合材料分析基础</h1>
+<blockquote>
+<p>https://www.cnblogs.com/aksoam/p/18222439
+教材:Finite_Element_Analysis_of_Composite_Material using ABAQUS
+未完结</p>
+</blockquote>
+<h1 id="_1">各向异性材料的弹性力学基础</h1>
+<p>复合材料宏观力学分析的基本假设: 1.所研究的各向异性弹性体为均质连续固体 2.线弹性范围内,服从广义虎克定律.3.小变形</p>
+<p>各向异性与各向同性弹性力学的基本方程的差别在于:本构方程.其它平衡方程,几何方程,协调方程,和边界条件等则完全相同</p>
+<h2 id="1">1.弹性力学中的几个基本概念</h2>
+<ul>
+<li>体力:— 弹性体内单位体积上所受的外力</li>
+</ul>
+<div class="arithmatex">\[
+F=\lim_{\Delta V\to0}\frac{\Delta Q}{\Delta V}\\
+F=X\boldsymbol{i}+Y\boldsymbol{j}+Z\boldsymbol{k}
+\]</div>
+<ul>
+<li>面力:作用于物体表面单位面积上的外力</li>
+</ul>
+<div class="arithmatex">\[
+F=\lim_{\Delta S\to0}\frac{\Delta Q}{\Delta S}\\\boldsymbol{F}=\overline{X}\boldsymbol{i}+\overline{Y}\boldsymbol{j}+\overline{Z}\boldsymbol{k}
+\]</div>
+<ul>
+<li>内力: 由于外力作用引起的相互作用力</li>
+</ul>
+<div class="arithmatex">\[
+s=\lim_{\Delta A\to0}\frac{\Delta Q}{\Delta A}
+\]</div>
+<ul>
+<li>应力:由外力引起的在 P点的某一面上内力分布集度.应力的法向分量为正应力;切向分量为剪应力.</li>
+</ul>
+<p>一点应力状态: 通过一点P 的各个面上应力状况的集合.矩阵表示为:</p>
+<div class="arithmatex">\[
+[\sigma]=\begin{bmatrix}\sigma_x&amp;\tau_{xy}&amp;\tau_{xz}\\\tau_{yx}&amp;\sigma_y&amp;\tau_{yz}\\\tau_{zx}&amp;\tau_{zy}&amp;\sigma_z\end{bmatrix}
+\]</div>
+<p>应力符号的意义:
++ 对于正应力:第1个下标表示应力所在面的法线方向;
++ 对于切应力(以<span class="arithmatex">\(\tau_{xy}\)</span>为例):第1个下标表示切应力所在面的法线方向,第2个下标表示切应力的方向.</p>
+<p>应力正负号的规定:
++ 正应力:拉为正,压为负.
++ 剪应力:
+    + 坐标正面上,与坐标正向一致时为正;
+    + 坐标负面上,与坐标正向相反时为正.</p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240530151649436-1319359655.png" /></p>
+<p>根据剪应力互等定理,可以知道:应力矩阵只有6个独立变量:<span class="arithmatex">\(\sigma_x,\sigma_y,\sigma_z,\tau_{xy},\tau_{yz},\tau_{xz}\)</span>.</p>
+<div class="arithmatex">\[\left.\left\{\begin{array}{c}\tau_{xy}=\tau_{yx}\\\tau_{yz}=\tau_{zy}\\\tau_{zx}=\tau_{xz}\end{array}\right.\right.\]</div>
+<ul>
+<li>位移:物体变形时各点位置的改变量称为位移.总位移=刚体位移+形变位移.通常一点P的位移,用它在x、y、z轴上的位移分量u、v、w来表示,<strong>以沿坐标轴正向为正,沿坐标轴负向为负</strong>.</li>
+</ul>
+<div class="arithmatex">\[
+\overrightarrow{x}^{2}=u\overrightarrow{i}+v\overrightarrow{j}+w\overrightarrow{k}
+\]</div>
+<ul>
+<li>应变:物体变形时各点位置的变形程度称为应变.</li>
+</ul>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240530153235539-777349569.png" /></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240530153532596-1928770513.png" /></p>
+<p>对于三维空间,应变分量可以表示为:</p>
+<div class="arithmatex">\[
+\begin{aligned}&amp;\varepsilon_{x}=\frac{\partial u}{\partial x},\varepsilon_{y}=\frac{\partial\nu}{\partial y},\varepsilon_{z}=\frac{\partial w}{\partial z}\\&amp;\gamma_{yz}=\frac{\partial w}{\partial y}+\frac{\partial\nu}{\partial z},\gamma_{zx}=\frac{\partial u}{\partial z}+\frac{\partial w}{\partial x},\gamma_{xy}=\frac{\partial\nu}{\partial x}+\frac{\partial u}{\partial y}\end{aligned}
+\]</div>
+<p>定义张量应变如下.<strong>张量应变和工程应变的关系:正应变两者一致,张量剪应变为工程剪应变的0.5倍.</strong></p>
+<div class="arithmatex">\[
+\begin{aligned}\varepsilon_{ij}&amp;=\frac{1}{2}(u_{i,j}+u_{j,i})\quad 其中(i,j&amp;=1,2,3)\end{aligned}
+\]</div>
+<p>张量应变矩阵为:</p>
+<div class="arithmatex">\[
+\begin{bmatrix}\varepsilon\end{bmatrix}=\begin{bmatrix}\varepsilon_x&amp;\gamma_{xy}&amp;\gamma_{xz}\\\gamma_{yx}&amp;\varepsilon_y&amp;\gamma_{yz}\\\gamma_{zx}&amp;\gamma_{zy}&amp;\varepsilon_z\end{bmatrix}\\
+\text{其中}\begin{cases}&amp;\gamma_{xy}=\gamma_{yx}\\&amp;\gamma_{yz}=\gamma_{zy}\\&amp;\gamma_{zx}=\gamma_{xz}\end{cases}
+\]</div>
+<h2 id="2">2.各向异性弹性力学的基本方程</h2>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240530155346053-271432350.png" /></p>
+<ul>
+<li>弹性力学平衡方程(equilibrium eqs.):描述应力-位移之间的关系</li>
+</ul>
+<p>取一个微元体dx * dy * dz, 假设受到体力<span class="arithmatex">\(F=X_x\boldsymbol{i}+X_y\boldsymbol{j}+X_z\boldsymbol{k}\)</span>的作用, 则有:</p>
+<div class="arithmatex">\[
+\frac{\partial\sigma_{x}}{\partial x}+\frac{\partial\tau_{yx}}{\partial y}+\frac{\partial\tau_{zx}}{\partial z}+X_{x}=\rho\frac{\partial^{2}u}{\partial t^{2}}\\
+\frac{\partial\tau_{xy}}{\partial x}+\frac{\partial\sigma_{y}}{\partial y}+\frac{\partial\tau_{zy}}{\partial z}+X_{y}=\rho\frac{\partial^{2}\nu}{\partial t^{2}}\\
+\frac{\partial\tau_{xz}}{\partial x}+\frac{\partial\tau_{yz}}{\partial y}+\frac{\partial\sigma_{z}}{\partial z}+X_{z}=\rho\frac{\partial^{2}w}{\partial t^{2}}
+\]</div>
+<p>其中, <span class="arithmatex">\(\rho\)</span>为体积密度,<span class="arithmatex">\(X_{x},X_{y},X_{z}\)</span>为体力密度(unit:N/m^3),<span class="arithmatex">\(\sigma_{x},\sigma_{y},\sigma_{z}\)</span>为应力,<span class="arithmatex">\(\tau_{xy},\tau_{xz},\tau_{yz}\)</span>为张量应变,<span class="arithmatex">\(u,\nu,w\)</span>为位移.</p>
+<p>描述应变-位移之间的关系可以用变形协调方程(deformation eqs.)或几何方程(geometry eqs.)表示,两者等效.</p>
+<blockquote>
+<p>三个独立的位移场即可以完全确定变形,而应变亦可以描述变形,它们之间满足以下关系!</p>
+</blockquote>
+<ul>
+<li>几何方程</li>
+</ul>
+<div class="arithmatex">\[
+\varepsilon_{x}=\frac{\partial u}{\partial x}\\
+\varepsilon_{y}=\frac{\partial\nu}{\partial y}\\
+\varepsilon_{z}=\frac{\partial w}{\partial z}\\
+\gamma_{zy}=\frac{\partial w}{\partial y}+\frac{\partial\nu}{\partial z}\\
+\gamma_{zx}=\frac{\partial w}{\partial x}+\frac{\partial u}{\partial z}\\
+\gamma_{yx}=\frac{\partial u}{\partial y}+\frac{\partial\nu}{\partial x}
+\]</div>
+<ul>
+<li>变形协调方程</li>
+</ul>
+<div class="arithmatex">\[
+\frac{\partial^{2}\varepsilon_{x}}{\partial y^{2}}+\frac{\partial^{2}\varepsilon_{y}}{\partial x^{2}}=\frac{\partial^{2}\gamma_{xy}}
+{\partial x\partial y}\\
+\frac{\partial^{2}\varepsilon_{z}}{\partial x^{2}}+\frac{\partial^{2}\varepsilon_{x}}{\partial z^{2}}=\frac{\partial^{2}\gamma_{zx}}{\partial z\partial x}\\
+\frac{\partial^{2}\varepsilon_{y}}{\partial z^{2}}+\frac{\partial^{2}\varepsilon_{z}}{\partial y^{2}}=\frac{\partial^{2}\gamma_{zy}}{\partial z\partial y}\\
+\frac{\partial}{\partial x}(\frac{\partial\gamma_{xz}}{\partial y}+\frac{\partial\gamma_{xy}}{\partial z}-\frac{\partial\gamma_{yz}}{\partial x})=2\frac{\partial^{2}\varepsilon_{x}}{\partial z\partial y}\\
+\frac{\partial}{\partial y}(\frac{\partial\gamma_{xy}}{\partial z}+\frac{\partial\gamma_{zy}}{\partial x}-\frac{\partial\gamma_{xz}}{\partial y})=2\frac{\partial^{2}\varepsilon_{y}}{\partial z\partial x}\\
+\frac{\partial}{\partial z}(\frac{\partial\gamma_{zy}}{\partial x}+\frac{\partial\gamma_{zx}}{\partial y}-\frac{\partial\gamma_{xy}}{\partial z})=2\frac{\partial^{2}\varepsilon_{z}}{\partial y\partial x}
+\]</div>
+<ul>
+<li>本构方程(constitutive eqs.):描述应力-应变之间的关系</li>
+</ul>
+<p>本构方程反映了材料的性质.一般刚度矩阵表示应力应变关系, 它是各向异性弹性力学的基本方程.根据不同材料,矩阵独立变量个数也不同.</p>
+<div class="arithmatex">\[
+\begin{bmatrix}\sigma_1\\\sigma_2\\\sigma_3\\\tau_{23}\\\tau_{31}\\\tau_{12}\end{bmatrix}=\begin{bmatrix}C_{11}&amp;C_{12}&amp;C_{13}&amp;C_{14}&amp;C_{15}&amp;C_{16}\\C_{21}&amp;C_{22}&amp;C_{23}&amp;C_{24}&amp;C_{25}&amp;C_{26}\\C_{31}&amp;C_{32}&amp;C_{33}&amp;C_{34}&amp;C_{35}&amp;C_{36}\\C_{41}&amp;C_{42}&amp;C_{43}&amp;C_{44}&amp;C_{45}&amp;C_{46}\\C_{51}&amp;C_{52}&amp;C_{53}&amp;C_{54}&amp;C_{55}&amp;C_{56}\\C_{61}&amp;C_{62}&amp;C_{63}&amp;C_{64}&amp;C_{65}&amp;C_{66}\end{bmatrix}\begin{bmatrix}\varepsilon_1\\\varepsilon_2\\\varepsilon_3\\\gamma_{23}\\\gamma_{31}\\\gamma_{12}\end{bmatrix}
+\]</div>
+<p>综上,
+待解变量共15个:
++ 3个位移分量,u,v,w
++ 6个应变分量,<span class="arithmatex">\(\varepsilon_\mathrm{x},\varepsilon_\mathrm{y},\varepsilon_\mathrm{z},\gamma_\mathrm{yz},\gamma_\mathrm{xz},\gamma_\mathrm{yx}\)</span>
++  6个应力分量,<span class="arithmatex">\(\sigma_\mathrm{x},\sigma_\mathrm{y},\sigma_\mathrm{z},\tau_\mathrm{yz},\tau_\mathrm{xz},\tau_\mathrm{yx}\)</span></p>
+<p>对应的方程也是15个,静力平衡方程(3)＋几何关系(6)＋本构方程(6)</p>
+<p>定解还需边界条件:</p>
+<div class="arithmatex">\[
+\begin{aligned}&amp;\text{给定力的边界条件(3)}\\&amp;\begin{cases}\sigma_xl+\tau_{xy}m+\tau_{xz}n=\overline{X},\text{已知}\\\tau_{yx}l+\sigma_ym+\tau_{yz}n=\overline{Y},\text{已知}\\\tau_{zx}l+\tau_{zy}m+\sigma_zn=\overline{Z},\text{已知}\end{cases}\\&amp;\text{给定位移的边界条件(3)}\\&amp;\begin{cases}u=\overline{u},\text{已知}\\\nu=\overline{\nu},\text{已知}\\w=\overline{w},\text{已知}\end{cases}\end{aligned}
+\]</div>
+<h2 id="3">3.各向异性弹性力学的本构方程</h2>
+<p>在满足线弹性-小变形时,各向异性弹性力学的本构方程可以写成:</p>
+<div class="arithmatex">\[
+\sigma_i=C_{ij}\varepsilon_j\quad
+\varepsilon_i=S_{ij}\sigma_j\\
+其中i,j=1,2,3,4,5,6\\
+S=C^{-1}
+\]</div>
+<p>应力应变本来是张量,将其转换成列阵形式,有:</p>
+<div class="arithmatex">\[
+[\sigma]=[\sigma_1, \sigma_2, \sigma_3, \tau_{23}, \tau_{31}, \tau_{12}]=[\sigma_1, \sigma_2, \sigma_3, \tau_{4}, \tau_{5}, \tau_{6}]\\
+[\varepsilon]=[\varepsilon_1, \varepsilon_2, \varepsilon_3, \gamma_{23}, \gamma_{31}, \gamma_{12}]=[\varepsilon_1, \varepsilon_2, \varepsilon_3, \gamma_{4}, \gamma_{5}, \gamma_{6}]
+\]</div>
+<blockquote>
+<p>注意:这个notation 和abaqus 不一致.</p>
+</blockquote>
+<div class="arithmatex">\[
+\begin{bmatrix}\varepsilon_1\\\varepsilon_2\\\varepsilon_3\\\varepsilon_4\\\varepsilon_5\\\varepsilon_6\end{bmatrix}=\begin{bmatrix}S_{11}&amp;S_{12}&amp;S_{13}&amp;S_{14}&amp;S_{15}&amp;S_{16}\\S_{21}&amp;S_{22}&amp;S_{23}&amp;S_{24}&amp;S_{25}&amp;S_{26}\\S_{31}&amp;S_{32}&amp;S_{33}&amp;S_{34}&amp;S_{35}&amp;S_{36}\\S_{41}&amp;S_{42}&amp;S_{43}&amp;S_{44}&amp;S_{45}&amp;S_{46}\\S_{51}&amp;S_{52}&amp;S_{53}&amp;S_{54}&amp;S_{55}&amp;S_{56}\\S_{61}&amp;S_{62}&amp;S_{63}&amp;S_{64}&amp;S_{65}&amp;S_{66}\end{bmatrix}\begin{bmatrix}\sigma_1\\\sigma_2\\\sigma_3\\\sigma_4\\\sigma_5\\\sigma_6\end{bmatrix}
+\]</div>
+<p>刚度矩阵和柔度矩阵都具有<strong>对称性</strong>:<span class="arithmatex">\(C_{\begin{array}{c}ij\\\end{array}}=\begin{array}{c}C_{\begin{array}{c}ji\\\end{array}}\end{array}\)</span></p>
+<h2 id="4">4.几种各向异性弹性力学的本构方程</h2>
+<ul>
+<li>完全各向异性(21个弹性常数)</li>
+</ul>
+<p>在均质弹性体中,若过每一点沿不同的方向都具有不同的弹性特性时,这种弹性体称之为一般各向异性体</p>
+<div class="arithmatex">\[
+\begin{gathered}\begin{pmatrix}\sigma_1\\\sigma_2\\\sigma_3\\\sigma_4\\\sigma_5\\\sigma_6\end{pmatrix}=\begin{bmatrix}C_{11}&amp;C_{12}&amp;C_{13}&amp;C_{14}&amp;C_{15}&amp;C_{16}\\C_{21}&amp;C_{22}&amp;C_{23}&amp;C_{24}&amp;C_{25}&amp;C_{26}\\C_{31}&amp;C_{32}&amp;C_{33}&amp;C_{34}&amp;C_{35}&amp;C_{36}\\C_{41}&amp;C_{42}&amp;C_{43}&amp;C_{44}&amp;C_{45}&amp;C_{46}\\C_{51}&amp;C_{52}&amp;C_{53}&amp;C_{54}&amp;C_{55}&amp;C_{56}\\C_{61}&amp;C_{62}&amp;C_{63}&amp;C_{64}&amp;C_{65}&amp;C_{66}\end{bmatrix}\begin{bmatrix}\varepsilon_1\\\varepsilon_2\\\varepsilon_3\\\varepsilon_4\\\varepsilon_5\\\varepsilon_6\end{bmatrix}\end{gathered}
+\]</div>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240601100944301-109370052.png" /></p>
+<ul>
+<li>正交各向异性材料</li>
+</ul>
+<p>如果材料有两个正交的材料性能对称面,则对于和这两个平面相垂直的第三个平面也具有对称性,这种材
+料称为正交各向异性.9个独立常数.<strong>材料主向:是指和三个正交对称平面的交线相平行的方向</strong>;正应力与剪应变之间没有耦合,剪应力与正应变之间没有耦合不同平面内的剪应力和剪应变之间也没有相互作用</p>
+<div class="arithmatex">\[
+\begin{bmatrix}\mathbf{\sigma}_1\\\mathbf{\sigma}_2\\\mathbf{\sigma}_3\\\mathbf{\tau}_{23}\\\mathbf{\tau}_{31}\\\mathbf{\tau}_{12}\end{bmatrix}=\begin{bmatrix}\mathbf{C}_{11}&amp;\mathbf{C}_{12}&amp;\mathbf{C}_{13}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}\\\mathbf{C}_{21}&amp;\mathbf{C}_{22}&amp;\mathbf{C}_{23}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}\\\mathbf{C}_{31}&amp;\mathbf{C}_{23}&amp;\mathbf{C}_{33}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}\\\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{C}_{44}&amp;\mathbf{0}&amp;\mathbf{0}\\\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{C}_{55}&amp;\mathbf{0}\\\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{C}_{66}\end{bmatrix}\begin{bmatrix}\mathbf{\varepsilon}_1\\\mathbf{\varepsilon}_2\\\mathbf{\varepsilon}_3\\\mathbf{\gamma}_{23}\\\mathbf{\gamma}_{31}\\\mathbf{\gamma}_{12}\end{bmatrix}
+\]</div>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531105240320-1475173144.png" /></p>
+<p>通过分析几何的对称性可推测弹性对称性.例子:纤维在横截面内按距形排列的单向纤维复合材料,宏观而言是一正交异性体的例子.</p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240601101112505-2021884425.png" /></p>
+<ul>
+<li>横观各向同性材料(transverse isotropic materials)</li>
+</ul>
+<p>如果材料具有三个互相垂直的弹性性能对称平面,且其 中的一个平面是各向同性的,那么为横观各向同性材料,<strong>5个独立常数</strong>.如果通过均质弹性体的每一点都可以找到某一相互平行的平面,并且该平面内所有各个方向的弹性性质均相同.</p>
+<p>纤维增强复合材料中:纤维在横截面内是随机排列的,宏观而言,其所有横方向的弹性性能均相同.</p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240601102409569-1068610472.png" /></p>
+<p>当取1-2面为各向同性面时( 下标1,2可以互换,即<span class="arithmatex">\(C_{11}=C_{22},C_{44}=C_{55},C_{23}=C_{13}\)</span> ),并且1-2平面旋转任何角度,应变能密度不变,即有:<span class="arithmatex">\(C_{66}=\frac{C_{11}-C_{12}}2\)</span>.其刚度矩阵和柔度矩阵格式如下:</p>
+<blockquote>
+<p>这也是abaqus 中使用的notation.</p>
+</blockquote>
+<div class="arithmatex">\[\begin{bmatrix}\mathbf{\sigma}_1\\\mathbf{\sigma}_2\\\mathbf{\sigma}_3\\\mathbf{\tau}_{23}\\\mathbf{\tau}_{31}\\\mathbf{\tau}_{12}\end{bmatrix}=\begin{bmatrix}\mathbf{C}_{11}&amp;\mathbf{C}_{12}&amp;\mathbf{C}_{13}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}\\\mathbf{C}_{12}&amp;\mathbf{C}_{11}&amp;\mathbf{C}_{13}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}\\\mathbf{C}_{13}&amp;\mathbf{C}_{13}&amp;\mathbf{C}_{33}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}\\\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{C}_{44}&amp;\mathbf{0}&amp;\mathbf{0}\\\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{C}_{44}&amp;\mathbf{0}\\\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{0}&amp;\mathbf{\frac{C_{11}-C_{12}}{2}}\end{bmatrix}\begin{bmatrix}\mathbf{\varepsilon}_1\\\mathbf{\varepsilon}_2\\\mathbf{\varepsilon}_3\\\mathbf{\gamma}_{23}\\\mathbf{\gamma}_{31}\\\mathbf{\gamma}_{12}\end{bmatrix}\]</div>
+<p>对应的柔度矩阵为:</p>
+<div class="arithmatex">\[\begin{bmatrix}\varepsilon_1\\\varepsilon_2\\\varepsilon_3\\\gamma_{23}\\\gamma_{31}\\\gamma_{12}\end{bmatrix}=\begin{bmatrix}S_{11}&amp;S_{12}&amp;S_{13}&amp;0&amp;0&amp;0\\S_{12}&amp;S_{11}&amp;S_{13}&amp;0&amp;0&amp;0\\S_{13}&amp;S_{13}&amp;S_{33}&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;S_{44}&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;S_{44}&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;2(S_{11}-S_{12})\end{bmatrix}\begin{bmatrix}\sigma_1\\\sigma_2\\\sigma_3\\\tau_{23}\\\tau_{31}\\\tau_{12}\end{bmatrix}\]</div>
+<ul>
+<li>各向同性材料</li>
+</ul>
+<p>如果材料具有无穷多个性能对称面,它称为各向同性的材料,<strong>有2个独立常数</strong></p>
+<div class="arithmatex">\[\begin{aligned}
+&amp;\begin{bmatrix}\sigma_1\\\sigma_2\\\sigma_3\\\tau_{23}\\\tau_{31}\\\tau_{12}\end{bmatrix} =\begin{bmatrix}\mathbf{C}_{11}&amp;\mathbf{C}_{12}&amp;\mathbf{C}_{12}&amp;0&amp;0&amp;0\\\mathbf{C}_{12}&amp;\mathbf{C}_{11}&amp;\mathbf{C}_{12}&amp;0&amp;0&amp;0\\\mathbf{C}_{12}&amp;\mathbf{C}_{12}&amp;\mathbf{C}_{11}&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;\frac{\mathbf{C}_{11}-\mathbf{C}_{12}}{2}&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;\frac{\mathbf{C}_{11}-\mathbf{C}_{12}}{2}&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;\frac{\mathbf{C}_{11}-\mathbf{C}_{12}}{2}\end{bmatrix}\begin{bmatrix}\mathbf{\varepsilon}_1\\\mathbf{\varepsilon}_2\\\mathbf{\varepsilon}_3\\\mathbf{\gamma}_{23}\\\mathbf{\gamma}_{31}\\\mathbf{\gamma}_{12}\end{bmatrix}\\
+&amp;C_{11} =\mathbf{C}_{22}=\mathbf{C}_{33}  \\
+&amp;C_{12} =\mathbf{C}_{23}=\mathbf{C}_{31}  \\
+&amp;C_{44} =\mathbf{C}_{55}=\mathbf{C}_{66}=(\mathbf{C}_{11}-\mathbf{C}_{12})/2  
+\end{aligned}\]</div>
+<p>柔度矩阵为:</p>
+<div class="arithmatex">\[\begin{bmatrix}\varepsilon_1\\\varepsilon_2\\\varepsilon_3\\\gamma_{23}\\\gamma_{31}\\\gamma_{12}\end{bmatrix}=\begin{bmatrix}S_{11}&amp;S_{12}&amp;S_{12}&amp;0&amp;0&amp;0\\S_{12}&amp;S_{11}&amp;S_{12}&amp;0&amp;0&amp;0\\S_{12}&amp;S_{12}&amp;S_{11}&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;2(S_{11}-S_{12})&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;2(S_{11}-S_{12})&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;2(S_{11}-S_{12})\end{bmatrix}\begin{bmatrix}\sigma_1\\\sigma_2\\\sigma_3\\\tau_{23}\\\tau_{31}\\\tau_{12}\end{bmatrix}\]</div>
+<h2 id="5">5.正交各向异性材料的工程常数</h2>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531105755676-1621879404.png" /></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531105819358-1390718343.png" /></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531110828784-265035064.png" /></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531111002956-1881776580.png" /></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531111019382-2021307275.png" /></p>
+<ul>
+<li>弹性常数的取值范围限制</li>
+</ul>
+<p>根据非0应变状态的弹性应变能为正值,应变能应是应变或者是应力的<strong>正定二次型</strong>.应变能的表达式为: <span class="arithmatex">\(W=\frac12S_{ij}\sigma_i\sigma_j\)</span> ,因此:W是 <span class="arithmatex">\(\sigma_{i}\)</span> 的正定二次型的充要条件是<strong>矩阵[S]的所有主要主子式大于零</strong>.</p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531111944891-2084768134.png" /></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531111955797-421403764.png" /></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531112004929-1466795954.png" /></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531112018852-1601136806.png" /></p>
+<h2 id="6">6. 单层板宏观力学分析</h2>
+<p>单层板可以认为是"纤维布"或"预浸料".对单层板作以下假定:</p>
+<ul>
+<li>为正交各向异性材料,或者横观各向同性材料.</li>
+<li>单向板的厚度尺寸远小于其它两个方向的尺寸</li>
+<li>面外应力分量与面内应力分量相比很小,可以忽略,因此单层板问题可以视为<strong>二维平面应力问题</strong></li>
+<li>线弹性,小变形</li>
+<li>连续性</li>
+<li>纤维复合材料在纤维方向承受载荷,纤维是主要承载相,基体的作用是支撑纤维保持一定的状态,保护纤维不受损伤并在纤维的端头附近以剪切形式传递载荷.</li>
+<li>当在纤维方向以外承受横向载荷时,纤维与基体均同时承担.</li>
+<li>均匀性</li>
+<li>纤维在基体中基本相互平行,但是在垂直于纤维的方向是随机分布的</li>
+</ul>
+<p>不同的弹性模型:</p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531170205637-369216416.png" /></p>
+<p>单层板的方向设定:
+1:纤维方向(轴向,纵向)
+2:方向垂直于纤维(横向)
+3:方向垂直于单向板平面(法线方向)</p>
+<p>123坐标系为正轴坐标系一材料主轴方向;xy3坐标系为偏轴坐标系一空间坐标方向</p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531170027659-222967722.png" /></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531170332022-1450221887.png" /></p>
+<h3 id="_2">单层板在材料主向上的应力应变关系</h3>
+<p>单层板(lamina):是指单向纤维在基体中成扁平形状的层片.</p>
+<p>正交各向异性应力应变关系:</p>
+<div class="arithmatex">\[
+\begin{bmatrix}\varepsilon_1\\\varepsilon_2\\\varepsilon_3\\\gamma_{32}\\\gamma_{13}\\\gamma_{12}\end{bmatrix}=\begin{bmatrix}S_{11}&amp;S_{12}&amp;S_{13}&amp;0&amp;0&amp;0\\S_{21}&amp;S_{22}&amp;S_{23}&amp;0&amp;0&amp;0\\S_{31}&amp;S_{32}&amp;S_{33}&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;S_{44}&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;S_{55}&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;S_{66}\end{bmatrix}\begin{bmatrix}\sigma_1\\\sigma_2\\0\\0\\0\\\tau_{12}\end{bmatrix}
+\]</div>
+<p>考虑到 <span class="arithmatex">\(\sigma_3=\tau_{23}=\tau_{31}=0\)</span> ,刚度矩阵退化为:</p>
+<div class="arithmatex">\[\begin{Bmatrix}\varepsilon_1\\\varepsilon_2\\\gamma_{12}\end{Bmatrix}=\begin{bmatrix}S_{11}&amp;S_{12}&amp;0\\S_{21}&amp;S_{22}&amp;0\\0&amp;0&amp;S_{66}\end{bmatrix}\begin{Bmatrix}\sigma_1\\\sigma_2\\\tau_{12}\end{Bmatrix}\]</div>
+<p>单层板法向正应变为:</p>
+<div class="arithmatex">\[\begin{aligned}
+\mathcal{E}_{3}&amp; =s_{13}\sigma_{1}+s_{23}\sigma_{2}  \\
+&amp;=-\frac{\nu_{31}}{E_3}\sigma_1-\frac{\nu_{23}}{E_2}\sigma_2
+\end{aligned}\]</div>
+<p>用工程常数表示柔度矩阵:</p>
+<div class="arithmatex">\[\begin{gathered}\begin{bmatrix}S\end{bmatrix}=\begin{bmatrix}\frac{1}{E_1}&amp;-\frac{\nu_{21}}{E_2}&amp;0\\-\frac{\nu_{12}}{E_1}&amp;\frac{1}{E_2}&amp;0\\0&amp;0&amp;\frac{1}{G_{12}}\end{bmatrix}\\\frac{\nu_{21}}{E_2}=\frac{\nu_{12}}{E_1}\end{gathered}\]</div>
+<p>此时,对柔度矩阵S求逆,得到刚度矩阵<span class="arithmatex">\([Q]\)</span>(这件刚度矩阵):</p>
+<div class="arithmatex">\[\begin{aligned} &amp; [Q]=[S]^{-1}=\begin{bmatrix}Q_{11} &amp; Q_{12} &amp; 0\\ Q_{12} &amp; Q_{22} &amp; 0\\ 0 &amp; 0 &amp; Q_{66}\end{bmatrix} &amp; \\  &amp; Q_{11}=\frac{E_{1}}{1-\nu_{12}\nu_{21}}\quad Q_{22}=\frac{E_{2}}{1-\nu_{12}\nu_{21}} &amp; \\  &amp; Q_{12}=Q_{21}=\frac{\nu_{12}E_{2}}{1-\nu_{12}\nu_{21}}=\frac{\nu_{21}E_{1}}{1-\nu_{12}\nu_{21}} &amp; \\  &amp; Q_{66}=G_{12}\quad &amp; \end{aligned}\]</div>
+<p>如果,单层板是各向同性材料,则有:</p>
+<div class="arithmatex">\[\begin{aligned} &amp; \begin{Bmatrix}\varepsilon_1\\ \varepsilon_2\\ \gamma_{12}\end{Bmatrix}=\begin{bmatrix}S_{11} &amp; S_{12} &amp; 0\\ S_{12} &amp; S_{11} &amp; 0\\ 0 &amp; 0 &amp; 2(S_{11}-S_{12})\end{bmatrix}\begin{Bmatrix}\sigma_1\\ \sigma_2\\ \tau_{12}\end{Bmatrix}\\  &amp; S_{11}=\frac{1}{E},S_{12}=\frac{-\nu}{E},2(S_{11}-S_{12})=\frac{1}{G}=\frac{2(1+\nu)}{E}\\  &amp; S求逆,得Q\text{:}\quad\begin{Bmatrix}\sigma_1\\ \sigma_2\\ \tau_{12}\end{Bmatrix}=\begin{bmatrix}Q_{11} &amp; Q_{12} &amp; 0\\ Q_{12} &amp; Q_{11} &amp; 0\\ 0 &amp; 0 &amp; Q_{66}\end{bmatrix}\begin{Bmatrix}\varepsilon_1\\ \varepsilon_2\\ \gamma_{12}\end{Bmatrix}\\  &amp; Q_{11}=\frac{E}{1-\nu^{2}},Q_{12}=\frac{-\nu E}{1-\nu^{2}},Q_{66}=\frac{E}{2(1+\nu)}\end{aligned}\]</div>
+<ul>
+<li>常见的单层板材料属性 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>牌号</th>
+<th>材料</th>
+<th>Ex(GPa)</th>
+<th>Ey(GPa)</th>
+<th>Gxy(GPa)</th>
+<th>Nuxy</th>
+<th>纤维体积分数</th>
+<th>密度(g/cm^3)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T300/5208</td>
+<td>碳/环氧</td>
+<td>181</td>
+<td>10.3</td>
+<td>7.17</td>
+<td>.028</td>
+<td>70%</td>
+<td>1.6</td>
+</tr>
+<tr>
+<td></td>
+<td>铝</td>
+<td>69</td>
+<td>69</td>
+<td>26.54</td>
+<td>0.3</td>
+<td>*</td>
+<td>2.6</td>
+</tr>
+</tbody>
+</table>
+<p>检验材料的试验数据或者正交各向异性材料模型的正确性:</p>
+<ul>
+<li>
+<p>对于各向同性材料:<span class="arithmatex">\(-1&lt;\nu&lt;1/2\)</span></p>
+</li>
+<li>
+<p>柔度矩阵对角线上的各项应为正</p>
+</li>
+</ul>
+<div class="arithmatex">\[S_{11},S_{22},S_{66}&gt;0\quad\Rightarrow\quad E_1,E_2,G_{12}&gt;0\]</div>
+<ul>
+<li>同样要求刚度矩阵对角线上的各项总是为正</li>
+</ul>
+<div class="arithmatex">\[\mathcal{Q}_{ll}=E_I/(l-\nu_{l2}\nu_{2l})&gt;0 ; E_2\nu_{12}=E_1\nu_{21}\]</div>
+<div class="arithmatex">\[\Rightarrow\nu ^2{}_{l2}&lt; E_l/ E_2 ; \nu^2_{2l}&lt; E_2/E_l\]</div>
+<h3 id="_3">单向板在偏轴方向上的弹性特性</h3>
+<p>复合材料板往往由多层铺层方向不同的单层板组成.整体坐标系往往与各层材料的正轴坐标系不重合,单向板的偏轴弹性特性为单层非材料主方向的刚度.例子:对于纤维缠绕的圆柱型壳体,材料正轴是缠绕的螺旋
+线方向</p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240601103944668-889204752.png" /></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531174229168-825105642.png" /></p>
+<blockquote>
+<p>两套坐标系, 下面讨论应该知道应力,应变,刚度(柔度)矩阵在不同坐标系下的转化关系</p>
+</blockquote>
+<p>三维空间中的应力-应变转换:</p>
+<p>两个坐标系之间的关系可以用坐标轴两两之间的余弦值表示:</p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531174532348-1346521345.png" /></p>
+<p>用x'-y'-z'坐标系中的应力来表示x-y-z坐标系中的应力的转换方程为:</p>
+<div class="arithmatex">\[\left\{\sigma^{\prime}\right\}=\left[A\right]\left\{\sigma\right\},\quad\left\{\sigma\right\}=\left[A\right]^{-1}\left\{\sigma^{\prime}\right\}\]</div>
+<div class="arithmatex">\[\begin{bmatrix}\sigma_{x}\\ \sigma_{y}\\ \sigma_{z}\\ \tau_{yz}\\ \tau_{zx}\\ \tau_{xy}\end{bmatrix}=\begin{bmatrix}l_1^2 &amp; m_1^2 &amp; n_1^2 &amp; 2m_1n_1 &amp; 2n_1l_1 &amp; 2l_1m_1\\ l_2^2 &amp; m_2^2 &amp; n_2^2 &amp; 2m_2n_2 &amp; 2n_2l_2 &amp; 2l_2m_2\\ l_3^2 &amp; m_3^2 &amp; n_3^2 &amp; 2m_3n_3 &amp; 2n_3l_3 &amp; 2l_3m_3\\ l_2l_3 &amp; m_2m_3 &amp; n_2n_3 &amp; m_2n_3+m_3n_2 &amp; n_2l_3+n_3l_2 &amp; l_2m_3+l_3m_2\\ l_3l_1 &amp; m_3m_1 &amp; n_3n_1 &amp; m_3n_1+m_1n_3 &amp; n_3l_1+n_1l_3 &amp; l_3m_1+l_1m_3\\ l_1l_2 &amp; m_1m_2 &amp; m_1n_2 &amp; m_1n_2+m_2n_1 &amp; n_1l_2+n_2l_1 &amp; l_1m_2+l_2m_1\end{bmatrix}\begin{bmatrix}\sigma_{x}^{^{\prime}}\\ \sigma_{y}^{^{\prime}}\\ \sigma_{z}^{^{\prime}}\\ \sigma_{z}^{^{\prime}}\\ \tau_{yz}^{^{\prime}}\\ \tau_{zx}^{^{\prime}}\\ \tau_{xy}^{^{\prime}}\\  \end{bmatrix}\]</div>
+<p>同样的应变转换方程可以表示为:</p>
+<div class="arithmatex">\[\left\{\varepsilon^{\prime}\right\}=\left[B\right]\left\{\varepsilon\right\},\quad\left\{\varepsilon\right\}=\left[B\right]^{-1}\left\{\varepsilon^{\prime}\right\}\]</div>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531175324349-1537963649.png" /></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531175340588-1151893243.png" /></p>
+<p>根据以上原理,用1-2坐标系中的应力来表示x-y坐标系中的应力的转换方程为:</p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531175433452-233323181.png" /></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531175448838-1129600480.png" /></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531175509377-1560500986.png" /></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531175527327-1243235345.png" /></p>
+<p>所以,折减刚度矩阵Q在不同坐标系下的转化关系为:</p>
+<div class="arithmatex">\[\left([T]^{-1}\right)^T=[R][T][R]^{-1}\quad\rightarrow\quad\left[\overline{Q}\right]=[T]^{-1}[Q]\left([T]^{-1}\right)^T\]</div>
+<p>这就得到了单层板在x-y坐标系下的正交各向异性本构为:</p>
+<blockquote>
+<p>六个分量,四个独立常数,广义的正交各向异性层板剪应变和正应力,剪应力和正应变存在耦合</p>
+</blockquote>
+<div class="arithmatex">\[\begin{Bmatrix}\sigma_\mathrm{x}\\\sigma_\mathrm{y}\\\tau_\mathrm{xy}\end{Bmatrix}=\begin{bmatrix}\overline{\mathbf{Q}}\end{bmatrix}\begin{Bmatrix}\varepsilon_\mathrm{x}\\\varepsilon_\mathrm{y}\\\gamma_\mathrm{xy}\end{Bmatrix}=\begin{bmatrix}\overline{\mathbf{Q}}_{11}&amp;\overline{\mathbf{Q}}_{12}&amp;\overline{\mathbf{Q}}_{16}\\\overline{\mathbf{Q}}_{12}&amp;\overline{\mathbf{Q}}_{22}&amp;\overline{\mathbf{Q}}_{26}\\\overline{\mathbf{Q}}_{16}&amp;\overline{\mathbf{Q}}_{26}&amp;\overline{\mathbf{Q}}_{66}\end{bmatrix}\begin{Bmatrix}\varepsilon_\mathrm{x}\\\varepsilon_\mathrm{y}\\\gamma_\mathrm{xy}\end{Bmatrix}\]</div>
+<p>其中:</p>
+<div class="arithmatex">\[\begin{bmatrix}T\end{bmatrix}=\begin{bmatrix}\cos^2\theta&amp;\sin^2\theta&amp;2\sin\theta\cos\theta\\\sin^2\theta&amp;\cos^2\theta&amp;-2\sin\theta\cos\theta\\-\sin\theta\cos\theta&amp;\sin\theta\cos\theta&amp;\cos^2\theta-\sin^2\theta\end{bmatrix}\]</div>
+<div class="arithmatex">\[\begin{aligned}&amp;\overline{Q}_{11}=Q_{11}\cos^{4}\theta+2(Q_{12}+2Q_{66})\sin^{2}\theta\cos^{2}\theta+Q_{22}\sin^{4}\theta\\&amp;\overline{Q}_{12}=(Q_{11}+Q_{22}-4Q_{66})\sin^{2}\theta\cos^{2}\theta+Q_{12}(\cos^{4}\theta+\sin^{4}\theta)\\&amp;\overline{Q}_{22}=Q_{11}\sin^{4}\theta+2(Q_{12}+2Q_{66})\sin^{2}\theta\cos^{2}\theta+Q_{22}\cos^{4}\theta\\&amp;\overline{Q}_{16}=(Q_{11}-Q_{12}-2Q_{66})\sin\theta\cos^{3}\theta+(Q_{12}-Q_{22}+2Q_{66})\sin^{3}\theta\cos\theta\\&amp;\overline{Q}_{26}=(Q_{11}-Q_{12}-2Q_{66})\sin^{3}\theta\cos\theta+(Q_{12}-Q_{22}+2Q_{66})\sin\theta\cos^{3}\theta\\&amp;\overline{Q}_{66}=(Q_{11}+Q_{22}-2Q_{12}-2Q_{66})\sin^{2}\theta\cos^{2}\theta+Q_{66}(\cos^{4}\theta+\sin^{4}\theta)\end{aligned}\]</div>
+<p>可见,刚度矩阵分量是四个独立常数和角度的复杂函数;Tsai&amp;Pagano利用三角恒等式对刚度变换进行了有创造性的改造.</p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531180626881-1625757572.png" /></p>
+<div class="arithmatex">\[\begin{aligned} &amp; \mathbf{m}=\cos\theta\quad\mathbf{n}=\sin\theta\\  &amp; \begin{Bmatrix}\overline{\mathbf{Q}}_{11}\\ \overline{\mathbf{Q}}_{22}\\ \overline{\mathbf{Q}}_{12}\\ \overline{\mathbf{Q}}_{66}\\ \overline{\mathbf{Q}}_{16}\\ \overline{\mathbf{Q}}_{26}\end{Bmatrix}=\begin{bmatrix}\mathbf{m}^4 &amp; \mathbf{n}^4 &amp; 2\mathbf{m}^2\mathbf{n}^2 &amp; 4\mathbf{m}^2\mathbf{n}^2\\ \mathbf{n}^4 &amp; \mathbf{m}^4 &amp; 2\mathbf{m}^2\mathbf{n}^2 &amp; 4\mathbf{m}^2\mathbf{n}^2\\ \mathbf{m}^2\mathbf{n}^2 &amp; \mathbf{m}^2\mathbf{n}^2 &amp; \mathbf{m}^4+\mathbf{n}^4 &amp; -4\mathbf{m}^2\mathbf{n}^2\\ \mathbf{m}^2\mathbf{n}^2 &amp; \mathbf{m}^2\mathbf{n}^2 &amp; -2\mathbf{m}^2\mathbf{n}^2 &amp; (\mathbf{m}^2-\mathbf{n}^2)^2\\ \mathbf{m}^3\mathbf{n} &amp; -\mathbf{mn}^3 &amp; \mathbf{mn}^3-\mathbf{m}^3\mathbf{n} &amp; 2(\mathbf{mn}^3-\mathbf{m}^3\mathbf{n})\\ \mathbf{mn}^3 &amp; -\mathbf{m}^3\mathbf{n} &amp; \mathbf{m}^3\mathbf{n}-\mathbf{mn}^3 &amp; 2(\mathbf{m}^3\mathbf{n}-\mathbf{mn}^3)\end{bmatrix}\begin{cases}\mathbf{Q}_{11}\\ \mathbf{Q}_{22}\\ \mathbf{Q}_{12}\\ \mathbf{Q}_{66}\end{cases}\end{aligned}\]</div>
+<p>利用三角恒等式:</p>
+<div class="arithmatex">\[\mathrm{m}^{4}=\cos^{4}\theta=\frac{1}{8}(3+4\cos2\theta+\cos4\theta)\\
+\mathrm{m}^{3}\mathrm{n}=\cos^{3}\theta\sin\theta=\frac{1}{8}(2\sin2\theta+\sin4\theta)\\
+\mathrm{m}^{2}\mathrm{n}^{2}=\cos^{2}\mathbf{\theta}\sin^{2}\mathbf{\theta}=\frac{1}{8}(1-\cos4\mathbf{\theta})\\
+\mathrm{mn}^{3}=\cos\theta\sin^{3}\theta=\frac{1}{8}(2\sin2\theta-\sin4\theta)\\
+\mathrm{n}^{4}=\sin^{4}\theta=\frac{1}{8}(3-4\cos2\theta+\cos4\theta)\]</div>
+<p>进一步,可以整理为:</p>
+<div class="arithmatex">\[\begin{bmatrix}\bar{Q}_{11}\\\bar{Q}_{22}\\\bar{Q}_{12}\\\bar{Q}_{66}\\\bar{Q}_{16}\\\bar{Q}_{26}\end{bmatrix}=\begin{bmatrix}U_1&amp;\cos2\theta&amp;\cos4\theta\\U_1&amp;-\cos2\theta&amp;\cos4\theta\\U_4&amp;0&amp;-\cos4\theta\\U_5&amp;0&amp;-\cos4\theta\\0&amp;\frac{1}{2}\sin2\theta&amp;\sin4\theta\\\\0&amp;\frac{1}{2}\sin2\theta&amp;-\sin\theta\end{bmatrix}\begin{Bmatrix}1\\U_2\\U_3\end{Bmatrix}\]</div>
+<p>其中:</p>
+<div class="arithmatex">\[\begin{aligned}
+&amp;\mathbf{U}_{1} =(3\mathbf{Q}_{11}+3\mathbf{Q}_{22}+2\mathbf{Q}_{12}+4\mathbf{Q}_{66})/8  \\
+&amp;U_{2} =(\mathbf{Q}_{11}-\mathbf{Q}_{22})/2  \\
+&amp;U_{3} =(\mathbf{Q}_{11}+\mathbf{Q}_{22}-2\mathbf{Q}_{12}-4\mathbf{Q}_{66})/8  \\
+&amp;\mathbf{U}_{4} =(\mathbf{Q}_{11}+\mathbf{Q}_{22}+6\mathbf{Q}_{12}-4\mathbf{Q}_{66})/8  \\
+&amp;\mathbf{U}_{\mathbf{s}} =(\mathbf{Q}_{11}+\mathbf{Q}_{22}-2\mathbf{Q}_{12}+4\mathbf{Q}_{66})/8 
+\end{aligned}\]</div>
+<p>分解之后:</p>
+<div class="arithmatex">\[\overline{Q}_{11}=U_{1}+U_{2}\cos2\theta+U_{3}\cos4\theta\\
+\overline{\mathbf{Q}}_{12}=\mathbf{U}_{4}-\mathbf{U}_{3}\cos4\mathbf{\theta}\\
+\overline{\mathbf{Q}}_{22}=\mathbf{U}_{1}-\mathbf{U}_{2}\cos2\mathbf{\theta}+\mathbf{U}_{3}\cos4\mathbf{\theta}\\
+\overline{\mathbf{Q}}_{16}=\frac{1}{2}\mathbf{U}_{2}\sin2\mathbf{\theta}+\mathbf{U}_{3}\sin4\mathbf{\theta}\\
+\overline{\mathbf{Q}}_{26}=\frac{1}{2}\mathbf{U}_{2}\sin2\mathbf{\theta}-\mathbf{U}_{3}\sin4\mathbf{\theta}\\
+\overline{\mathbf{Q}}_{66}=\mathbf{U}_{5}-\mathbf{U}_{3}\cos4\mathbf{\theta}\]</div>
+<p>在绕垂直于单层板的轴旋转时,其刚度分量的部分值是不变的,U1 ,U4 ,U5为常数项,不随角度变化,有一定的含义,如拉伸模量,剪切模量等</p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240531181353082-2032412646.png" /></p>
+<h2 id="_4">单层板失效准则</h2>
+<h3 id="_5">复合材料的比应变能密度破坏准则</h3>
+<blockquote>
+<p>声明:本文仅介绍他人成果</p>
+</blockquote>
+<p>中国科学院力学研究所在88年发的一文章,讲了一个复材准则:比应变能密度破坏准则.可以用于预测复合材料破坏强度(在什么应力状态下发生失效).</p>
+<p>论文链接: http://www.cqvip.com/qk/94252x/19892/93249.html</p>
+<p>这个准则假设:<strong>当单层(即lamina)中两倍比应变能密度等于1时,材料发生破坏</strong>.数学表达式为:</p>
+<div class="arithmatex">\[
+2S_r&gt;=1; S_r为比应变能密度
+\]</div>
+<p>比应变能<span class="arithmatex">\(S_r\)</span>:</p>
+<div class="arithmatex">\[
+S_r=\frac{1}{2}(\overline \sigma_1 \overline \epsilon_1+\overline \sigma_2 \overline \epsilon_2+\overline \sigma_{12} \overline \epsilon_{12} )
+\]</div>
+<p><span class="arithmatex">\(\overline \sigma_1 、\overline \epsilon_1\)</span>为比应力和比应变.定义如下:</p>
+<ul>
+<li>比应力</li>
+</ul>
+<div class="arithmatex">\[
+\overline \sigma_1=\sigma_1/X; \\
+\overline \sigma_2=\sigma_2/Y; \\
+\overline \sigma_{12}=\sigma_{12}/S; \\
+\]</div>
+<ul>
+<li>比应变</li>
+</ul>
+<div class="arithmatex">\[
+\overline \epsilon_1=\epsilon_1/\epsilon_{1 limit};\\
+\overline \epsilon_2=\epsilon_2/\epsilon_{2 limit};\\
+\overline \epsilon_{12}=\epsilon_{12}/\epsilon_{12 limit};\\
+\]</div>
+<ul>
+<li>应变极限值
+$$
+\epsilon_{1 limit}=X/E_{11};\
+\epsilon_{2 limit}=Y/E_{22};\
+\epsilon_{12 limit}=S/G_{12};\
+$$</li>
+</ul>
+<p>整理得到:</p>
+<div class="arithmatex">\[
+S_r=\frac{1}{2}[(\frac{\sigma_1}{X})^2+(\frac{\sigma_2}{Y})^2-\frac{\nu_{12}}{E_{11}} \sigma_1 \sigma_2(\frac{E_{11}}{X^2}+\frac{E_{22}}{Y^2})+(\frac{\tau_{12}}{S})^2]
+\]</div>
+<h2 id="_6">参考资料:</h2>
+<ul>
+<li><a href="https://drive.google.com/file/d/1pQcFMNyWlEey7b59jv_McMmgkE9Bk2IR/view?usp=sharing">第二章各向异性弹性力学基础-西安交通大学航天航空学院</a></li>
+</ul>
+<h1 id="_7">材料力学性能测试方法</h1>
+<h2 id="_8">拉伸性能</h2>
+<p>拉伸试验是最常用的试验方法,用于测定试样在受到轴向拉伸载荷后的行为.这些试验类型可在室温或受控(加热或制冷)条件下进行,以确定材料的拉伸性能.</p>
+<p>适用材料:</p>
+<p>金属、塑料、弹性体、纸张、复合材料、橡胶、纺织品、粘合剂、薄膜等.</p>
+<p>常见的拉伸试验结果:</p>
+<ul>
+<li>最大载荷</li>
+<li>最大载荷下的伸长</li>
+<li>最大载荷做功</li>
+<li>刚度</li>
+<li>断裂载荷</li>
+<li>断裂时的形变</li>
+<li>断裂做功</li>
+<li>弦斜率</li>
+<li>应力应变</li>
+</ul>
+<p>试验仪器:万能试验机,高速试验机等</p>
+<p>部分测试标准:</p>
+<ul>
+<li>GB/T 6397-1986&lt;金属拉伸试验试样&gt;</li>
+<li>ASTM D3039-76用于测定高模量纤维增强聚合物复合材料面内拉伸性能</li>
+<li>ASTM D638用于测定试件的拉伸强度和拉伸模量</li>
+<li>GB/T 3354-2014 定向纤维增强聚合物基复合材料拉伸性能试验方法</li>
+</ul>
+<h2 id="_9">压缩性能</h2>
+<p>压缩试验是一种常用于测定材料的压缩负载或抗压性的试验方法,同时也用于测定材料在受到一个特定的压缩负载并保持一段设定时间后的恢复能力.压缩试验用于测定材料在加载下的行为.此外也可测定一段时间内材料在(恒定或递增)载荷下可承受的最大应力.</p>
+<p>压缩试验主要适用于脆性材料,如铸铁.对于塑性材料,无法测出压缩强度极限,但可以测量弹性模量、比例极限和屈服强度等.</p>
+<p>部分测试标准 </p>
+<ul>
+<li>GB/T7314-2005&lt;金属压缩实验试样&gt;</li>
+<li>ASTM D3410-75(剪切荷载法测定带无支撑标准截面的聚合体母体复合材料压缩特性的试验方法)  </li>
+<li>GB/T7314-2005&lt;金属材料室温压缩试验方法&gt;</li>
+<li>T/CSTM 00287-2020 纤维增强聚合物基复合材料单向层合板平行纤维方向压缩性能试验方法</li>
+</ul>
+<h2 id="_10">弯曲性能</h2>
+<p>弯曲试验是材料机械性能试验的基本方法之一,其测定材料承受弯曲载荷时的力学特性的试验.主要有三点弯曲和四点弯曲两种加载荷方式</p>
+<p>部分测试标准: </p>
+<ul>
+<li>ASTM D7624用于测定聚合物基复合材料的弯曲刚度与强度性能</li>
+<li>GB/T232-2010&lt;金属材料弯曲试验方法&gt;</li>
+<li>GB/T 41762.2-2022 纤维增强塑料复合材料 层合板厚度方向性能的测定 第2部分:弯曲试验测定碳纤维单向层合板的弹性模量、强度和威布尔尺寸效应</li>
+</ul>
+<h2 id="_11">冲击试验</h2>
+<p>冲击试验一般是确定军用、民用设备在经受外力冲撞或作用时产品的安全性、可靠性和有效性的一种试验方法.</p>
+<p>常用技术指标:峰值加速度、脉冲持续时间、速度变化量(半正弦波、后峰锯齿波、梯形波)和波形选择.</p>
+<p>部分测试标准: </p>
+<ul>
+<li>ISO 179-1-2010塑料摆式冲击性能的测定</li>
+<li>GB/T 15231.5-1994 玻璃纤维增强水泥性能试验方法 抗冲击性能</li>
+<li>GB/T 14152-2001 热塑性塑料管材耐性外冲击性能  </li>
+<li>GB/T 21239-2007 纤维增强塑料层合板冲击后压缩性能试验方</li>
+<li>BS EN 950-1999 门扇.耐坚硬物体冲击性能的测定 </li>
+<li>DIN ISO 2747-1999 瓷釉和搪瓷.搪瓷烹调器具.耐热冲击性能的测定</li>
+<li>GB/T 3917.1-2009 纺织品织物撕破性能  </li>
+<li>BS EN ISO 6603-1-2000塑料 硬质塑料冲孔性能的测定  </li>
+<li>T/CSTM 00286-2020 纤维增强聚合物基复合材料层合板 冲击后压缩性能试验方法</li>
+</ul>
+<h1 id="_12">复合材料有限元分析</h1>
+<h2 id="_13">前置知识基础</h2>
+<h3 id="_14">位移</h3>
+<p>单一的单层板(英文一般用lamina表示)一般认为是正交各向异性材料行为,具有三个正交的弹性对称面,三个平面的相交线构成了局部坐标系的轴,即纤维方向<span class="arithmatex">\((x_{1}')\)</span>,厚度方向<span class="arithmatex">\((x_{3}')\)</span>,还有第三根轴<span class="arithmatex">\((x_{2}'=x_{3}' \times x_{1}')\)</span>.</p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240616191449473-628784386.png" /></p>
+<p>在lamina材料坐标系下,位移表示有两种方式:<span class="arithmatex">\(u_i=(u_1,u_2,u_3)\)</span>或<span class="arithmatex">\(u_i=(u,v,w)\)</span>.位移是一个向量,或者说一阶张量:</p>
+<div class="arithmatex">\[\mathbf u=u_i=(u_{1,}u_{2,}u_3);i=1...3\]</div>
+<h3 id="lagrangian-strain-tensor">拉格朗日应变张量( Lagrangian strain tensor):</h3>
+<div class="arithmatex">\[L_{ij}=\frac{1}{2}(u_{i,j}+u_{j,i}+u_{r,i}u_{r,j})\\\text{where,} \quad u_{i,j}=\frac{\partial u_{i}}{\partial x_{j}}\]</div>
+<p>当位移梯度非常小的时候,拉格朗日应变张量可以近似为:<span class="arithmatex">\(\varepsilon=\varepsilon_{ij}=\frac{1}{2}(u_{i,j}+u_{j,i})\)</span>,应变是一个二阶对称张量.展开的定义式子:</p>
+<div class="arithmatex">\[\begin{aligned}\varepsilon_{11}&amp;=\frac{\partial u_1}{\partial x_1}=\epsilon_1;\quad2\varepsilon_{12}=2\varepsilon_{21}=\left(\frac{\partial u_1}{\partial x_2}+\frac{\partial u_2}{\partial x_1}\right)=\gamma_6=\epsilon_6\\\varepsilon_{22}&amp;=\frac{\partial u_2}{\partial x_2}=\epsilon_2;\quad2\varepsilon_{13}=2\varepsilon_{31}=\left(\frac{\partial u_1}{\partial x_3}+\frac{\partial u_3}{\partial x_1}\right)=\gamma_5=\epsilon_5\\\varepsilon_{33}&amp;=\frac{\partial u_3}{\partial x_3}=\epsilon_3;\quad2\varepsilon_{23}=2\varepsilon_{32}=\left(\frac{\partial u_2}{\partial x_3}+\frac{\partial u_3}{\partial x_2}\right)=\gamma_4=\epsilon_4\end{aligned}\]</div>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240616192020961-747609066.png" /></p>
+<p>在有限元软件中,需要注意的是剪应变的选用,如ABAQUS的E12,13,23表示的是工程剪应变,而不是张量剪应变.之所以采用工程剪应变(<span class="arithmatex">\(\gamma = 2*\varepsilon\)</span>),是因为剪切模量G可以直接定义:$\tau=G\gamma $.将张量应变写成矩阵形式:</p>
+<div class="arithmatex">\[[\varepsilon]=\left[\begin{array}{ccc}\varepsilon_{11}&amp;\varepsilon_{12}&amp;\varepsilon_{13}\\\varepsilon_{12}&amp;\varepsilon_{22}&amp;\varepsilon_{23}\\\varepsilon_{13}&amp;\varepsilon_{23}&amp;\varepsilon_{33}\end{array}\right]=\left[\begin{array}{ccc}\epsilon_1&amp;\epsilon_6/2&amp;\epsilon_5/2\\\epsilon_6/2&amp;\epsilon_2&amp;\epsilon_4/2\\\epsilon_5/2&amp;\epsilon_4/2&amp;\epsilon_3\end{array}\right]\]</div>
+<h3 id="_15">应力张量:</h3>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240616193237114-1577536488.png" /></p>
+<p>应力张量是二阶张量,能够完全描述材料一点的应力状态.一般写作:<span class="arithmatex">\(\sigma_{ij},with \quad i,j=1,2,3\)</span>,<strong>第一个下标表示所在平面的法向,第二个下标表示应力分量的方向</strong>.应力张量的矩阵形式:</p>
+<div class="arithmatex">\[[\sigma]=\left[\begin{array}{ccc}\sigma_{11}&amp;\sigma_{12}&amp;\sigma_{13}\\\sigma_{12}&amp;\sigma_{22}&amp;\sigma_{23}\\\sigma_{13}&amp;\sigma_{23}&amp;\sigma_{33}\end{array}\right]=\left[\begin{array}{ccc}\sigma_{1}&amp;\sigma_{6}&amp;\sigma_{5}\\\sigma_{6}&amp;\sigma_{2}&amp;\sigma_{4}\\\sigma_{5}&amp;\sigma_{4}&amp;\sigma_{3}\end{array}\right]\]</div>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240616194627952-2135089727.png" /></p>
+<h3 id="_16">符号简写</h3>
+<p>因为应力,应变张量都是对称的.因此有限元中一般用Voigt矢量简化表示张量:<span class="arithmatex">\(\sigma_\alpha=\sigma_{ij}=\sigma_{ji}\)</span>,简化规则:</p>
+<div class="arithmatex">\[\begin{aligned}\alpha&amp;=i&amp;\quad if\quad i=j\\\alpha&amp;=9-i-j&amp;\quad if\quad i\neq j\end{aligned}\]</div>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240616195012334-1195664983.png" /></p>
+<p>根据上表,可愿意定义一个转换矩阵T,将应变应力从标准Voigt形式转换到Abaqus,Ls-dyna,Ansys等软件的应力应变形式:</p>
+<div class="arithmatex">\[\{\sigma_A\}=[T]\{\sigma\}\]</div>
+<div class="arithmatex">\[[T]=\left[\begin{array}{cccccc}1&amp;0&amp;0&amp;0&amp;0&amp;0\\0&amp;1&amp;0&amp;0&amp;0&amp;0\\0&amp;0&amp;1&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;1\\0&amp;0&amp;0&amp;0&amp;1&amp;0\\0&amp;0&amp;0&amp;1&amp;0&amp;0\end{array}\right]\]</div>
+<p>使用以上的T矩阵,就可以将应变应力从标准张量形式转换到Abaqus的notation.此外,刚度矩阵的转换为:</p>
+<div class="arithmatex">\[[C_A]=[T]^T[C][T]\]</div>
+<p>For LS-DYNAand ANSYS, the transformation matrix is:</p>
+<div class="arithmatex">\[[T]=\left[\begin{array}{cccccc}1&amp;0&amp;0&amp;0&amp;0&amp;0\\0&amp;1&amp;0&amp;0&amp;0&amp;0\\0&amp;0&amp;1&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;1\\0&amp;0&amp;0&amp;1&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;1&amp;0\end{array}\right]\]</div>
+<h3 id="_17">边界条件</h3>
+<ul>
+<li>Traction Boundary Conditions</li>
+</ul>
+<p>力学有限元分析求解,需要指定边界条件. 边界条件可以是位移或者应力的分量指定.对于任意曲面上的一点P,牵引力<span class="arithmatex">\(T_{i}\)</span> 由该点的三个分量组成.如图1.4:</p>
+<div class="arithmatex">\[T_{i}=\{\sigma_{nn},\sigma_{nt},\sigma_{ns}\}^T\]</div>
+<p>用柯西定律形式写:</p>
+<div class="arithmatex">\[T_i=\sigma_{ji}n_j=\sum_j^3\sigma_{ji}n_j\]</div>
+<p>其中<span class="arithmatex">\(n_j\)</span>是法向量,例如: 对于垂直于x1的平面,<span class="arithmatex">\(n_{i}=(1,0,0)\)</span> 则:</p>
+<div class="arithmatex">\[T_1=\sigma_{11};\quad T_2=\sigma_{12} ;\quad T_3=\sigma_{13}\]</div>
+<ul>
+<li>Free Surface Boundary Conditions</li>
+</ul>
+<p>一个曲面是自由面,等价于应力为0;<span class="arithmatex">\(T_n=\sigma_{nn}=0,T_t=\sigma_{nt}=0,\mathrm{and}T_s=\sigma_{ns}=0.\)</span></p>
+<p>例如,当一个曲面受到纯压力加载时,对应的就是<span class="arithmatex">\(T_n!=0,T_t=T_s=0\)</span>.</p>
+<h3 id="continuity-conditions">Continuity Conditions</h3>
+<ul>
+<li>Traction Continuity(剪切连续性)</li>
+</ul>
+<p>平衡要求牵引力分量<span class="arithmatex">\(T_i\)</span>必须在任何表面上连续.(在局部坐标系n(3)-t(2)-s(1)下)即:</p>
+<div class="arithmatex">\[\sigma_{nn}^{+}=\sigma_{nn}^{-},\sigma_{nt}^{+}=\sigma_{nt}^{-},\sigma_{ns}^{+}=\sigma_{ns}^{-}\]</div>
+<p>由于材料的性质在层间边界上一般是不连续的,所以应力的其他两个法向分量,一个剪切分量也是一般<strong>不满足连续性的</strong>,即:</p>
+<div class="arithmatex">\[\sigma_{tt}^{+}\neq\sigma_{tt}^{-},\sigma_{ss}^{+}\neq\sigma_{ss}^{-},\sigma_{ts}^{+}\neq\sigma_{ts}^{-}.\]</div>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240617171230764-433524415.png" /></p>
+<h3 id="coordinate-transformations">Coordinate Transformations(坐标变换)</h3>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240617172615660-2033466485.png" /></p>
+<p>对于一点P的坐标值(x1,x2,x3)在不同坐标系下的转换.如图1.7有:</p>
+<div class="arithmatex">\[\begin{aligned}x_1'&amp;=x_1\cos\theta+x_2\sin\theta\\x_2'&amp;=-x_1\sin\theta+x_2\cos\theta\\x_3'&amp;=x_3\end{aligned}\]</div>
+<p>写成矩阵形式:</p>
+<div class="arithmatex">\[\begin{aligned}
+tensor \ notation: x_i'&amp;=a_{ij}x_j\\
+matrix \ notation:\left\{x'\right\}&amp;=\left[a\right]\left\{x\right\}\\
+\end{aligned}\]</div>
+<p>其中,<span class="arithmatex">\(a_{ij}\)</span> 是坐标变换矩阵,</p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240617173532147-349338305.png" /></p>
+<p>所以,lamina-system到laminate-system为:<span class="arithmatex">\(\begin{Bmatrix}x\end{Bmatrix}=\begin{bmatrix}a\end{bmatrix}^T\begin{Bmatrix}x'\end{Bmatrix}\)</span>; laminate-system到lamina-system为:<span class="arithmatex">\(\begin{Bmatrix}x'\end{Bmatrix}=\begin{bmatrix}a\end{bmatrix}\begin{Bmatrix}x\end{Bmatrix}\)</span></p>
+<ul>
+<li>Example 1.3</li>
+</ul>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240617175434205-1966200912.png" /></p>
+<p><font face="Times New Roman"><i> 
+A fiber reinforced composite tube is wound in the hoop direction (1-direction).Formulas for the stiffness values (E 1 , E 2 , etc.) are given in that system.However, when analyzing the cross-section of this material with generalized plane strain elements (CAX4 in Abaqus), the model is typically constructed in the structural X,Y,Z system. It is therefore necessary to provide the stiffness values in the structural system as E x , E y , etc. Construct the transformation matrix [a] T to go from lamina coordinates (1-2-3) to structural coordinates in Figure 1.8.
+</i></font></p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240617175514511-821450781.png" /></p>
+<ul>
+<li>Stress Transformation</li>
+</ul>
+<p>继续使用前一节的坐标系定义,应力张量的转换关系:</p>
+<div class="arithmatex">\[\{\sigma'\}=[a]\{\sigma\}[a]^T\]</div>
+<p>此外,根据<span class="arithmatex">\([a]\)</span>可以定义6X6转换矩阵T,且有关系:</p>
+<div class="arithmatex">\[\sigma_\alpha'=T_{\alpha\beta}\sigma_\beta \]</div>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240617192321244-1268907046.png" /></p>
+<ul>
+<li>Strain Transformation</li>
+</ul>
+<p>和上述同理,应变张量的转换关系,<span class="arithmatex">\(T_{\alpha\beta}\)</span>定义不变:</p>
+<div class="arithmatex">\[\varepsilon_\alpha'=T_{\alpha\beta}\varepsilon_\beta \]</div>
+<p>但考虑到一般都采用工程剪应变 <span class="arithmatex">\(\gamma xz,\gamma yz,\gamma xy\)</span>,两者的关系为(左侧为工程应变):</p>
+<div class="arithmatex">\[\epsilon_\delta=R_{\delta\gamma}\varepsilon_\gamma \]</div>
+<p>Router矩阵定义:</p>
+<div class="arithmatex">\[[R]=\left[\begin{array}{cccccc}1&amp;0&amp;0&amp;0&amp;0&amp;0\\0&amp;1&amp;0&amp;0&amp;0&amp;0\\0&amp;0&amp;1&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;2&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;2&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;2\end{array}\right]\]</div>
+<p>因此,工程应变之间的转换关系为:</p>
+<div class="arithmatex">\[\begin{aligned}\epsilon_{\alpha}^{\prime}&amp;=\overline{T}_{\alpha\beta}\epsilon_{\beta}\\\left[\overline{T}\right]&amp;=[R][T][R]^{-1}\end{aligned}\]</div>
+<p>应力转换矩阵为:</p>
+<p><img alt="img" src="../FILES/Note_Fem_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80.md/2026433-20240617193225534-1064024854.png" /></p>
+<blockquote>
+<p>注意: <strong>应力转换矩阵和应变转换矩阵之间存在关系<span class="arithmatex">\([T]^{-1}=[\overline{T}]^T\)</span></strong></p>
+</blockquote>
+<ul>
+<li>本构方程的变换</li>
+</ul>
+<p>材料坐标系下定义本构方程(使用张量应力/应变):</p>
+<div class="arithmatex">\[\begin{aligned}\sigma'&amp;=\mathbf{C}':\varepsilon'\\\sigma'_{ij}&amp;=C'_{ijkl}\varepsilon'_{kl}\end{aligned}\]</div>
+<p><span class="arithmatex">\(C'\)</span>是材料坐标系下的刚度矩阵.laminate坐标系下的本构方程是: <span class="arithmatex">\(\{\sigma\}=[C]\{\epsilon\}\)</span> ,刚度矩阵的转换关系如下:</p>
+<div class="arithmatex">\[[C]=[\overline{T}]^T[C^{\prime}][\overline{T}]\]</div>
+<div class="arithmatex">\[[C^{\prime}]=[\overline{T}]^{-T}[C][\overline{T}]^{-1}=[T][C][T]^T\]</div>
+<h3 id="3d">3d 本构方程</h3>
+<p>已经在<a href="#4几种各向异性弹性力学的本构方程">几种各向异性弹性力学的本构方程</a>这节说过了,就不赘述.</p>
+<h3 id="3d2d">3D本构退化到2D平面应力方程</h3>
+<p>弹性力学中2D公式有:平面应力和平面应变. 平面应变假设:</p>
+<div class="arithmatex">\[\begin{array}{lcl}u&amp;=&amp;u\left(x,y\right)\\v&amp;=&amp;v\left(x,y\right)\\w&amp;=&amp;0\end{array}\]</div>
+<p>换成应变就是:</p>
+<div class="arithmatex">\[\begin{array}{lllllll}u&amp;=&amp;u\left(x,y\right)&amp;&amp;&amp;&amp;\\v&amp;=&amp;v\left(x,y\right)&amp;&amp;&amp;&amp;\\\varepsilon_{zz}&amp;=&amp;\varepsilon_{xz}&amp;=&amp;\varepsilon_{yz}&amp;=&amp;0\end{array}\]</div>
+<p>平面应力状态假设:与 z 方向有关的三个应力张量分量为零.但是<strong>只有在厚度趋近于零的极限时才完全正确</strong></p>
+<div class="arithmatex">\[u=u(x,y),v=v(x,y),\sigma_{z}=\sigma_{xz}=\sigma_{yz}=0\]</div>
+<p>所以在平面应力状态下,本构方程为:</p>
+<div class="arithmatex">\[\left\{\begin{array}{c}\epsilon_1'\\\epsilon_2'\\\epsilon_3'\\\gamma_4'\\\gamma_5'\\\gamma_6'\end{array}\right\}=\left[\begin{array}{cccccc}S_{11}'&amp;S_{12}'&amp;S_{13}'&amp;0&amp;0&amp;0\\S_{12}'&amp;S_{22}'&amp;S_{23}'&amp;0&amp;0&amp;0\\S_{13}'&amp;S_{23}'&amp;S_{33}'&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;S_{44}'&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;S_{55}'&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;S_{66}'\end{array}\right]\left\{\begin{array}{c}\sigma_1'\\\sigma_2'\\\sigma_3'=0\\\sigma_4'\\\sigma_5'\\\sigma_6'\end{array}\right\}\]</div>
+<p>从而可以得到3X3的<strong>面内缩减柔度矩阵</strong>公式:</p>
+<div class="arithmatex">\[\left\{\begin{array}{c}\epsilon_1'\\\epsilon_2'\\\gamma_6'\end{array}\right\}=\left[\begin{array}{ccc}S_{11}'&amp;S_{12}'&amp;0\\S_{12}'&amp;S_{22}'&amp;0\\0&amp;0&amp;S_{66}'\end{array}\right]\left\{\begin{array}{c}\sigma_1'\\\sigma_2'\\\sigma_6'\end{array}\right\}\]</div>
+<p>求逆操作后得到<strong>面内折减刚度矩阵</strong><span class="arithmatex">\([Q^{\prime}]=[S_{3\times3}^{\prime}]^{-1}\)</span>:</p>
+<div class="arithmatex">\[\left\{\begin{array}{c}\sigma_1'\\\sigma_2'\\\sigma_6'\end{array}\right\}=\left[\begin{array}{ccc}Q_{11}'&amp;Q_{12}'&amp;0\\Q_{12}'&amp;Q_{22}'&amp;0\\0&amp;0&amp;Q_{66}'\end{array}\right]\left\{\begin{array}{c}\epsilon_1'\\\epsilon_2'\\\gamma_6'\end{array}\right\}\]</div>
+<p>需要注意的是面内缩减柔度矩阵<span class="arithmatex">\(\begin{bmatrix}S'_{3\times3}\end{bmatrix}\)</span>和6X6的柔度矩阵在数值上是对应的;但是 <strong>面内折减刚度矩阵</strong><span class="arithmatex">\([Q^{\prime}]\)</span>和6X6的刚度矩阵是不对应的.这是因为面内折减刚度矩阵<span class="arithmatex">\(Q'\)</span>由3X3柔度阵求逆得到,C'是由6X6柔度阵求逆得到.</p>
+<p>而面外相关的公式为:</p>
+<div class="arithmatex">\[\epsilon_3'=S_{13}'\sigma_1'+S_{23}'\sigma_2'\]</div>
+<div class="arithmatex">\[\left\{\begin{array}{c}\gamma_4'\\\gamma_5'\end{array}\right\}=\left[\begin{array}{cc}S_4'&amp;0\\0&amp;S_{55}'\end{array}\right]\left\{\begin{array}{c}\sigma_4'\\\sigma_5'\end{array}\right\}\]</div>
+<div class="arithmatex">\[\left\{\begin{array}{c}\sigma_4'\\\sigma_5'\end{array}\right\}=\left[\begin{array}{cc}C_{44}'&amp;0\\0&amp;C_{55}'\end{array}\right]\left\{\begin{array}{c}\gamma_4'\\\gamma_5'\end{array}\right\}\]</div>
+<h3 id="_18">均衡对称层合板的等效模量计算</h3>
+<p>均衡对称层合板的刚度矩阵为:</p>
+<div class="arithmatex">\[\begin{aligned}[C]=\sum_{k=1}^N\frac{t_k}{t}[C_k]\end{aligned}\]</div>
+<p>柔度矩阵不能简单相加,也不能求平均值.所以层合板的柔度矩阵<span class="arithmatex">\([S]=[C]^{-1}\)</span>.这种层合板具有正交各向异性的刚度/柔度矩阵:</p>
+<div class="arithmatex">\[\left.\left[S\right]=\left[\begin{array}{ccccccc}\frac{1}{E_x}&amp;-\frac{\nu_{yx}}{E_y}&amp;-\frac{\nu_{zx}}{E_z}&amp;0&amp;0&amp;0\\-\frac{\nu_{xy}}{E_x}&amp;\frac{1}{E_y}&amp;-\frac{\nu_{zy}}{E_z}&amp;0&amp;0&amp;0\\-\frac{\nu_{xz}}{E_x}&amp;-\frac{\nu_{yz}}{E_y}&amp;\frac{1}{E_z}&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;\frac{1}{G_{yz}}&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;\frac{1}{G_{xz}}&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;\frac{1}{G_{xy}}\end{array}\right.\right]\]</div>
+<p>等效模量如下求得:</p>
+<div class="arithmatex">\[\begin{aligned}
+E_{x}&amp; =1/S_{11} \quad \nu_{xy}  =-S_{21}/S_{11}  \\
+E_{y}&amp; =1/S_{22}  \quad \nu_{xz}  =-S_{31}/S_{11}  \\
+E_{z}&amp; =1/S_{33}  \quad \nu_{yz}  =-S_{32}/S_{22}  \\
+G_{yz}&amp; =1/S_{44}  \\
+G_{xz}&amp; =1/S_{55}  \\
+G_{xy}&amp; =1/S_{66}  \\
+\end{aligned}\]</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "content.code.copy"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

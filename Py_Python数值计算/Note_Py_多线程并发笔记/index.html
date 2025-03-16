@@ -1,0 +1,1748 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Note_Py_Mpmath%E5%BA%93%E7%AC%94%E8%AE%B0/">
+      
+      
+        <link rel="next" href="../Note_Py_Matlab2Python%E7%B4%A2%E5%BC%95/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.2.7">
+    
+    
+      
+        <title>multiprocessing多线程 - Qinguoming Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#note_py_" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Qinguoming Notes" class="md-header__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Qinguoming Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              multiprocessing多线程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Qinguoming Notes" class="md-nav__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Qinguoming Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    数值分析算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            数值分析算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    蒙特卡洛实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数值积分+微分方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95code%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法CODE实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E6%B1%82%E6%A0%B9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    非线性方程求根
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E5%88%9D%26%E8%BE%B9%E5%80%BC%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    常微分方程初&边值问题数值解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_Crout%E5%88%86%E8%A7%A3%E8%BF%BD%E8%B5%B6%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crout分解追赶法的线性方程组求解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    FEM算法原理及编程
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            FEM算法原理及编程
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Mindlin%E6%9D%BFQ4%E5%8D%95%E5%85%83%E6%8E%A8%E5%AF%BC-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mindlin Q4单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Kirchhoff%E6%9D%BF%E7%90%86%E8%AE%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基尔霍夫板理论
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E5%B1%82%E5%90%88%E6%9D%BF%E5%8D%95%E5%85%83%E6%A0%BC%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    层合板单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FEM边界条件处理方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E7%BB%93%E6%9E%84%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%95%99%E6%9D%90%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    结构动力学教材笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python数值计算
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Python数值计算
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Py_%E6%9D%90%E6%96%99%E5%88%9A%E5%BA%A6%E8%BD%AC%E6%8D%A2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    材料刚度矩阵转换
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Py_Vtk%E6%96%87%E4%BB%B6%E8%A7%84%E5%88%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vtk文件规则
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Py_2%263%E7%BB%B4%E9%AB%98%E6%96%AF%E7%A7%AF%E5%88%86py%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2&3维高斯积分Python实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Py_Mpmath%E5%BA%93%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mpmath库
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    multiprocessing多线程
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    multiprocessing多线程
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    调用函数后,函数内的变量如何释放?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python27for-loop" class="md-nav__link">
+    python2.7怎么使用多线程加速for loop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    多进程进程池,函数序列化错误的处理
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time" class="md-nav__link">
+    Time模块计算程序运行时间
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start" class="md-nav__link">
+    使用多进程,Start()后,如何获得返回值?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sqlite3" class="md-nav__link">
+    使用多进程并行,每个进程都将结果写入sqlite3数据库,可以么
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python" class="md-nav__link">
+    python创建进程池
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    进程池的最大进程数怎么确定
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#py27" class="md-nav__link">
+    py2.7字典合并的办法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#join" class="md-nav__link">
+    多进程的join()方法
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Py_Matlab2Python%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Matlab2Python索引
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CNC_Cpp%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cpp数值计算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Abaqus 建模
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Abaqus 建模
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus CompositeLayup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%A4%B9%E8%8A%AF%E6%9D%BF%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus Sandwich建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%A4%B1%E6%95%88/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材失效建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E7%A6%BB%E6%95%A3%E5%A2%9E%E5%BC%BA%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材离散增强建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_SolidSection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus SolidSection KeyWord
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E8%BE%93%E5%87%BA%E6%80%BB%E4%BD%93%E5%88%9A%E5%BA%A6%E7%9F%A9%E9%98%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 输出总体刚度矩阵
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复合材料分析基础
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%8E%8B%E7%94%B5%E5%88%86%E6%9E%90%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 压电分析入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    其他
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            其他
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git常用命令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_%E5%87%A0%E7%AF%87%E6%A8%A1%E6%80%81%E5%BA%94%E5%8F%98%E8%83%BD%E8%AE%BA%E6%96%87/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    几篇模态应变能论文
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../About/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Me
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    调用函数后,函数内的变量如何释放?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python27for-loop" class="md-nav__link">
+    python2.7怎么使用多线程加速for loop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    多进程进程池,函数序列化错误的处理
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time" class="md-nav__link">
+    Time模块计算程序运行时间
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start" class="md-nav__link">
+    使用多进程,Start()后,如何获得返回值?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sqlite3" class="md-nav__link">
+    使用多进程并行,每个进程都将结果写入sqlite3数据库,可以么
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python" class="md-nav__link">
+    python创建进程池
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    进程池的最大进程数怎么确定
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#py27" class="md-nav__link">
+    py2.7字典合并的办法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#join" class="md-nav__link">
+    多进程的join()方法
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="note_py_">Note_Py_多线程并发笔记</h1>
+<h2 id="_1">调用函数后,函数内的变量如何释放?</h2>
+<p>在 Python 中,函数内部的局部变量在函数执行完毕后会被释放.这是因为函数内的局部变量只在函数执行期间存在,当函数执行完毕后,这些局部变量所占用的内存空间会被自动释放.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">my_function</span><span class="p">():</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="c1"># 在函数内部定义一个局部变量</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Hello, World!&quot;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># 调用函数</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">my_function</span><span class="p">()</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># 函数执行完毕后,局部变量 message 被释放</span>
+</span></code></pre></div>
+<p>在这个例子中,当函数 <code>my_function</code> 执行完毕后,<strong>局部变量 <code>message</code> 被释放,不再占用内存空间</strong>.</p>
+<p>需要注意的是:函数内部的变量释放并不意味着函数返回值所占用的内存会被释放.</p>
+<p><strong>如果函数返回了一个引用类型的对象(如列表、字典等),这个对象在函数执行完毕后仍然可以被外部代码所引用,直到没有任何引用指向它时,Python 的垃圾回收机制才会将其释放.</strong></p>
+<p>总之,函数内的局部变量会在函数执行完毕后被释放,但返回值所占用的内存空间的释放取决于对象是否还被引用.</p>
+<h2 id="python27for-loop">python2.7怎么使用多线程加速for loop</h2>
+<p>在 Python 2.7 中,你可以使用 <code>threading</code> 模块来实现多线程加速 for 循环.在 Python 2.7 中,<code>threading</code> 是用来创建和管理线程的内置模块.在 for 循环中使用多线程可以加速处理大量数据或者 IO 密集型任务.</p>
+<p>以下是一个简单的示例,演示了如何在 Python 2.7 中使用多线程来加速 for 循环:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span> <span class="nn">threading</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># 定义一个函数,用于并发执行的任务</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">def</span> <span class="nf">process_data</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="c1"># 这里可以放入需要处理的任务</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processing data:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># 假设有一个包含需要处理数据的列表</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># 创建线程列表</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c1"># 创建并启动线程</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">data_list</span><span class="p">:</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="c1"># 创建线程,并将函数和数据作为参数传递给线程的构造函数</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">process_data</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">data</span><span class="p">,))</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="c1"># 等待所有线程执行完毕</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    <span class="n">t</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All threads have finished processing&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>在这个示例中,我们首先定义了一个处理数据的函数 <code>process_data</code>,然后创建了一个包含需要处理的数据的列表 <code>data_list</code>.接着,我们创建了多个线程,并将函数和数据作为参数传递给线程的构造函数 <code>threading.Thread</code>,然后启动这些线程并等待它们执行完毕.</p>
+<p>需要注意的是,在 Python 2.7 中,由于全局解释器锁 (GIL) 的存在,多线程并不能有效地利用多核 CPU.<strong>如果想要充分利用多核 CPU,可以考虑使用 <code>multiprocessing</code> 模块来实现多进程加速.</strong></p>
+<p>总之,在 Python 2.7 中,你可以使用 <code>threading</code> 模块来在 for 循环中实现多线程加速,但要注意 GIL 对多线程并发执行的影响.</p>
+<h2 id="_2">多进程进程池,函数序列化错误的处理</h2>
+<p>报错:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="ne">RuntimeError</span>  <span class="n">File</span> <span class="s2">&quot;C:\Python27\lib\multiprocessing</span><span class="se">\f</span><span class="s2">orking.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">258</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__init__</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="ow">is</span> <span class="ow">not</span> <span class="n">going</span> <span class="n">to</span> <span class="n">be</span> <span class="n">frozen</span> <span class="n">to</span> <span class="n">produce</span> <span class="n">a</span> <span class="n">Windows</span> <span class="n">executable</span><span class="o">.</span><span class="s1">&#39;&#39;&#39;)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="s1">            Attempt to start a new process before the current process</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="s1">            has finished its bootstrapping phase.</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="s1">            This probably means that you are on Windows and you have</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="s1">            forgotten to use the proper idiom in the main module:</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="s1">                if __name__ == &#39;__main__&#39;:</span>
+</span></code></pre></div></p>
+<p>这个错误是由于在使用 <code>multiprocessing</code> 模块时,Python 2.7 试图对函数进行序列化 (pickling) 以便在多个进程之间传递.然而,由于某些函数不是可以被序列化的(可被pickling),因此会导致报错.</p>
+<p>为了解决这个问题,可以将需要并发执行的函数放在一个单独的文件中,然后使用 <code>if __name__ == '__main__':</code> 来保护多进程的主入口点,这样可以避免 Windows 下的报错.下面是一个修改后的示例:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 在新的文件中定义需要并行执行的函数</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># 例如,放在一个名为 parallel.py 的文件中</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># 定义需要并行执行的任务</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="k">def</span> <span class="nf">process_data</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="c1"># 这里可以放入需要处理的任务</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processing data:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># 添加保护主入口点的代码</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="c1"># 创建进程池</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="k">with</span> <span class="n">Pool</span><span class="p">()</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="c1"># 假设有一个包含需要处理数据的列表</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>        <span class="c1"># 并行执行任务</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>        <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">process_data</span><span class="p">,</span> <span class="n">data_list</span><span class="p">)</span>
+</span></code></pre></div>
+<p>然后在你的主程序中调用这个新的文件:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span> <span class="nn">parallel</span> <span class="kn">import</span> <span class="n">process_data</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">with</span> <span class="n">Pool</span><span class="p">()</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">process_data</span><span class="p">,</span> <span class="n">data_list</span><span class="p">)</span>
+</span></code></pre></div>
+<p>将并发执行的函数放在一个单独的文件中,并使用 <code>if __name__ == '__main__':</code> 来保护主入口点,可以解决在 Windows 下使用 <code>multiprocessing</code> 模块时的序列化错误.</p>
+<h2 id="time">Time模块计算程序运行时间</h2>
+<p>在 Python 中,你可以使用 <code>time</code> 模块来计算程序的运行时间.下面我将向你展示如何使用该模块来测量代码块的执行时间.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span> <span class="nn">time</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># 记录开始时间</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># 在这里放置你想要测量执行时间的代码块</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># 例如,一个耗时的计算任务或者一个函数的执行</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1"># 记录结束时间</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="c1"># 计算时间差</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="n">execution_time</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;程序执行时间为:&quot;</span><span class="p">,</span> <span class="n">execution_time</span><span class="p">,</span> <span class="s2">&quot;秒&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>在这个示例中,用 <code>time.time()</code> 记录了代码块开始和结束的时间戳,然后计算它们之间的差值,从而得到代码块的执行时间.</p>
+<h2 id="start">使用多进程,Start()后,如何获得返回值?</h2>
+<p>在 Python 中,进程池是可以直接得到返回值的,但使用多进程创建一个进程后,通常情况下无法直接获得函数的返回值,因为子进程和父进程是相互独立的.然而,你可以通过一些手段来获取子进程的返回值.</p>
+<p>一种常用的方法是使用进程间通信(Inter-process Communication, IPC).在 Python 中,可以使用 <code>multiprocessing</code> 模块提供的队列(Queue)和管道(Pipe)来实现进程间通信,从而传递子进程的返回值给父进程.下面是一个示例:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">import</span> <span class="nn">multiprocessing</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># 定义一个函数,用于在子进程中执行</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="k">def</span> <span class="nf">process_func</span><span class="p">(</span><span class="n">queue</span><span class="p">):</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">result</span> <span class="o">=</span> <span class="mi">42</span>  <span class="c1"># 这里可以是任何需要返回的值</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># 将结果放入队列中</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="c1"># 创建一个队列用于进程间通信</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    <span class="n">queue</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>    <span class="c1"># 创建子进程并启动</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>    <span class="n">process</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">process_func</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">queue</span><span class="p">,))</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    <span class="n">process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>    <span class="c1"># 等待子进程执行完毕</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>    <span class="n">process</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>    <span class="c1"># 获取子进程返回的结果</span>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;子进程返回值:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</span></code></pre></div>
+<p>在这个示例中,我们在子进程中执行 <code>process_func</code> 函数,并将结果放入队列中.在父进程中,我们可以通过调用队列的 <code>get</code> 方法来获取子进程的返回值.</p>
+<h2 id="sqlite3">使用多进程并行,每个进程都将结果写入sqlite3数据库,可以么</h2>
+<p>可以使用多进程并行处理,在每个进程中将结果写入到 SQLite3 数据库.但需要注意的是,SQLite3 在写入时可能会有一些限制,因此在多进程环境下需要格外小心.</p>
+<p>下面是一个简单的示例,演示了如何在多进程中将结果写入 SQLite3 数据库:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span> <span class="nn">sqlite3</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">import</span> <span class="nn">multiprocessing</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># 定义一个函数,用于在子进程中执行</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">def</span> <span class="nf">write_to_database</span><span class="p">(</span><span class="n">process_id</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="c1"># 连接数据库</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;results.db&#39;</span><span class="p">)</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="n">c</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="c1"># 执行写入操作</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    <span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO results VALUES (?, ?)&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">process_id</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    <span class="c1"># 提交更改并关闭连接</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>    <span class="c1"># 创建一个 SQLite3 数据库</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>    <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;results.db&#39;</span><span class="p">)</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>    <span class="n">c</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>    <span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;CREATE TABLE IF NOT EXISTS results</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="s1">                 (process_id INTEGER, result TEXT)&#39;&#39;&#39;</span><span class="p">)</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>
+</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>    <span class="c1"># 创建多个进程并启动</span>
+</span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a>    <span class="n">processes</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-7-28"><a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+</span><span id="__span-7-29"><a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a>        <span class="n">process</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">write_to_database</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Result </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+</span><span id="__span-7-30"><a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a>        <span class="n">processes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">process</span><span class="p">)</span>
+</span><span id="__span-7-31"><a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a>        <span class="n">process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span id="__span-7-32"><a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a>
+</span><span id="__span-7-33"><a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a>    <span class="c1"># 等待所有子进程执行完毕</span>
+</span><span id="__span-7-34"><a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a>    <span class="k">for</span> <span class="n">process</span> <span class="ow">in</span> <span class="n">processes</span><span class="p">:</span>
+</span><span id="__span-7-35"><a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a>        <span class="n">process</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</span><span id="__span-7-36"><a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a>
+</span><span id="__span-7-37"><a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;所有进程已经执行完毕,结果已写入数据库&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>在这个示例中,我们首先创建了一个 SQLite3 数据库,然后定义了一个函数 <code>write_to_database</code>,用于在每个子进程中执行数据库写入操作.在主程序中,我们创建了多个进程,每个进程将结果写入数据库.</p>
+<p>需要注意的是,SQLite3 在多线程/多进程下有一些限制,具体表现取决于使用的 SQLite3 驱动程序.通常建议在多进程环境中谨慎地使用 SQLite3,并注意处理可能出现的并发访问问题.如果需要在多进程或多线程环境下执行大量数据库操作,考虑使用其他支持并发访问的数据库,如 PostgreSQL 或 MySQL.</p>
+<h2 id="python">python创建进程池</h2>
+<p>在 Python 中,你可以使用 <code>multiprocessing</code> 模块来创建进程池.进程池可以帮助你管理多个子进程,从而可以并发执行多个任务.</p>
+<p>下面是一个简单的示例,演示了如何在 Python 中创建进程池:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span> <span class="nn">multiprocessing</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># 定义一个函数,用于在子进程中执行</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">def</span> <span class="nf">process_func</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">data</span> <span class="o">*</span> <span class="mi">2</span>  <span class="c1"># 这里可以是任何需要处理的任务</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="k">return</span> <span class="n">result</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="c1"># 创建一个进程池,指定最大进程数为 4</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="k">with</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>        <span class="c1"># 定义一个需要处理的数据列表</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>        <span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        <span class="c1"># 并行执行任务,并获取结果</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>        <span class="n">results</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">process_func</span><span class="p">,</span> <span class="n">data_list</span><span class="p">)</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>        <span class="c1"># 打印结果</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;处理结果:&quot;</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
+</span></code></pre></div>
+<p>在这个示例中,我们首先创建了一个进程池,指定最大进程数为 4.然后,我们定义了一个需要处理的数据列表 <code>data_list</code>,并使用 <code>pool.map</code> 方法并行执行了这些数据的处理,最后获取并打印了执行的结果.</p>
+<p>通过使用进程池,你可以很方便地并发执行多个子任务,从而提高程序的执行效率.需要注意的是,进程池并不适用于所有类型的任务,比如对于 IO 密集型任务,有时候使用线程池可能会更加合适.</p>
+<h2 id="_3">进程池的最大进程数怎么确定</h2>
+<p>确定进程池中进程的最大数量取决于多个因素,包括系统资源、任务类型和性能需求.</p>
+<ol>
+<li>
+<p>CPU 核心数量:通常来说,进程池的最大进程数不应该超过CPU核心的数量.因为如果进程数超过了 CPU 核心数量,就会导致进程上下文切换频繁,从而降低整体性能.</p>
+</li>
+<li>
+<p>任务类型:如果你的任务是 CPU 密集型的,即任务需要大量的 CPU 计算资源,那么通常可以根据 CPU 核心数量来确定最大进程数.如果任务是 IO 密集型的,即任务需要大量的 IO 操作,可以允许更多的进程,因为 IO 操作通常会释放 CPU 的执行时间,允许更多的进程并发执行.</p>
+</li>
+<li>
+<p>内存和其他资源:每个进程都会消耗系统资源,包括内存、文件描述符等.因此,你需要考虑系统的可用资源来确定最大进程数.如果系统资源不足,进程数过多会导致系统性能下降甚至崩溃.</p>
+</li>
+<li>
+<p>性能需求:有时候,为了提高任务执行速度,可以略微增加进程池的最大进程数.在实际应用中,通常需要进行一些基准测试和性能优化,以确定最佳的进程池大小.</p>
+</li>
+</ol>
+<p>一般来说,初始时可以选择一个合理的进程池大小,进行性能测试和观察系统资源使用情况,根据实际情况逐步调整进程池大小,以取得最佳性能.</p>
+<h2 id="py27">py2.7字典合并的办法</h2>
+<p>在 Python 2.7 中,你可以使用 <code>update</code> 方法来合并两个字典.这个方法将一个字典的内容更新到另一个字典中,如果存在相同的键,则以被更新字典中的值为准.</p>
+<p>以下是一个示例,演示了如何在 Python 2.7 中合并两个字典:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 定义两个字典</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">dict2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># 使用 update 方法合并字典</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">dict1</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dict2</span><span class="p">)</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">dict1</span><span class="p">)</span>
+</span></code></pre></div>
+<p>在这个示例中,<code>dict1.update(dict2)</code> 将字典 <code>dict2</code> 中的内容更新到了 <code>dict1</code> 中,最终得到了合并后的字典.此时,如果存在相同的键(例如 'b'),则以被更新字典中的值为准,因此最终的结果是 <code>{'a': 1, 'b': 3, 'c': 4}</code>.</p>
+<p>除了 <code>update</code> 方法,你还可以使用字典解析和 <code>**</code> 操作符来实现字典的合并.以下是另外一种合并字典的方法:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">dict2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># 使用字典解析和 ** 操作符合并字典</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">merged_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">[</span><span class="n">dict1</span><span class="p">,</span> <span class="n">dict2</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">merged_dict</span><span class="p">)</span>
+</span></code></pre></div>
+<p>无论使用哪种方法,这些技巧都可以帮助你在 Python 2.7 中实现字典的合并操作.</p>
+<h2 id="join">多进程的join()方法</h2>
+<p>在多进程中,当主进程等待子进程执行完毕时,可以使用 <code>join()</code> 方法来实现.
+<div class="language-py highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">import</span> <span class="nn">multiprocessing</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="k">def</span> <span class="nf">create_items</span><span class="p">(</span><span class="n">pipe</span><span class="p">):</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="n">send_c</span><span class="p">,</span> <span class="n">recv_c</span> <span class="o">=</span> <span class="n">pipe</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="kn">import</span> <span class="nn">time</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    <span class="c1"># 函数计算得到一个数据结果</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;start time:</span><span class="si">{}</span><span class="s2">, process name:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">current_process</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="c1"># send_c.send(data)</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>    <span class="n">pipe_1</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pipe</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>    <span class="n">ps</span><span class="o">=</span><span class="p">[]</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>        <span class="n">p</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">create_items</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Process-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">pipe_1</span><span class="p">,))</span>
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>        <span class="n">ps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">:</span>
+</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>        <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a>        <span class="c1"># print(&quot;Process-{} start,alive={}&quot;.format(p.name,p.is_alive()))</span>
+</span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a>        <span class="c1"># p.join()</span>
+</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a>        <span class="c1"># print(&quot;Process-{} jion,alive={}&quot;.format(p.name,p.is_alive()))</span>
+</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a>
+</span><span id="__span-11-26"><a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>    <span class="kn">import</span> <span class="nn">time</span>
+</span><span id="__span-11-27"><a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-11-28"><a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>
+</span><span id="__span-11-29"><a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>    <span class="c1"># _,recv_c = pipe_1</span>
+</span><span id="__span-11-30"><a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a>    <span class="c1"># getdata=[]</span>
+</span><span id="__span-11-31"><a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a>    <span class="c1"># for i in range(21):</span>
+</span><span id="__span-11-32"><a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>    <span class="c1">#     data = recv_c.recv()</span>
+</span><span id="__span-11-33"><a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a>    <span class="c1">#     print(data.shape)</span>
+</span><span id="__span-11-34"><a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a>    <span class="c1">#     getdata.append(data)</span>
+</span><span id="__span-11-35"><a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a>    <span class="c1"># # print(data)</span>
+</span><span id="__span-11-36"><a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a>    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">:</span>
+</span><span id="__span-11-37"><a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Process-</span><span class="si">{}</span><span class="s2"> ,alive=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">p</span><span class="o">.</span><span class="n">is_alive</span><span class="p">()))</span>
+</span><span id="__span-11-38"><a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a>        <span class="n">p</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+</span><span id="__span-11-39"><a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Process-</span><span class="si">{}</span><span class="s2"> terminate,alive=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">p</span><span class="o">.</span><span class="n">is_alive</span><span class="p">()))</span>
+</span></code></pre></div></p>
+<p>输出:
+<div class="language-py highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848697.91</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">1</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848697.92</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">3</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848697.93</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">9</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848697.93</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">2</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848697.94</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">5</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848697.94</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">0</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848697.94</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">4</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848697.94</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">10</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848697.95</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">7</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848698.16</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">12</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848698.17</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">16</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848698.17</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">6</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848698.17</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">13</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848698.17</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">11</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848698.18</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">17</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848698.18</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">14</span>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848698.22</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">8</span>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="n">ssstart</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848698.22</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">18</span><span class="n">tart</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848698.22</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">15</span><span class="n">tart</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715848698.22</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">19</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">0</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">0</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">1</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">1</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">2</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">2</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">3</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">3</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">4</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">4</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">5</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">5</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">6</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-34"><a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">6</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-35"><a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">7</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-36"><a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">7</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-37"><a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">8</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-38"><a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">8</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-39"><a id="__codelineno-12-39" name="__codelineno-12-39" href="#__codelineno-12-39"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">9</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-40"><a id="__codelineno-12-40" name="__codelineno-12-40" href="#__codelineno-12-40"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">9</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-41"><a id="__codelineno-12-41" name="__codelineno-12-41" href="#__codelineno-12-41"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">10</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-42"><a id="__codelineno-12-42" name="__codelineno-12-42" href="#__codelineno-12-42"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">10</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-43"><a id="__codelineno-12-43" name="__codelineno-12-43" href="#__codelineno-12-43"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">11</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-44"><a id="__codelineno-12-44" name="__codelineno-12-44" href="#__codelineno-12-44"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">11</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-45"><a id="__codelineno-12-45" name="__codelineno-12-45" href="#__codelineno-12-45"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">12</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-46"><a id="__codelineno-12-46" name="__codelineno-12-46" href="#__codelineno-12-46"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">12</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-47"><a id="__codelineno-12-47" name="__codelineno-12-47" href="#__codelineno-12-47"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">13</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-48"><a id="__codelineno-12-48" name="__codelineno-12-48" href="#__codelineno-12-48"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">13</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-49"><a id="__codelineno-12-49" name="__codelineno-12-49" href="#__codelineno-12-49"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">14</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-50"><a id="__codelineno-12-50" name="__codelineno-12-50" href="#__codelineno-12-50"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">14</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-51"><a id="__codelineno-12-51" name="__codelineno-12-51" href="#__codelineno-12-51"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">15</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-52"><a id="__codelineno-12-52" name="__codelineno-12-52" href="#__codelineno-12-52"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">15</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-53"><a id="__codelineno-12-53" name="__codelineno-12-53" href="#__codelineno-12-53"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">16</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-54"><a id="__codelineno-12-54" name="__codelineno-12-54" href="#__codelineno-12-54"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">16</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-55"><a id="__codelineno-12-55" name="__codelineno-12-55" href="#__codelineno-12-55"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">17</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-56"><a id="__codelineno-12-56" name="__codelineno-12-56" href="#__codelineno-12-56"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">17</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-57"><a id="__codelineno-12-57" name="__codelineno-12-57" href="#__codelineno-12-57"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">18</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-58"><a id="__codelineno-12-58" name="__codelineno-12-58" href="#__codelineno-12-58"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">18</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-59"><a id="__codelineno-12-59" name="__codelineno-12-59" href="#__codelineno-12-59"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">19</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-12-60"><a id="__codelineno-12-60" name="__codelineno-12-60" href="#__codelineno-12-60"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">19</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span></code></pre></div></p>
+<p>在start()进程后,不加join()方法,那么每个进程开始启动计算的时间几乎一致.加入join()方法后,一个进程会等计算完成后才开始下一个进程.</p>
+<p><div class="language-py highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># -*- coding: utf-8 -*-</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kn">import</span> <span class="nn">multiprocessing</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="kn">from</span> <span class="nn">test</span> <span class="kn">import</span> <span class="n">square</span><span class="p">,</span><span class="n">foo</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="k">def</span> <span class="nf">create_items</span><span class="p">(</span><span class="n">pipe</span><span class="p">):</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="n">send_c</span><span class="p">,</span> <span class="n">recv_c</span> <span class="o">=</span> <span class="n">pipe</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>    <span class="kn">import</span> <span class="nn">time</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>    <span class="c1"># 函数计算得到一个数据结果</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>    <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;start time:</span><span class="si">{}</span><span class="s2">, process name:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">current_process</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>    <span class="c1"># send_c.send(data)</span>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>    <span class="n">pipe_1</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pipe</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>    <span class="n">ps</span><span class="o">=</span><span class="p">[]</span>
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>        <span class="n">p</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">create_items</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Process-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">pipe_1</span><span class="p">,))</span>
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>        <span class="n">ps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">:</span>
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>        <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Process-</span><span class="si">{}</span><span class="s2"> start,alive=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">p</span><span class="o">.</span><span class="n">is_alive</span><span class="p">()))</span>
+</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>        <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>    <span class="kn">import</span> <span class="nn">time</span>
+</span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-13-28"><a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_alive</span><span class="p">())</span>
+</span><span id="__span-13-29"><a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">:</span>
+</span><span id="__span-13-30"><a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Process-</span><span class="si">{}</span><span class="s2"> ,alive=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">p</span><span class="o">.</span><span class="n">is_alive</span><span class="p">()))</span>
+</span><span id="__span-13-31"><a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</span><span id="__span-13-32"><a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a>        <span class="n">p</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+</span><span id="__span-13-33"><a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Process-</span><span class="si">{}</span><span class="s2"> terminate,alive=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">p</span><span class="o">.</span><span class="n">is_alive</span><span class="p">()))</span>
+</span></code></pre></div>
+输出:
+<div class="language-py highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">0</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849085.02</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">0</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">1</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849085.59</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">1</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">2</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849086.18</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">2</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">3</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849086.76</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">3</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">4</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849087.34</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">4</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">5</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849087.92</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">5</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">6</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849088.51</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">6</span>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">7</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849089.1</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">7</span>
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">8</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849089.67</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">8</span>
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">9</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849090.26</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">9</span>
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">10</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849090.84</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">10</span>
+</span><span id="__span-14-23"><a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">11</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-24"><a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849091.41</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">11</span>
+</span><span id="__span-14-25"><a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">12</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-26"><a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849092.0</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">12</span>
+</span><span id="__span-14-27"><a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">13</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-28"><a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849092.58</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">13</span>
+</span><span id="__span-14-29"><a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">14</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-30"><a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849093.16</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">14</span>
+</span><span id="__span-14-31"><a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">15</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-32"><a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849093.74</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">15</span>
+</span><span id="__span-14-33"><a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">16</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-34"><a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849094.32</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">16</span>
+</span><span id="__span-14-35"><a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">17</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-36"><a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849094.9</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">17</span>
+</span><span id="__span-14-37"><a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">18</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-38"><a id="__codelineno-14-38" name="__codelineno-14-38" href="#__codelineno-14-38"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849095.49</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">18</span>
+</span><span id="__span-14-39"><a id="__codelineno-14-39" name="__codelineno-14-39" href="#__codelineno-14-39"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">19</span> <span class="n">start</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-14-40"><a id="__codelineno-14-40" name="__codelineno-14-40" href="#__codelineno-14-40"></a><span class="n">start</span> <span class="n">time</span><span class="p">:</span><span class="mf">1715849096.08</span><span class="p">,</span> <span class="n">process</span> <span class="n">name</span><span class="p">:</span><span class="n">Process</span><span class="o">-</span><span class="mi">19</span>
+</span><span id="__span-14-41"><a id="__codelineno-14-41" name="__codelineno-14-41" href="#__codelineno-14-41"></a><span class="kc">False</span>
+</span><span id="__span-14-42"><a id="__codelineno-14-42" name="__codelineno-14-42" href="#__codelineno-14-42"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">0</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-43"><a id="__codelineno-14-43" name="__codelineno-14-43" href="#__codelineno-14-43"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">0</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-44"><a id="__codelineno-14-44" name="__codelineno-14-44" href="#__codelineno-14-44"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">1</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-45"><a id="__codelineno-14-45" name="__codelineno-14-45" href="#__codelineno-14-45"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">1</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-46"><a id="__codelineno-14-46" name="__codelineno-14-46" href="#__codelineno-14-46"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">2</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-47"><a id="__codelineno-14-47" name="__codelineno-14-47" href="#__codelineno-14-47"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">2</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-48"><a id="__codelineno-14-48" name="__codelineno-14-48" href="#__codelineno-14-48"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">3</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-49"><a id="__codelineno-14-49" name="__codelineno-14-49" href="#__codelineno-14-49"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">3</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-50"><a id="__codelineno-14-50" name="__codelineno-14-50" href="#__codelineno-14-50"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">4</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-51"><a id="__codelineno-14-51" name="__codelineno-14-51" href="#__codelineno-14-51"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">4</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-52"><a id="__codelineno-14-52" name="__codelineno-14-52" href="#__codelineno-14-52"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">5</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-53"><a id="__codelineno-14-53" name="__codelineno-14-53" href="#__codelineno-14-53"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">5</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-54"><a id="__codelineno-14-54" name="__codelineno-14-54" href="#__codelineno-14-54"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">6</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-55"><a id="__codelineno-14-55" name="__codelineno-14-55" href="#__codelineno-14-55"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">6</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-56"><a id="__codelineno-14-56" name="__codelineno-14-56" href="#__codelineno-14-56"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">7</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-57"><a id="__codelineno-14-57" name="__codelineno-14-57" href="#__codelineno-14-57"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">7</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-58"><a id="__codelineno-14-58" name="__codelineno-14-58" href="#__codelineno-14-58"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">8</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-59"><a id="__codelineno-14-59" name="__codelineno-14-59" href="#__codelineno-14-59"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">8</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-60"><a id="__codelineno-14-60" name="__codelineno-14-60" href="#__codelineno-14-60"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">9</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-61"><a id="__codelineno-14-61" name="__codelineno-14-61" href="#__codelineno-14-61"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">9</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-62"><a id="__codelineno-14-62" name="__codelineno-14-62" href="#__codelineno-14-62"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">10</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-63"><a id="__codelineno-14-63" name="__codelineno-14-63" href="#__codelineno-14-63"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">10</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-64"><a id="__codelineno-14-64" name="__codelineno-14-64" href="#__codelineno-14-64"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">11</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-65"><a id="__codelineno-14-65" name="__codelineno-14-65" href="#__codelineno-14-65"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">11</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-66"><a id="__codelineno-14-66" name="__codelineno-14-66" href="#__codelineno-14-66"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">12</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-67"><a id="__codelineno-14-67" name="__codelineno-14-67" href="#__codelineno-14-67"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">12</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-68"><a id="__codelineno-14-68" name="__codelineno-14-68" href="#__codelineno-14-68"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">13</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-69"><a id="__codelineno-14-69" name="__codelineno-14-69" href="#__codelineno-14-69"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">13</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-70"><a id="__codelineno-14-70" name="__codelineno-14-70" href="#__codelineno-14-70"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">14</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-71"><a id="__codelineno-14-71" name="__codelineno-14-71" href="#__codelineno-14-71"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">14</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-72"><a id="__codelineno-14-72" name="__codelineno-14-72" href="#__codelineno-14-72"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">15</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-73"><a id="__codelineno-14-73" name="__codelineno-14-73" href="#__codelineno-14-73"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">15</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-74"><a id="__codelineno-14-74" name="__codelineno-14-74" href="#__codelineno-14-74"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">16</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-75"><a id="__codelineno-14-75" name="__codelineno-14-75" href="#__codelineno-14-75"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">16</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-76"><a id="__codelineno-14-76" name="__codelineno-14-76" href="#__codelineno-14-76"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">17</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-77"><a id="__codelineno-14-77" name="__codelineno-14-77" href="#__codelineno-14-77"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">17</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-78"><a id="__codelineno-14-78" name="__codelineno-14-78" href="#__codelineno-14-78"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">18</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-79"><a id="__codelineno-14-79" name="__codelineno-14-79" href="#__codelineno-14-79"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">18</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-80"><a id="__codelineno-14-80" name="__codelineno-14-80" href="#__codelineno-14-80"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">19</span> <span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-14-81"><a id="__codelineno-14-81" name="__codelineno-14-81" href="#__codelineno-14-81"></a><span class="n">Process</span><span class="o">-</span><span class="n">Process</span><span class="o">-</span><span class="mi">19</span> <span class="n">terminate</span><span class="p">,</span><span class="n">alive</span><span class="o">=</span><span class="kc">False</span>
+</span></code></pre></div></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "content.code.copy"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
