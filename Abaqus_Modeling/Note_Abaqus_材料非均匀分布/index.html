@@ -1,0 +1,1848 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Note_Abaqus_%E7%83%AD%E8%86%A8%E8%83%80%E7%B3%BB%E6%95%B0%E8%AE%BE%E7%BD%AE/">
+      
+      
+        <link rel="next" href="../Note_Abaqus_%E9%A2%84%E5%BA%94%E5%8A%9B%E6%A8%A1%E6%80%81/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.2.7">
+    
+    
+      
+        <title>Abaqus 材料非均匀分布 - Qinguoming Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#note_abaqus_" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Qinguoming Notes" class="md-header__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Qinguoming Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Abaqus 材料非均匀分布
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Qinguoming Notes" class="md-nav__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Qinguoming Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    数值分析算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            数值分析算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    蒙特卡洛实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数值积分+微分方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95code%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法CODE实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E6%B1%82%E6%A0%B9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    非线性方程求根
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E5%88%9D%26%E8%BE%B9%E5%80%BC%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    常微分方程初&边值问题数值解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_Crout%E5%88%86%E8%A7%A3%E8%BF%BD%E8%B5%B6%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crout分解追赶法的线性方程组求解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    FEM算法原理及编程
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            FEM算法原理及编程
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Mindlin%E6%9D%BFQ4%E5%8D%95%E5%85%83%E6%8E%A8%E5%AF%BC-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mindlin Q4单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Kirchhoff%E6%9D%BF%E7%90%86%E8%AE%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基尔霍夫板理论
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E5%B1%82%E5%90%88%E6%9D%BF%E5%8D%95%E5%85%83%E6%A0%BC%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    层合板单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FEM边界条件处理方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E7%BB%93%E6%9E%84%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%95%99%E6%9D%90%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    结构动力学教材笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python数值计算
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Python数值计算
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_%E6%9D%90%E6%96%99%E5%88%9A%E5%BA%A6%E8%BD%AC%E6%8D%A2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    材料刚度矩阵转换
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Vtk%E6%96%87%E4%BB%B6%E8%A7%84%E5%88%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vtk文件规则
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_2%263%E7%BB%B4%E9%AB%98%E6%96%AF%E7%A7%AF%E5%88%86py%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2&3维高斯积分Python实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Mpmath%E5%BA%93%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mpmath库
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    multiprocessing多线程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Matlab2Python%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Matlab2Python索引
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CNC_Cpp%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cpp数值计算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Abaqus 建模
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Abaqus 建模
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus CompositeLayup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%A4%B9%E8%8A%AF%E6%9D%BF%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus Sandwich建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%A4%B1%E6%95%88/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材失效建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E7%A6%BB%E6%95%A3%E5%A2%9E%E5%BC%BA%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材离散增强建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_SolidSection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus SolidSection KeyWord
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E8%BE%93%E5%87%BA%E5%8D%95%E5%85%83%E5%88%9A%E5%BA%A6%E7%9F%A9%E9%98%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 输出单元刚度矩阵
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E8%BE%93%E5%87%BA%E6%80%BB%E4%BD%93%E5%88%9A%E5%BA%A6%E7%9F%A9%E9%98%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 输出总体刚度矩阵
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复合材料分析基础
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%8E%8B%E7%94%B5%E5%88%86%E6%9E%90%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 压电分析入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E7%83%AD%E8%86%A8%E8%83%80%E7%B3%BB%E6%95%B0%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 热膨胀系数设置
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Abaqus 材料非均匀分布
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 材料非均匀分布
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    方法一
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    方法二
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    结果对比
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    资料
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E9%A2%84%E5%BA%94%E5%8A%9B%E6%A8%A1%E6%80%81/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 预应力模态
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E6%A8%A1%E6%80%81%E7%A8%B3%E6%80%81%E5%88%86%E6%9E%90%E5%8E%9F%E7%90%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 模态稳态分析原理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    其他
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            其他
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git常用命令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_%E5%87%A0%E7%AF%87%E6%A8%A1%E6%80%81%E5%BA%94%E5%8F%98%E8%83%BD%E8%AE%BA%E6%96%87/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    几篇模态应变能论文
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_%E7%82%B9%E4%B8%8E%E5%A4%9A%E9%9D%A2%E4%BD%93%E4%BD%8D%E7%BD%AE%E5%85%B3%E7%B3%BB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    点与多面体位置关系
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_%E5%9F%BA%E4%BA%8EKdTree%E7%9A%84%E7%A9%BA%E9%97%B4%E6%90%9C%E7%B4%A2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    KdTree的空间搜索
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_HM%E5%9B%9B%E9%9D%A2%E4%BD%93%E7%BD%91%E6%A0%BC%E5%88%92%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HM四面体网格划分
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Mathtype%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MathType使用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Python%E7%9A%84%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python的函数传参
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Matlab%E5%85%83%E8%83%9E%E6%95%B0%E7%BB%84%E7%94%A8%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Matlab元胞数组
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_%E6%8F%90%E5%8F%96Fibersim%20xml%E4%BF%A1%E6%81%AF/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    提取Fibersim xml信息
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Py%26Matlab%E5%A4%84%E7%90%86ODB%E6%95%B0%E6%8D%AE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Py&Matlab处理ODB数据
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Abaqus%E7%9A%84py%E6%8A%A5%E9%94%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus几个py报错
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Catia%E8%AE%B8%E5%8F%AF%E8%AF%81%E7%A0%B4%E8%A7%A3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Catia许可证破解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_%E8%BE%93%E5%87%BA%E7%A7%AF%E5%88%86%E7%82%B9%E6%95%B0%E6%8D%AE%E5%88%B0dat%E6%96%87%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    输出积分点数据到dat文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Abaqus%26UG%E6%97%A0%E6%B3%95%E5%90%8C%E6%97%B6%E5%90%AF%E5%8A%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus&UG无法同时启动
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Fibersim%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fibersim安装破解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_%E8%BD%AF%E4%BB%B6%E6%8A%A5%E9%94%99%E5%90%88%E9%9B%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    软件报错合集
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../About/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Me
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    方法一
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    方法二
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    结果对比
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    资料
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="note_abaqus_">Note_Abaqus_材料非均匀分布</h1>
+<blockquote>
+<p>https://www.cnblogs.com/aksoam/p/17600445.html</p>
+</blockquote>
+<p>设想一种情况:在有限元分析中，一个区域或者整个网格中，每个单元的材料行为都是单独的。这时在ABAQUS中应该如何设置？</p>
+<p>两种办法：
++ 给每个单元创建一个集合，然后一一赋予SECTION.
++ 使用*Distribution关键字，实现空间分布的材料行为，再将SECTION属性赋予给单元。这一种方法好处是，减少后处理的压力，没有那么多的SET和SECTION</p>
+<p>两种方法对比：
++ 第一种方法可以在CAE界面中手动设置，也可以用Python脚本自动设置，但是一旦单元数量过多，就会导致CAE界面卡顿，且Python速度也不是很快。电脑性能不行的话，后处理压力比较大，因为有很多的Set,Section.
++ 第二种方法，不支持CAE，只能修改INP文件实现。优点是后处理软件压力小点，没有那么多set</p>
+<p>下面以下面的四个实体单元为例子，分别使用两种方法，<strong>直接编写INP文件，命令行中提交计算，进行静态分析</strong>。</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_%E6%9D%90%E6%96%99%E9%9D%9E%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83.md/2026433-20230802131919385-1460819133.png" /></p>
+<h2 id="_1">方法一</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>*Heading
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>** JOB:OneByOneSet_AnisotropicMaterial_FourELEM
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>*Preprint, echo=NO, model=NO, history=NO, contact=NO
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>**
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>** PARTS
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>**
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>*Part, name=FourElem
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>*Node
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>      1,         -25.,       -11.25,          10.
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>      2,         -25.,       -0.625,          10.
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>      3,         -25.,          10.,          10.
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>      4,         -25.,       -11.25,           0.
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>      5,         -25.,       -0.625,           0.
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>      6,         -25.,          10.,           0.
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>      7,        -12.5,       -11.25,          10.
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>      8,        -12.5,       -0.625,          10.
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>      9,        -12.5,          10.,          10.
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>     10,        -12.5,       -11.25,           0.
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>     11,        -12.5,       -0.625,           0.
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>     12,        -12.5,          10.,           0.
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>     13,           0.,       -11.25,          10.
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>     14,           0.,       -0.625,          10.
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>     15,           0.,          10.,          10.
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>     16,           0.,       -11.25,           0.
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>     17,           0.,       -0.625,           0.
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>     18,           0.,          10.,           0.
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>*Element, type=C3D8R
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>1,  7,  8, 11, 10,  1,  2,  5,  4
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>2,  8,  9, 12, 11,  2,  3,  6,  5
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>3, 13, 14, 17, 16,  7,  8, 11, 10
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>4, 14, 15, 18, 17,  8,  9, 12, 11
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>*Elset, elset=E1
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>1
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>*Elset,elset=E2
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>2
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>*Elset,elset=E3
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>3
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>*Elset,elset=E4
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>4
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>**Gobal orien
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>*Orientation, name=Ori-1
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>1., 0., 0., 0., 1., 0.
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>1, 0.
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>**Section Assign
+</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>*Solid Section,Elset=E1,Material=M1,Orientation=Ori-1
+</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>*Solid Section,Elset=E2,Material=M2,Orientation=Ori-1
+</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>*Solid Section,Elset=E3,Material=M3,Orientation=Ori-1
+</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>*Solid Section,Elset=E4,Material=M4,Orientation=Ori-1
+</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>*End Part
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>** ASSEMBLY
+</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>**
+</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>*Assembly, name=Assembly
+</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>**  
+</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>*Instance, name=FourElem-1, part=FourElem
+</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>*End Instance
+</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>**  
+</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>*Nset, nset=Set-1, instance=FourElem-1, generate
+</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a> 13,  18,   1
+</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>*Elset, elset=Set-1, instance=FourElem-1
+</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a> 3, 4
+</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>*Elset, elset=_Surf-1_S2, internal, instance=FourElem-1
+</span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a> 1, 2
+</span><span id="__span-0-63"><a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>*Surface, type=ELEMENT, name=Surf-1
+</span><span id="__span-0-64"><a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>_Surf-1_S2, S2
+</span><span id="__span-0-65"><a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>*End Assembly
+</span><span id="__span-0-66"><a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>**Material:M1
+</span><span id="__span-0-67"><a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>*Material,Name=M1
+</span><span id="__span-0-68"><a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>*Elastic,TYPE=ANISOTROPIC
+</span><span id="__span-0-69"><a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>8929.4608,1526.5216,8923.6134,3635.3632,3476.3026,120679.2644,8.3944,7.7689,
+</span><span id="__span-0-70"><a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>439.6758,3701.6801,-145.4016,-135.4002,-7614.9276,-29.5989,4212.6626,-122.1556,
+</span><span id="__span-0-71"><a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>-112.4105,-6361.0837,-24.5995,433.279,4055.9163
+</span><span id="__span-0-72"><a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>**Material:M2
+</span><span id="__span-0-73"><a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>*Material,Name=M2
+</span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>*Elastic,TYPE=ANISOTROPIC
+</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a>17550.0133,13611.2277,25852.2543,13021.7401,17628.6822,24242.5311,9788.8481,13699.1544,
+</span><span id="__span-0-76"><a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a>13033.5732,14762.1216,-9538.4395,-13349.2807,-12699.5968,-10779.3782,14203.3879,-11372.6959,
+</span><span id="__span-0-77"><a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a>-15914.7528,-15140.8525,-12851.6274,12522.8552,18629.8078
+</span><span id="__span-0-78"><a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>**Material:M3
+</span><span id="__span-0-79"><a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a>*Material,Name=M3
+</span><span id="__span-0-80"><a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a>*Elastic,TYPE=ANISOTROPIC
+</span><span id="__span-0-81"><a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a>8929.8392,1529.3591,8928.7933,3642.9557,3613.164,120481.7162,9.95,9.8574,
+</span><span id="__span-0-82"><a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a>517.3742,3702.3839,-147.4303,-146.0569,-7669.087,-35.2767,4222.4903,-143.1982,
+</span><span id="__span-0-83"><a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a>-141.2357,-7414.3551,-34.4302,509.844,4193.1319
+</span><span id="__span-0-84"><a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a>**Material:M4
+</span><span id="__span-0-85"><a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a>*Material,Name=M4
+</span><span id="__span-0-86"><a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a>*Elastic,TYPE=ANISOTROPIC
+</span><span id="__span-0-87"><a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a>9058.1198,1940.0409,10089.9165,5393.1754,11874.9043,98667.1446,203.4878,541.258,
+</span><span id="__span-0-88"><a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>4678.4804,3943.7999,639.8814,1702.0259,14711.8024,766.6464,6110.7723,1221.6736,
+</span><span id="__span-0-89"><a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a>3249.5219,28087.9378,1463.6933,4602.6886,12487.
+</span><span id="__span-0-90"><a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a>** 
+</span><span id="__span-0-91"><a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a>** STEP: Step-1
+</span><span id="__span-0-92"><a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a>** 
+</span><span id="__span-0-93"><a id="__codelineno-0-93" name="__codelineno-0-93" href="#__codelineno-0-93"></a>*Step, name=Step-1, nlgeom=YES
+</span><span id="__span-0-94"><a id="__codelineno-0-94" name="__codelineno-0-94" href="#__codelineno-0-94"></a>*Static
+</span><span id="__span-0-95"><a id="__codelineno-0-95" name="__codelineno-0-95" href="#__codelineno-0-95"></a>0.1, 1., 1e-05, 0.2
+</span><span id="__span-0-96"><a id="__codelineno-0-96" name="__codelineno-0-96" href="#__codelineno-0-96"></a>** 
+</span><span id="__span-0-97"><a id="__codelineno-0-97" name="__codelineno-0-97" href="#__codelineno-0-97"></a>** BOUNDARY CONDITIONS
+</span><span id="__span-0-98"><a id="__codelineno-0-98" name="__codelineno-0-98" href="#__codelineno-0-98"></a>** 
+</span><span id="__span-0-99"><a id="__codelineno-0-99" name="__codelineno-0-99" href="#__codelineno-0-99"></a>** Name: BC-1 Type: Symmetry/Antisymmetry/Encastre
+</span><span id="__span-0-100"><a id="__codelineno-0-100" name="__codelineno-0-100" href="#__codelineno-0-100"></a>*Boundary
+</span><span id="__span-0-101"><a id="__codelineno-0-101" name="__codelineno-0-101" href="#__codelineno-0-101"></a>Set-1, ENCASTRE
+</span><span id="__span-0-102"><a id="__codelineno-0-102" name="__codelineno-0-102" href="#__codelineno-0-102"></a>** 
+</span><span id="__span-0-103"><a id="__codelineno-0-103" name="__codelineno-0-103" href="#__codelineno-0-103"></a>** LOADS
+</span><span id="__span-0-104"><a id="__codelineno-0-104" name="__codelineno-0-104" href="#__codelineno-0-104"></a>** 
+</span><span id="__span-0-105"><a id="__codelineno-0-105" name="__codelineno-0-105" href="#__codelineno-0-105"></a>** Name: Load-1   Type: Pressure
+</span><span id="__span-0-106"><a id="__codelineno-0-106" name="__codelineno-0-106" href="#__codelineno-0-106"></a>*Dsload
+</span><span id="__span-0-107"><a id="__codelineno-0-107" name="__codelineno-0-107" href="#__codelineno-0-107"></a>Surf-1, P, 1.
+</span><span id="__span-0-108"><a id="__codelineno-0-108" name="__codelineno-0-108" href="#__codelineno-0-108"></a>** 
+</span><span id="__span-0-109"><a id="__codelineno-0-109" name="__codelineno-0-109" href="#__codelineno-0-109"></a>** OUTPUT REQUESTS
+</span><span id="__span-0-110"><a id="__codelineno-0-110" name="__codelineno-0-110" href="#__codelineno-0-110"></a>** 
+</span><span id="__span-0-111"><a id="__codelineno-0-111" name="__codelineno-0-111" href="#__codelineno-0-111"></a>*Restart, write, frequency=0
+</span><span id="__span-0-112"><a id="__codelineno-0-112" name="__codelineno-0-112" href="#__codelineno-0-112"></a>** 
+</span><span id="__span-0-113"><a id="__codelineno-0-113" name="__codelineno-0-113" href="#__codelineno-0-113"></a>** FIELD OUTPUT: F-Output-1
+</span><span id="__span-0-114"><a id="__codelineno-0-114" name="__codelineno-0-114" href="#__codelineno-0-114"></a>** 
+</span><span id="__span-0-115"><a id="__codelineno-0-115" name="__codelineno-0-115" href="#__codelineno-0-115"></a>*Output, field
+</span><span id="__span-0-116"><a id="__codelineno-0-116" name="__codelineno-0-116" href="#__codelineno-0-116"></a>*Node Output
+</span><span id="__span-0-117"><a id="__codelineno-0-117" name="__codelineno-0-117" href="#__codelineno-0-117"></a>U, 
+</span><span id="__span-0-118"><a id="__codelineno-0-118" name="__codelineno-0-118" href="#__codelineno-0-118"></a>*Element Output, directions=YES
+</span><span id="__span-0-119"><a id="__codelineno-0-119" name="__codelineno-0-119" href="#__codelineno-0-119"></a>S, 
+</span><span id="__span-0-120"><a id="__codelineno-0-120" name="__codelineno-0-120" href="#__codelineno-0-120"></a>** 
+</span><span id="__span-0-121"><a id="__codelineno-0-121" name="__codelineno-0-121" href="#__codelineno-0-121"></a>** HISTORY OUTPUT: H-Output-1
+</span><span id="__span-0-122"><a id="__codelineno-0-122" name="__codelineno-0-122" href="#__codelineno-0-122"></a>** 
+</span><span id="__span-0-123"><a id="__codelineno-0-123" name="__codelineno-0-123" href="#__codelineno-0-123"></a>*Output, history, variable=PRESELECT
+</span><span id="__span-0-124"><a id="__codelineno-0-124" name="__codelineno-0-124" href="#__codelineno-0-124"></a>*End Step
+</span></code></pre></div>
+<h2 id="_2">方法二</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>*Heading
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>**JOB:DistributionAnisotropicMaterial_FourELEM
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>*Preprint, echo=NO, model=NO, history=NO, contact=NO
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>**
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>** PARTS
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>**
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>*Part, name=FourElem
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>*Node
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>      1,         -25.,       -11.25,          10.
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>      2,         -25.,       -0.625,          10.
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>      3,         -25.,          10.,          10.
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>      4,         -25.,       -11.25,           0.
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>      5,         -25.,       -0.625,           0.
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>      6,         -25.,          10.,           0.
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>      7,        -12.5,       -11.25,          10.
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>      8,        -12.5,       -0.625,          10.
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>      9,        -12.5,          10.,          10.
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>     10,        -12.5,       -11.25,           0.
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>     11,        -12.5,       -0.625,           0.
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>     12,        -12.5,          10.,           0.
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>     13,           0.,       -11.25,          10.
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>     14,           0.,       -0.625,          10.
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>     15,           0.,          10.,          10.
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>     16,           0.,       -11.25,           0.
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>     17,           0.,       -0.625,           0.
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>     18,           0.,          10.,           0.
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>**定义单元和单元类型
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>*Element, type=C3D8R
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>1,  7,  8, 11, 10,  1,  2,  5,  4
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>2,  8,  9, 12, 11,  2,  3,  6,  5
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>3, 13, 14, 17, 16,  7,  8, 11, 10
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>4, 14, 15, 18, 17,  8,  9, 12, 11
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>**创建单元集合E1
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>*Elset, elset=E1
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>1,2,3,4
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>**定义全局坐标系
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>*Orientation, name=Ori-1
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>1., 0., 0., 0., 1., 0.
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>1, 0.
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>**赋予截面给实体单元集E1，指定材料和材料局部坐标
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>*Solid Section,Elset=E1,Material=M1,Orientation=Ori-1
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>*End Part
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>*Assembly, name=Assembly
+</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>**  
+</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>*Instance, name=FourElem-1, part=FourElem
+</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>**在实例下定义材料空间分布
+</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>*Distribution,Name=dist1,LOCATION=ELEMENT,TABLE=tab1
+</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a> ,8929.4608,1526.5216,8923.6134,3635.3632,3476.3026,120679.2644,8.3944
+</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>7.7689,439.6758,3701.6801,-145.4016,-135.4002,-7614.9276,-29.5989,4212.6626
+</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>-122.1556,-112.4105,-6361.0837,-24.5995,433.279,4055.9163
+</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>1,8929.4608,1526.5216,8923.6134,3635.3632,3476.3026,120679.2644,8.3944
+</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>7.7689,439.6758,3701.6801,-145.4016,-135.4002,-7614.9276,-29.5989,4212.6626
+</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>-122.1556,-112.4105,-6361.0837,-24.5995,433.279,4055.9163
+</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>2,17550.0133,13611.2277,25852.2543,13021.7401,17628.6822,24242.5311,9788.8481
+</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>13699.1544,13033.5732,14762.1216,-9538.4395,-13349.2807,-12699.5968,-10779.3782,14203.3879
+</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>-11372.6959,-15914.7528,-15140.8525,-12851.6274,12522.8552,18629.8078
+</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>3,8929.8392,1529.3591,8928.7933,3642.9557,3613.164,120481.7162,9.95,
+</span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>9.8574,517.3742,3702.3839,-147.4303,-146.0569,-7669.087,-35.2767,4222.4903
+</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>-143.1982,-141.2357,-7414.3551,-34.4302,509.844,4193.1319
+</span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>4,9058.1198,1940.0409,10089.9165,5393.1754,11874.9043,98667.1446,203.4878,
+</span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>541.258,4678.4804,3943.7999,639.8814,1702.0259,14711.8024,766.6464,6110.7723,
+</span><span id="__span-1-62"><a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>1221.6736,3249.5219,28087.9378,1463.6933,4602.6886,12487.
+</span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>*End Instance
+</span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>**  
+</span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>*Nset, nset=Set-1, instance=FourElem-1, generate
+</span><span id="__span-1-66"><a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a> 13,  18,   1
+</span><span id="__span-1-67"><a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>*Elset, elset=Set-1, instance=FourElem-1
+</span><span id="__span-1-68"><a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a> 3, 4
+</span><span id="__span-1-69"><a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>*Elset, elset=_Surf-1_S2, internal, instance=FourElem-1
+</span><span id="__span-1-70"><a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a> 1, 2
+</span><span id="__span-1-71"><a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>*Surface, type=ELEMENT, name=Surf-1
+</span><span id="__span-1-72"><a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>_Surf-1_S2, S2
+</span><span id="__span-1-73"><a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>*End Assembly
+</span><span id="__span-1-74"><a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>**确定分布表格中的数据格式
+</span><span id="__span-1-75"><a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a>*Distribution Table,Name=tab1
+</span><span id="__span-1-76"><a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a>MODULUS , MODULUS , MODULUS , MODULUS , MODULUS , MODULUS , MODULUS
+</span><span id="__span-1-77"><a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>MODULUS , MODULUS , MODULUS , MODULUS , MODULUS , MODULUS , MODULUS, MODULUS
+</span><span id="__span-1-78"><a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a>MODULUS , MODULUS , MODULUS , MODULUS , MODULUS , MODULUS 
+</span><span id="__span-1-79"><a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a>**Material:M1
+</span><span id="__span-1-80"><a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a>*Material,Name=M1
+</span><span id="__span-1-81"><a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a>**各向异性材料，空间分布按照dist1中给定
+</span><span id="__span-1-82"><a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a>*Elastic,TYPE=ANISOTROPIC
+</span><span id="__span-1-83"><a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a>FourElem-1.dist1
+</span><span id="__span-1-84"><a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a>** ----------------------------------------------------------------
+</span><span id="__span-1-85"><a id="__codelineno-1-85" name="__codelineno-1-85" href="#__codelineno-1-85"></a>** 
+</span><span id="__span-1-86"><a id="__codelineno-1-86" name="__codelineno-1-86" href="#__codelineno-1-86"></a>** STEP: Step-1
+</span><span id="__span-1-87"><a id="__codelineno-1-87" name="__codelineno-1-87" href="#__codelineno-1-87"></a>** 
+</span><span id="__span-1-88"><a id="__codelineno-1-88" name="__codelineno-1-88" href="#__codelineno-1-88"></a>*Step, name=Step-1, nlgeom=YES
+</span><span id="__span-1-89"><a id="__codelineno-1-89" name="__codelineno-1-89" href="#__codelineno-1-89"></a>*Static
+</span><span id="__span-1-90"><a id="__codelineno-1-90" name="__codelineno-1-90" href="#__codelineno-1-90"></a>0.1, 1., 1e-05, 0.2
+</span><span id="__span-1-91"><a id="__codelineno-1-91" name="__codelineno-1-91" href="#__codelineno-1-91"></a>** 
+</span><span id="__span-1-92"><a id="__codelineno-1-92" name="__codelineno-1-92" href="#__codelineno-1-92"></a>** BOUNDARY CONDITIONS
+</span><span id="__span-1-93"><a id="__codelineno-1-93" name="__codelineno-1-93" href="#__codelineno-1-93"></a>** 
+</span><span id="__span-1-94"><a id="__codelineno-1-94" name="__codelineno-1-94" href="#__codelineno-1-94"></a>** Name: BC-1 Type: Symmetry/Antisymmetry/Encastre
+</span><span id="__span-1-95"><a id="__codelineno-1-95" name="__codelineno-1-95" href="#__codelineno-1-95"></a>*Boundary
+</span><span id="__span-1-96"><a id="__codelineno-1-96" name="__codelineno-1-96" href="#__codelineno-1-96"></a>Set-1, ENCASTRE
+</span><span id="__span-1-97"><a id="__codelineno-1-97" name="__codelineno-1-97" href="#__codelineno-1-97"></a>** 
+</span><span id="__span-1-98"><a id="__codelineno-1-98" name="__codelineno-1-98" href="#__codelineno-1-98"></a>** LOADS
+</span><span id="__span-1-99"><a id="__codelineno-1-99" name="__codelineno-1-99" href="#__codelineno-1-99"></a>** 
+</span><span id="__span-1-100"><a id="__codelineno-1-100" name="__codelineno-1-100" href="#__codelineno-1-100"></a>** Name: Load-1   Type: Pressure
+</span><span id="__span-1-101"><a id="__codelineno-1-101" name="__codelineno-1-101" href="#__codelineno-1-101"></a>*Dsload
+</span><span id="__span-1-102"><a id="__codelineno-1-102" name="__codelineno-1-102" href="#__codelineno-1-102"></a>Surf-1, P, 1.
+</span><span id="__span-1-103"><a id="__codelineno-1-103" name="__codelineno-1-103" href="#__codelineno-1-103"></a>** 
+</span><span id="__span-1-104"><a id="__codelineno-1-104" name="__codelineno-1-104" href="#__codelineno-1-104"></a>** OUTPUT REQUESTS
+</span><span id="__span-1-105"><a id="__codelineno-1-105" name="__codelineno-1-105" href="#__codelineno-1-105"></a>** 
+</span><span id="__span-1-106"><a id="__codelineno-1-106" name="__codelineno-1-106" href="#__codelineno-1-106"></a>*Restart, write, frequency=0
+</span><span id="__span-1-107"><a id="__codelineno-1-107" name="__codelineno-1-107" href="#__codelineno-1-107"></a>** 
+</span><span id="__span-1-108"><a id="__codelineno-1-108" name="__codelineno-1-108" href="#__codelineno-1-108"></a>** FIELD OUTPUT: F-Output-1
+</span><span id="__span-1-109"><a id="__codelineno-1-109" name="__codelineno-1-109" href="#__codelineno-1-109"></a>** 
+</span><span id="__span-1-110"><a id="__codelineno-1-110" name="__codelineno-1-110" href="#__codelineno-1-110"></a>*Output, field
+</span><span id="__span-1-111"><a id="__codelineno-1-111" name="__codelineno-1-111" href="#__codelineno-1-111"></a>*Node Output
+</span><span id="__span-1-112"><a id="__codelineno-1-112" name="__codelineno-1-112" href="#__codelineno-1-112"></a>U, 
+</span><span id="__span-1-113"><a id="__codelineno-1-113" name="__codelineno-1-113" href="#__codelineno-1-113"></a>*Element Output, directions=YES
+</span><span id="__span-1-114"><a id="__codelineno-1-114" name="__codelineno-1-114" href="#__codelineno-1-114"></a>S, 
+</span><span id="__span-1-115"><a id="__codelineno-1-115" name="__codelineno-1-115" href="#__codelineno-1-115"></a>** 
+</span><span id="__span-1-116"><a id="__codelineno-1-116" name="__codelineno-1-116" href="#__codelineno-1-116"></a>** HISTORY OUTPUT: H-Output-1
+</span><span id="__span-1-117"><a id="__codelineno-1-117" name="__codelineno-1-117" href="#__codelineno-1-117"></a>** 
+</span><span id="__span-1-118"><a id="__codelineno-1-118" name="__codelineno-1-118" href="#__codelineno-1-118"></a>*Output, history, variable=PRESELECT
+</span><span id="__span-1-119"><a id="__codelineno-1-119" name="__codelineno-1-119" href="#__codelineno-1-119"></a>*End Step
+</span></code></pre></div>
+<h2 id="_3">结果对比</h2>
+<p>结果一致</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_%E6%9D%90%E6%96%99%E9%9D%9E%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83.md/2026433-20230802132938739-1520345514.png" /></p>
+<h2 id="_4">资料</h2>
+<p><a href="http://130.149.89.49:2080/v2016/books/usb/default.htm">2.8.1 Distribution definition</a>
+<a href="http://130.149.89.49:2080/v2016/books/key/default.htm">*ELASTIC</a>
+<a href="http://130.149.89.49:2080/v2016/books/key/ch18abk23.html">*SOLID SECTION</a>
+<a href="http://130.149.89.49:2080/v2016/books/key/default.htm">*SOLID SECTION</a>
+<a href="http://130.149.89.49:2080/v2016/books/key/default.htm">*DISTRIBUTION TABLE</a>
+<a href="http://130.149.89.49:2080/v2016/books/usb/default.htm">1.2.1 Input syntax rules</a></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "content.code.copy"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

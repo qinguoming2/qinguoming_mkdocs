@@ -1,0 +1,1972 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Note_Abaqus_%E6%9D%90%E6%96%99%E9%9D%9E%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83/">
+      
+      
+        <link rel="next" href="../Note_Abaqus_%E6%A8%A1%E6%80%81%E7%A8%B3%E6%80%81%E5%88%86%E6%9E%90%E5%8E%9F%E7%90%86/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.2.7">
+    
+    
+      
+        <title>Abaqus 预应力模态 - Qinguoming Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#note_abaqus_" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Qinguoming Notes" class="md-header__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Qinguoming Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Abaqus 预应力模态
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Qinguoming Notes" class="md-nav__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Qinguoming Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    数值分析算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            数值分析算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    蒙特卡洛实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数值积分+微分方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95code%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法CODE实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E6%B1%82%E6%A0%B9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    非线性方程求根
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E5%88%9D%26%E8%BE%B9%E5%80%BC%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    常微分方程初&边值问题数值解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_Crout%E5%88%86%E8%A7%A3%E8%BF%BD%E8%B5%B6%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crout分解追赶法的线性方程组求解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    FEM算法原理及编程
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            FEM算法原理及编程
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Mindlin%E6%9D%BFQ4%E5%8D%95%E5%85%83%E6%8E%A8%E5%AF%BC-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mindlin Q4单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Kirchhoff%E6%9D%BF%E7%90%86%E8%AE%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基尔霍夫板理论
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E5%B1%82%E5%90%88%E6%9D%BF%E5%8D%95%E5%85%83%E6%A0%BC%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    层合板单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FEM边界条件处理方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E7%BB%93%E6%9E%84%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%95%99%E6%9D%90%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    结构动力学教材笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python数值计算
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Python数值计算
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_%E6%9D%90%E6%96%99%E5%88%9A%E5%BA%A6%E8%BD%AC%E6%8D%A2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    材料刚度矩阵转换
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Vtk%E6%96%87%E4%BB%B6%E8%A7%84%E5%88%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vtk文件规则
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_2%263%E7%BB%B4%E9%AB%98%E6%96%AF%E7%A7%AF%E5%88%86py%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2&3维高斯积分Python实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Mpmath%E5%BA%93%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mpmath库
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    multiprocessing多线程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Matlab2Python%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Matlab2Python索引
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CNC_Cpp%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cpp数值计算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Abaqus 建模
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Abaqus 建模
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus CompositeLayup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%A4%B9%E8%8A%AF%E6%9D%BF%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus Sandwich建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%A4%B1%E6%95%88/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材失效建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E7%A6%BB%E6%95%A3%E5%A2%9E%E5%BC%BA%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材离散增强建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_SolidSection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus SolidSection KeyWord
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E8%BE%93%E5%87%BA%E5%8D%95%E5%85%83%E5%88%9A%E5%BA%A6%E7%9F%A9%E9%98%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 输出单元刚度矩阵
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E8%BE%93%E5%87%BA%E6%80%BB%E4%BD%93%E5%88%9A%E5%BA%A6%E7%9F%A9%E9%98%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 输出总体刚度矩阵
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复合材料分析基础
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E5%8E%8B%E7%94%B5%E5%88%86%E6%9E%90%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 压电分析入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E7%83%AD%E8%86%A8%E8%83%80%E7%B3%BB%E6%95%B0%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 热膨胀系数设置
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E6%9D%90%E6%96%99%E9%9D%9E%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 材料非均匀分布
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Abaqus 预应力模态
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 预应力模态
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 什么是模态分析?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 单自由度系统振幅和固有频率的求解
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 单自由度系统振幅和固有频率的求解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 单自由度无阻尼系统的自由振动
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 单自由度有阻尼系统的自由振动
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 从公式推导理解振型和固有频率的概念
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-abaqus" class="md-nav__link">
+    4. Abaqus中的模态分析
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Abaqus中的模态分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-abaqus-theory" class="md-nav__link">
+    4.1 Abaqus Theory中的描述
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5.预应力模态
+  </a>
+  
+    <nav class="md-nav" aria-label="5.预应力模态">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    5.1 模态分析的一般步骤
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 模态分析的一般步骤">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    A. 单个零件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    B. 装配体
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    5.2 预应力模态
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Abaqus_%E6%A8%A1%E6%80%81%E7%A8%B3%E6%80%81%E5%88%86%E6%9E%90%E5%8E%9F%E7%90%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 模态稳态分析原理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    其他
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            其他
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git常用命令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_%E5%87%A0%E7%AF%87%E6%A8%A1%E6%80%81%E5%BA%94%E5%8F%98%E8%83%BD%E8%AE%BA%E6%96%87/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    几篇模态应变能论文
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_%E7%82%B9%E4%B8%8E%E5%A4%9A%E9%9D%A2%E4%BD%93%E4%BD%8D%E7%BD%AE%E5%85%B3%E7%B3%BB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    点与多面体位置关系
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_%E5%9F%BA%E4%BA%8EKdTree%E7%9A%84%E7%A9%BA%E9%97%B4%E6%90%9C%E7%B4%A2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    KdTree的空间搜索
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_HM%E5%9B%9B%E9%9D%A2%E4%BD%93%E7%BD%91%E6%A0%BC%E5%88%92%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HM四面体网格划分
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Mathtype%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MathType使用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Python%E7%9A%84%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python的函数传参
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Matlab%E5%85%83%E8%83%9E%E6%95%B0%E7%BB%84%E7%94%A8%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Matlab元胞数组
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_%E6%8F%90%E5%8F%96Fibersim%20xml%E4%BF%A1%E6%81%AF/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    提取Fibersim xml信息
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Py%26Matlab%E5%A4%84%E7%90%86ODB%E6%95%B0%E6%8D%AE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Py&Matlab处理ODB数据
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Abaqus%E7%9A%84py%E6%8A%A5%E9%94%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus几个py报错
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Catia%E8%AE%B8%E5%8F%AF%E8%AF%81%E7%A0%B4%E8%A7%A3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Catia许可证破解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_%E8%BE%93%E5%87%BA%E7%A7%AF%E5%88%86%E7%82%B9%E6%95%B0%E6%8D%AE%E5%88%B0dat%E6%96%87%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    输出积分点数据到dat文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Abaqus%26UG%E6%97%A0%E6%B3%95%E5%90%8C%E6%97%B6%E5%90%AF%E5%8A%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus&UG无法同时启动
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_Fibersim%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fibersim安装破解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Others/Note_Others_%E8%BD%AF%E4%BB%B6%E6%8A%A5%E9%94%99%E5%90%88%E9%9B%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    软件报错合集
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../About/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Me
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 什么是模态分析?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 单自由度系统振幅和固有频率的求解
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 单自由度系统振幅和固有频率的求解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 单自由度无阻尼系统的自由振动
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 单自由度有阻尼系统的自由振动
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 从公式推导理解振型和固有频率的概念
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-abaqus" class="md-nav__link">
+    4. Abaqus中的模态分析
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Abaqus中的模态分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-abaqus-theory" class="md-nav__link">
+    4.1 Abaqus Theory中的描述
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5.预应力模态
+  </a>
+  
+    <nav class="md-nav" aria-label="5.预应力模态">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    5.1 模态分析的一般步骤
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 模态分析的一般步骤">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    A. 单个零件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    B. 装配体
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    5.2 预应力模态
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="note_abaqus_">Note_Abaqus_预应力模态</h1>
+<h2 id="1">1. 什么是模态分析?</h2>
+<p>模态分析是指求解多自由度系统的模态振型及振动频率的过程.模态分析可简单地分为自由模态分析和约束模态分析.
++ 自由模态分析:不加任何约束,进行求解(会出现前六阶0模态)
++ 约束模态分析:施加完整的约束,模型不会出现刚体模态
+还可以分类为:
++ 预应力模态(典型例子:吉他琴弦)
++ 干模态分析(空气中)
++ 湿模态分析(流体耦合作用不可忽略)</p>
+<h2 id="2">2. 单自由度系统振幅和固有频率的求解</h2>
+<p>模态分析的本质上是求解一定条件下的结构动力学方程.
+这是完整的动力学方程:</p>
+<div class="arithmatex">\[
+Mu''+Cu'+Ku=f(t)
+\tag{1}
+\]</div>
+<p>模态分析时,假设整体结构处于自由振动状态(即<span class="arithmatex">\(f(t)=0\)</span>),并且结构阻你忽略不计,<span class="arithmatex">\(C=0\)</span>,则(1)变为以下公式:</p>
+<div class="arithmatex">\[
+Mu''+Ku=0
+\tag{2}
+\]</div>
+<p>对于单自由度系统,u是标量;而对N自由度系统来说,u是一个N x 1的列向量.</p>
+<h3 id="21">2.1 单自由度无阻尼系统的自由振动</h3>
+<p>最简单的 单自由度系统是<code>弹簧-质量块系统</code></p>
+<p><img alt="img" src="../FILES/Note_Abaqus_%E9%A2%84%E5%BA%94%E5%8A%9B%E6%A8%A1%E6%80%81.md/2026433-20230131152936701-193964549.png" /></p>
+<p><img alt="img" src="../FILES/Note_Abaqus_%E9%A2%84%E5%BA%94%E5%8A%9B%E6%A8%A1%E6%80%81.md/2026433-20230131153719771-2023788282.png" /></p>
+<p><img alt="img" src="../FILES/Note_Abaqus_%E9%A2%84%E5%BA%94%E5%8A%9B%E6%A8%A1%E6%80%81.md/2026433-20230131153834884-1799883484.png" /></p>
+<p>从上可以看出,质量块被简化为了一个刚体.方程<span class="arithmatex">\(mg-k\delta_{st}=0\)</span>中,影响求解结果的因素只有1)质量m;2)弹簧刚度k;</p>
+<p>将单自由度的线性系统无阻尼系统的微分方程写成广义坐标的标准形式:</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_%E9%A2%84%E5%BA%94%E5%8A%9B%E6%A8%A1%E6%80%81.md/2026433-20230131154719046-1615723062.png" /></p>
+<p>等效质量和等效刚度的求解不讨论(我不会)
++ <a href="https://www.cnblogs.com/aksoam/p/17079470.html">广义坐标的定义</a></p>
+<blockquote>
+<p>以上也是一个模态分析(求振型和固有频率)的过程.</p>
+</blockquote>
+<h3 id="22">2.2 单自由度有阻尼系统的自由振动</h3>
+<p>在实际物理模型中,阻尼总是存在的.</p>
+<p><img src="./FILES/Note_Abaqus_预应力模态.md/2026433-20230131160120604-911226555.png"  /></p>
+<details> <summary>点击展开更多推导</summary>
+<img src="./FILES/Note_Abaqus_预应力模态.md/2026433-20230131160138511-1134718562.png"  />
+
+<img src="./FILES/Note_Abaqus_预应力模态.md/2026433-20230131160203583-481745862.png"  />
+
+<img src="./FILES/Note_Abaqus_预应力模态.md/2026433-20230131160217609-1850606731.png"  />
+
+<img src="./FILES/Note_Abaqus_预应力模态.md/2026433-20230131160253344-988299281.png"  />
+
+<img src="./FILES/Note_Abaqus_预应力模态.md/2026433-20230131160305377-444892057.png"  />
+
+
+<img src="./FILES/Note_Abaqus_预应力模态.md/2026433-20230131160323798-1347590795.png"  />
+
+<img src="./FILES/Note_Abaqus_预应力模态.md/2026433-20230131160400654-893580733.png"  />
+</details>
+
+<h2 id="3">3. 从公式推导理解振型和固有频率的概念</h2>
+<p>之前分析的是单自由度的质量-弹簧(-粘壶)系统.现在分析多自由度系统.n自由度系统自由振动的微分方程组为:</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_%E9%A2%84%E5%BA%94%E5%8A%9B%E6%A8%A1%E6%80%81.md/2026433-20230131163254771-287761541.png" /></p>
+<p>写成矩阵形式为:
+$$
+\boldsymbol{M} \ddot{x}+\boldsymbol{K} \boldsymbol{x}=0
+\tag{3}
+$$</p>
+<p><span class="arithmatex">\(x\)</span>为<span class="arithmatex">\(n\times 1\)</span>的向量.(可以理解为广义坐标)
+假设解的形式为:
+<span class="arithmatex">\(<span class="arithmatex">\(x_{i}=A_{i} \sin (p t+\varphi) \quad i=1,2,3, \cdots n\)</span>\)</span>
+解的矩阵形式
+$$\boldsymbol{x_{n1}}=\boldsymbol{A_{n1}} \sin (p_{n1} t+\phi_{n1})
+\tag{4}
+$$</p>
+<blockquote>
+<p>下标n1表示 n 行 1 列</p>
+</blockquote>
+<p>将方程的解代入系统运动微分方程,并消去<span class="arithmatex">\(sin(pt+\psi)\)</span>,得:</p>
+<div class="arithmatex">\[
+KA-p^{2} M A=0 或 K \boldsymbol{A}=p^{2} M \boldsymbol{A}
+\tag{5}
+\]</div>
+<p>整理后:
+$$
+(K-p^2M)A=0
+\tag{6}
+$$
+其中特征矩阵为:
+$$
+B=K-p^2M
+\tag{7}
+$$</p>
+<p>从<span class="arithmatex">\(BA=0\)</span>来看,<span class="arithmatex">\(A\)</span>为自由度振幅向量( <span class="arithmatex">\(n\times1\)</span>),显然A不可能为0向量(A要有不全为零的解);那么要使<span class="arithmatex">\(BA=0\)</span>成立,系数行列式必须为0:
+$$
+|B|=0\Rightarrow |K-p^2M|=0
+\tag{8}
+$$</p>
+<blockquote>
+<p>这是关于p^2的n次多项式,根据此式(3)可以求出n个固有频率(或特征值).因此,n自由度系统由n个固有频率(模态)</p>
+</blockquote>
+<p>根据公式(5),左乘<span class="arithmatex">\(A^T\)</span>后:
+$$
+ A^T K {A}=p^{2} A^T M{A}
+ \tag{9}
+$$</p>
+<p>因为系统的质量矩阵M是正定的,刚度矩阵K是半正定或正定的,有:
+$$
+ A^T K {A}&gt;=0;A^T M{A}&gt;0
+$$
+因此:
+$$
+p<sup>2=\frac{A</sup>T K {A}}{A^T M{A}} &gt;=0
+\tag{10}
+$$</p>
+<p>频率方程中所有的固有频率值都是实数,并且是正数或为零.刚度矩阵为正定的称之为正定系统,对应于正定系统的固有频率值是正的;刚度矩阵为半正定的称之为半正定系统,对应于半正定系统的固有频率值是正数或为零.</p>
+<p>一般来说,振动系统的个固有频率的值互不相等(重根除外).将各个固有
+频率按照由小到大的顺序排列为
+$$
+0≤p1≤p2≤…≤Pm
+\tag{11}
+$$
+最低阶固有频率称为第一阶固有频率或称基频,然后依次称为第二阶、第三阶固有频率等.</p>
+<p>将频率值带入以下方程:
+$$
+(K-p^2M)A=0
+\tag{12}
+$$
+上式是一个n行线性方程组,未知数个数为n;每一个<span class="arithmatex">\(p_i\)</span>可以求得一个对应的振幅向量<span class="arithmatex">\(A^{(i)}\)</span>(n行1列),满足条件:
+$$
+(K-p_i<sup>2M)A</sup>{(i)}=0
+\tag{13}
+$$</p>
+<p><span class="arithmatex">\(K、M\)</span>都是n行n列的矩阵,<span class="arithmatex">\(p\)</span>为标量. <span class="arithmatex">\(A^i\)</span> 为对应于<span class="arithmatex">\(p_i\)</span>的特征矢量.它表示系统在以<span class="arithmatex">\(p_i\)</span>的频率作自由振动时,各自由度振幅的相对大小,称之为第i阶主振型,也称固有振型或主模态.</p>
+<p>对于任何n自由度振动系统,总可以找到n个固有频率和对应的n个主振型:</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_%E9%A2%84%E5%BA%94%E5%8A%9B%E6%A8%A1%E6%80%81.md/2026433-20230131172609538-1423711386.png" /></p>
+<h2 id="4-abaqus">4. Abaqus中的模态分析</h2>
+<p>ABAQUS可以进行实模态分析和复模态分析,也就是
+Natural frequency extraction和Complex frequency extraction.前者对应于frequency分析步,这是一个线性摄动分析步.<mark>能进行特征值提取,计算系统的固有频率和相应的振型</mark>;</p>
+<p>根据帮助文档,abaqus的特征值提取分析步求解的是无阻尼有限元模型.其固有频率的特征值问题:</p>
+<div class="arithmatex">\[
+\left(-\omega^{2}M^{M N}+K^{M N}\right)\phi^{N}=0,
+\tag{14}
+\]</div>
+<p><img alt="img" src="../FILES/Note_Abaqus_%E9%A2%84%E5%BA%94%E5%8A%9B%E6%A8%A1%E6%80%81.md/2026433-20230131184742137-2133269021.png" /></p>
+<h3 id="41-abaqus-theory">4.1 Abaqus Theory中的描述</h3>
+<p>结构分析有许多重要领域 对于提取系统的特征值至关重要,获得其固有振动频率或研究可能与运动不稳定性有关的分支.例如 地震事件的结构评估通常基于线性分析, 使用结构模式直至限制截止频率,这通常是 取为 33 Hz(周期/秒).</p>
+<p>一旦模态是可用的,他们的正交特性允许结构的线性响应被构造为一些单自由度系统的响应. 这为几种响应评估方法开辟了道路,这些方法:计算成本低廉,并提供对结构的有用行为.Abaqus/Standard 中提供了几种这样的方法</p>
+<p>数学特征值问题是一个经典的研究领域,许多工作一直致力于提供特征值提取方法.威尔金森(1965)的书提供了一个关于这个问题的优秀纲要.</p>
+<p>由有限元模型所产生的特征值问题是一个特殊的情况:它们涉及大但通常是窄带矩阵,通常只需要少量的特征对.对于许多重要的情况,矩阵是对称的.有限元模型的小振动固有模态的特征值问题是</p>
+<p><img alt="img" src="../FILES/Note_Abaqus_%E9%A2%84%E5%BA%94%E5%8A%9B%E6%A8%A1%E6%80%81.md/2026433-20230131203320686-1984603466.png" /></p>
+<p>经典矩阵形式:
+<img alt="img" src="../FILES/Note_Abaqus_%E9%A2%84%E5%BA%94%E5%8A%9B%E6%A8%A1%E6%80%81.md/2026433-20230131203928950-1865818671.png" /></p>
+<p>[M]是质量矩阵,是对称且正定的; [C]是阻尼矩阵;[K]是刚度矩阵;(<code>may include large-displacement effects, such as "stress stiffening" (initial stress terms)</code>;可能不是正定的或对称的;);<span class="arithmatex">\(\mu\)</span>是特征值,{<span class="arithmatex">\(\psi\)</span>}是特征向量(即振动模式)</p>
+<p><b><font color=red>将abaqus中经典矩阵形式的方程和方程(12)对比,可以看出:</font></b>
++ <span class="arithmatex">\(\{\psi\}\)</span>和<span class="arithmatex">\(A\)</span>相当,都表示广义坐标下的自由度振幅向量,即<mark>主振型</mark>
++ <span class="arithmatex">\(-p^2=\mu^2 \Rightarrow \mu=p i\)</span>,因此<span class="arithmatex">\(\mu和p\)</span>都表示<mark>固有频率.</mark></p>
+<blockquote>
+<p>This equation is available immediately from a linear perturbation of the equilibrium equation of the system.</p>
+</blockquote>
+<p>Typically, for symmetric eigenproblems we will also assume that <span class="arithmatex">\(K\)</span> is positive semidefinite(半正定). In this case μ becomes an imaginary eigenvalue, <span class="arithmatex">\(μ=i⁢ω\)</span>, where ω is the circular frequency, and the eigenvalue problem can be written as</p>
+<div class="arithmatex">\[
+(-ω^2[M]+[K])⁢{ϕ}=0
+\tag{15}
+\]</div>
+<p>If the model contains hybrid elements, contact pairs, or contact elements, the system of equations contains Lagrange multipliers and the stiffness matrix [K] becomes indefinite(不确定的). However, all the terms of the mass matrix corresponding to the Lagrange multipliers are equal to zero. Therefore, all the eigenvalues are imaginary, and the eigenvalue problem can still be written as above equation</p>
+<h2 id="5">5.预应力模态</h2>
+<p>abaqus的目的就是求解线性系统的固有频率和主振型;根据上文,可以看出求解是特征值问题时,能影响求解结果的因素只有:1)质量矩阵M;2)刚度矩阵K;</p>
+<p>以我所知,材料密度会影响M矩阵;K矩阵受结构系统的约束情况(Boundary condition),材料本构关系,接触情况等影响.</p>
+<blockquote>
+<p>虽然特征值提取是一个线性分析步,不考虑非线性情况.接触属于状态非线性,但也可以在ABQUS model中设定.ABAQUS求解器有处理这种情况的办法.</p>
+</blockquote>
+<p>模态分析中不支持施加load;也不能施加热载荷;但是温度能影响材料属性,进而影响M,K矩阵.</p>
+<h3 id="51">5.1 模态分析的一般步骤</h3>
+<h4 id="a">A. 单个零件</h4>
+<ol>
+<li>定义part</li>
+<li>定义材料属性</li>
+<li>定义装配</li>
+<li>定义分析步<ul>
+<li>选择frequency分析步;</li>
+<li>选择求解器,常用的是LANCOS;</li>
+<li>选择 求解频率范围</li>
+<li>定义增量步参数</li>
+</ul>
+</li>
+<li>定义场输出:U E S</li>
+<li>interaction (单个part一般没有接触)</li>
+<li>划分网格</li>
+<li>定义边界条件</li>
+</ol>
+<h4 id="b">B. 装配体</h4>
+<ol>
+<li>定义part</li>
+<li>定义材料属性</li>
+<li>定义装配</li>
+<li>定义分析步<ul>
+<li>选择frequency分析步;</li>
+<li>选择求解器,常用的是LANCOS;</li>
+<li>选择 求解频率范围</li>
+<li>定义增量步参数</li>
+</ul>
+</li>
+<li>定义场输出:U E S</li>
+<li>定义接触条件:可以是constraint 和 interaction.</li>
+<li>划分网格</li>
+<li>定义边界条件</li>
+</ol>
+<h3 id="52">5.2 预应力模态</h3>
+<p>预应力模态,按我的理解就是,假设t=0时,结构的刚度矩阵、质量矩阵为M0,K0;t=t1时,结构(分析对象)收到外部激励的作用,使得结构的刚度矩阵,质量矩阵发生改变,结构的刚度矩阵、质量矩阵为M1,K1;t=t2时,开始进行特征值提取,此时求解的是t1状态的结果.</p>
+<p>从上面这个理解出发,ABAQUS预应力模态只要在frequency分析步之前进行General,Static分析步,打开NLGeom选项(分析过程中刚度矩阵会不断变化).</p>
+<p>提取单元刚度矩阵:</p>
+<p><a href="https://www.cnblogs.com/aksoam/p/17077587.html">【ABAQUS 二次开发笔记】输出单元刚度矩阵 - hayden_william - 博客园</a></p>
+<blockquote>
+<p>以上均为我的一点理解,不一定完全正确,本文仅作为个人学习记录之用,其他概不负责.</p>
+</blockquote>
+<h2 id="_1">参考</h2>
+<ul>
+<li><a href="https://www.teesim.com/Case/Vibration/Vibration.html">连接器振动脱落_abaqus重启动分析_显式隐式切换_插拔力预应力模态_TeeSim天深科技</a></li>
+<li><a href="https://www.jishulink.com/post/1866830">Abaqus预应力模态分析 附Abaqus 分析用户手册材料卷下载- 技术邻</a></li>
+<li><a href="https://help.3ds.com/2020/English/DSSIMULIA_Established/SIMACAEANLRefMap/simaanl-c-freqextraction.htm?contextscope=all&amp;id=6151b88955874a338e867891164fca15#simaanl-c-freqextraction-t-icsect1">Natural frequency extraction - SIMULIA 用户帮助 2020 User guide</a></li>
+<li>&lt;结构动力学&gt;</li>
+<li><a href="https://www.icourse163.org/course/TJU-1003155001?tid=1450391454">振动理论及工程应用_天津大学_中国大学MOOC(慕课)</a></li>
+<li><a href="https://help.3ds.com/2020/English/DSSIMULIA_Established/SIMACAETHERefMap/simathe-c-eigenextract.htm?contextscope=all&amp;id=7d096d6e53fa4d62bbf36d5a5346d762">Eigenvalue extraction - SIMULIA 用户帮助 2020 Theory</a></li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "content.code.copy"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

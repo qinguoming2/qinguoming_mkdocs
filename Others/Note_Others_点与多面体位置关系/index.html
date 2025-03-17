@@ -1,0 +1,1837 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Note_%E5%87%A0%E7%AF%87%E6%A8%A1%E6%80%81%E5%BA%94%E5%8F%98%E8%83%BD%E8%AE%BA%E6%96%87/">
+      
+      
+        <link rel="next" href="../Note_Others_%E5%9F%BA%E4%BA%8EKdTree%E7%9A%84%E7%A9%BA%E9%97%B4%E6%90%9C%E7%B4%A2/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.2.7">
+    
+    
+      
+        <title>点与多面体位置关系 - Qinguoming Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#note_others_" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Qinguoming Notes" class="md-header__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Qinguoming Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              点与多面体位置关系
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Qinguoming Notes" class="md-nav__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Qinguoming Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    数值分析算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            数值分析算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    蒙特卡洛实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数值积分+微分方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95code%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法CODE实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E6%B1%82%E6%A0%B9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    非线性方程求根
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E5%88%9D%26%E8%BE%B9%E5%80%BC%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    常微分方程初&边值问题数值解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_Crout%E5%88%86%E8%A7%A3%E8%BF%BD%E8%B5%B6%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crout分解追赶法的线性方程组求解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    FEM算法原理及编程
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            FEM算法原理及编程
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Mindlin%E6%9D%BFQ4%E5%8D%95%E5%85%83%E6%8E%A8%E5%AF%BC-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mindlin Q4单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Kirchhoff%E6%9D%BF%E7%90%86%E8%AE%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基尔霍夫板理论
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E5%B1%82%E5%90%88%E6%9D%BF%E5%8D%95%E5%85%83%E6%A0%BC%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    层合板单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FEM边界条件处理方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E7%BB%93%E6%9E%84%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%95%99%E6%9D%90%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    结构动力学教材笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python数值计算
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Python数值计算
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_%E6%9D%90%E6%96%99%E5%88%9A%E5%BA%A6%E8%BD%AC%E6%8D%A2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    材料刚度矩阵转换
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Vtk%E6%96%87%E4%BB%B6%E8%A7%84%E5%88%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vtk文件规则
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_2%263%E7%BB%B4%E9%AB%98%E6%96%AF%E7%A7%AF%E5%88%86py%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2&3维高斯积分Python实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Mpmath%E5%BA%93%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mpmath库
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    multiprocessing多线程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Matlab2Python%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Matlab2Python索引
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CNC_Cpp%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cpp数值计算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Abaqus 建模
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Abaqus 建模
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus CompositeLayup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%A4%B9%E8%8A%AF%E6%9D%BF%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus Sandwich建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%A4%B1%E6%95%88/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材失效建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E7%A6%BB%E6%95%A3%E5%A2%9E%E5%BC%BA%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材离散增强建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_SolidSection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus SolidSection KeyWord
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E8%BE%93%E5%87%BA%E5%8D%95%E5%85%83%E5%88%9A%E5%BA%A6%E7%9F%A9%E9%98%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 输出单元刚度矩阵
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E8%BE%93%E5%87%BA%E6%80%BB%E4%BD%93%E5%88%9A%E5%BA%A6%E7%9F%A9%E9%98%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 输出总体刚度矩阵
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复合材料分析基础
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%8E%8B%E7%94%B5%E5%88%86%E6%9E%90%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 压电分析入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E7%83%AD%E8%86%A8%E8%83%80%E7%B3%BB%E6%95%B0%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 热膨胀系数设置
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E6%9D%90%E6%96%99%E9%9D%9E%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 材料非均匀分布
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E9%A2%84%E5%BA%94%E5%8A%9B%E6%A8%A1%E6%80%81/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 预应力模态
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E6%A8%A1%E6%80%81%E7%A8%B3%E6%80%81%E5%88%86%E6%9E%90%E5%8E%9F%E7%90%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 模态稳态分析原理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    其他
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            其他
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git常用命令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_%E5%87%A0%E7%AF%87%E6%A8%A1%E6%80%81%E5%BA%94%E5%8F%98%E8%83%BD%E8%AE%BA%E6%96%87/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    几篇模态应变能论文
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    点与多面体位置关系
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    点与多面体位置关系
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    方法一: 向量判别法
+  </a>
+  
+    <nav class="md-nav" aria-label="方法一: 向量判别法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    算法原理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#matlab" class="md-nav__link">
+    Matlab 实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#matlab_1" class="md-nav__link">
+    测试Matlab的速度和准确度
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    方法二:体积判别法
+  </a>
+  
+    <nav class="md-nav" aria-label="方法二:体积判别法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matlab_2" class="md-nav__link">
+    Matlab实现(仅限四面体)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_%E5%9F%BA%E4%BA%8EKdTree%E7%9A%84%E7%A9%BA%E9%97%B4%E6%90%9C%E7%B4%A2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    KdTree的空间搜索
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_HM%E5%9B%9B%E9%9D%A2%E4%BD%93%E7%BD%91%E6%A0%BC%E5%88%92%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HM四面体网格划分
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Mathtype%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MathType使用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Python%E7%9A%84%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python的函数传参
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Matlab%E5%85%83%E8%83%9E%E6%95%B0%E7%BB%84%E7%94%A8%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Matlab元胞数组
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_%E6%8F%90%E5%8F%96Fibersim%20xml%E4%BF%A1%E6%81%AF/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    提取Fibersim xml信息
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Py%26Matlab%E5%A4%84%E7%90%86ODB%E6%95%B0%E6%8D%AE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Py&Matlab处理ODB数据
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Abaqus%E7%9A%84py%E6%8A%A5%E9%94%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus几个py报错
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Catia%E8%AE%B8%E5%8F%AF%E8%AF%81%E7%A0%B4%E8%A7%A3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Catia许可证破解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_%E8%BE%93%E5%87%BA%E7%A7%AF%E5%88%86%E7%82%B9%E6%95%B0%E6%8D%AE%E5%88%B0dat%E6%96%87%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    输出积分点数据到dat文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Abaqus%26UG%E6%97%A0%E6%B3%95%E5%90%8C%E6%97%B6%E5%90%AF%E5%8A%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus&UG无法同时启动
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Fibersim%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fibersim安装破解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_%E8%BD%AF%E4%BB%B6%E6%8A%A5%E9%94%99%E5%90%88%E9%9B%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    软件报错合集
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../About/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Me
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    方法一: 向量判别法
+  </a>
+  
+    <nav class="md-nav" aria-label="方法一: 向量判别法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    算法原理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#matlab" class="md-nav__link">
+    Matlab 实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#matlab_1" class="md-nav__link">
+    测试Matlab的速度和准确度
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    方法二:体积判别法
+  </a>
+  
+    <nav class="md-nav" aria-label="方法二:体积判别法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matlab_2" class="md-nav__link">
+    Matlab实现(仅限四面体)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="note_others_">Note_Others_点与多面体位置关系</h1>
+<blockquote>
+<p>https://www.cnblogs.com/aksoam/p/17590039.html
+分别是向量判别法(算法来自他人论文)、体积判别法(code 是我从网上找的).</p>
+</blockquote>
+<h2 id="_1">方法一: 向量判别法</h2>
+<p>方法来自一会议论文:&lt;判断点与多面体空间位置关系的一个新算法_石露&gt;2008年,知网、万方、百度学术有收录.
+优点:
++ 适合任意多面体
++ 计算简单
++ 速度快</p>
+<h3 id="_2">算法原理</h3>
+<p><img alt="img" src="../FILES/Note_Others_%E7%82%B9%E4%B8%8E%E5%A4%9A%E9%9D%A2%E4%BD%93%E4%BD%8D%E7%BD%AE%E5%85%B3%E7%B3%BB.md/2026433-20230729162105405-1991483942.png" /></p>
+<h3 id="matlab">Matlab 实现</h3>
+<p>主函数为InPolyhedronByVJM(Nodes,P),当前仅支持ABAQUS 四面体和五面体单元,其余有需要的可自行在switch语句添加函数.
+输入:
++ Nodes:包含节点顺序和坐标的N x 3的矩阵
++ P:1x3的行向量</p>
+<p>这是我根据<strong>ABAQUS单元规则编写的函数</strong>,因此其他软件的网格信息文件还需要重写.</p>
+<p><div class="language-matlab highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">function</span><span class="w"> </span>flag<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">InPolyhedronByVJM</span><span class="p">(</span>Nodes,P<span class="p">)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c">% 根据向量判别法,判断点和多面体的位置关系.</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c">% 算法依据:石露,白冰,李小春. 判断点与多面体空问位置关系的一个新算法[C].</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c">% 输入:</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c">%       + Nodes: n x 3 matrix</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c">%       + P    : 1 x 3 row vector</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c">% 单元节点顺序需要满足ABAQUS的约定.</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c">% Nodes是一个n x 3的数值矩阵,每一行表示多面体的一个节点的空间坐标.</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c">% 点在多面体内部的充分必要条件:每个face上任一点到点P的向量和该face法向量的数量积都</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c">% 小于等于0,否则在体外.</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">NumOfNode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">Nodes</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="k">switch</span><span class="w"> </span><span class="n">NumOfNode</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">4</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">        </span><span class="nb">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">InTetrahedron</span><span class="p">(</span><span class="n">Nodes</span><span class="p">,</span><span class="w"> </span><span class="n">P</span><span class="p">);</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">        </span><span class="nb">disp</span><span class="p">(</span><span class="s">&#39;tetra&#39;</span><span class="p">)</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">5</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">        </span><span class="nb">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">InPyramid</span><span class="p">(</span><span class="n">Nodes</span><span class="p">,</span><span class="w"> </span><span class="n">P</span><span class="p">);</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">        </span><span class="nb">disp</span><span class="p">(</span><span class="s">&#39;parymid&#39;</span><span class="p">)</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="k">end</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="k">end</span>
+</span></code></pre></div>
+针对C3D4类单元的判别函数
+<div class="language-matlab highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">function</span><span class="w"> </span>flag<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">InTetrahedron</span><span class="p">(</span>Nodes, P<span class="p">)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c">% tetra elem have 4 face.</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c">% ABAQUS rule about node ordering and face numbering on element</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">FaceIDX</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">1</span><span class="w"> </span><span class="s">4</span><span class="w"> </span><span class="s">2</span><span class="p">;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">2</span><span class="w"> </span><span class="s">4</span><span class="w"> </span><span class="s">3</span><span class="p">;</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">3</span><span class="w"> </span><span class="s">4</span><span class="w"> </span><span class="s">1]</span><span class="p">;</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">for</span><span class="w"> </span><span class="n">faceId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">FaceIDX</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="c">% judge face i: node 1-node 2-node 3 face</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="c">% get face normal vector(outside)</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">GetNormVector</span><span class="p">(</span><span class="n">Nodes</span><span class="p">(</span><span class="n">FaceIDX</span><span class="p">(</span><span class="n">faceId</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="p">:),</span><span class="w"> </span><span class="n">Nodes</span><span class="p">(</span><span class="n">FaceIDX</span><span class="p">(</span><span class="n">faceId</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="p">:),</span><span class="w"> </span><span class="n">Nodes</span><span class="p">(</span><span class="n">FaceIDX</span><span class="p">(</span><span class="n">faceId</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="p">:));</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="c">% calculate dot product of P and normal vector n</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="n">N1P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Nodes</span><span class="p">(</span><span class="n">FaceIDX</span><span class="p">(</span><span class="n">faceId</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="p">:);</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">dot</span><span class="p">(</span><span class="n">N1P</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">        </span><span class="nb">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">        </span><span class="k">return</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="k">end</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="k">end</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="nb">flag</span><span class="p">=</span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="k">end</span>
+</span></code></pre></div>
+针对C3D5类单元的判别函数
+<div class="language-matlab highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">function</span><span class="w"> </span>flag<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">InPyramid</span><span class="p">(</span>Nodes, P<span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c">% Pyramid elem have 5 face.</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c">% ABAQUS rule about node ordering and face numbering on element</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">FaceIDX</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">1</span><span class="w"> </span><span class="s">5</span><span class="w"> </span><span class="s">2</span><span class="w"> </span><span class="s">0</span><span class="p">;</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">2</span><span class="w"> </span><span class="s">5</span><span class="w"> </span><span class="s">3</span><span class="w"> </span><span class="s">0</span><span class="p">;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="n">3</span><span class="w"> </span><span class="s">5</span><span class="w"> </span><span class="s">4</span><span class="w"> </span><span class="s">0</span><span class="p">;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">4</span><span class="w"> </span><span class="s">5</span><span class="w"> </span><span class="s">1</span><span class="w"> </span><span class="s">0]</span><span class="p">;</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="k">for</span><span class="w"> </span><span class="n">faceId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">FaceIDX</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="c">% judge face i: node 1-node 2-node 3 face</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="c">% get face normal vector(outside)</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">GetNormVector</span><span class="p">(</span><span class="n">Nodes</span><span class="p">(</span><span class="n">FaceIDX</span><span class="p">(</span><span class="n">faceId</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="p">:),</span><span class="w"> </span><span class="n">Nodes</span><span class="p">(</span><span class="n">FaceIDX</span><span class="p">(</span><span class="n">faceId</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="p">:),</span><span class="w"> </span><span class="n">Nodes</span><span class="p">(</span><span class="n">FaceIDX</span><span class="p">(</span><span class="n">faceId</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="p">:));</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="c">% calculate dot product of P and normal vector n</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="n">N1P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Nodes</span><span class="p">(</span><span class="n">FaceIDX</span><span class="p">(</span><span class="n">faceId</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="p">:);</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">dot</span><span class="p">(</span><span class="n">N1P</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">        </span><span class="nb">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">        </span><span class="k">return</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="k">end</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="k">end</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="nb">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="k">end</span>
+</span></code></pre></div>
+求面法向向量的函数
+<div class="language-matlab highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">function</span><span class="w"> </span>NormalVector<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">GetNormVector</span><span class="p">(</span>p1, p2, p3<span class="p">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c">% function return a Normal Vector,base on RightHand Rule, according to three point (row vector)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c">% NormalVector=cross product of (p2-p1) and (p3-p1)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c">% check</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">isrow</span><span class="p">(</span><span class="n">p1</span><span class="p">))</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">isrow</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">isrow</span><span class="p">(</span><span class="n">p3</span><span class="p">))</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="k">return</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">end</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">p1p2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">p1</span><span class="p">;</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">p1p3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">p3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">p1</span><span class="p">;</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="n">NormalVector</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">cross</span><span class="p">(</span><span class="n">p1p2</span><span class="p">,</span><span class="w"> </span><span class="n">p1p3</span><span class="p">);</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="k">end</span>
+</span></code></pre></div>
+附:abqus四面体和五面体单元的节点约定
+<img alt="img" src="../FILES/Note_Others_%E7%82%B9%E4%B8%8E%E5%A4%9A%E9%9D%A2%E4%BD%93%E4%BD%8D%E7%BD%AE%E5%85%B3%E7%B3%BB.md/2026433-20230729162940240-1021980872.png" /></p>
+<p><img alt="img" src="../FILES/Note_Others_%E7%82%B9%E4%B8%8E%E5%A4%9A%E9%9D%A2%E4%BD%93%E4%BD%8D%E7%BD%AE%E5%85%B3%E7%B3%BB.md/2026433-20230729163001262-1211370079.png" /></p>
+<h3 id="matlab_1">测试Matlab的速度和准确度</h3>
+<p><div class="language-matlab highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c">%% vector judge method test tetra elem (not include)</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">Nodes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">40033.883285119</span><span class="p">,</span><span class="w">  </span><span class="mf">264.5168630711</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mf">460.70942035982</span><span class="p">;</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="mf">40038.586165682</span><span class="p">,</span><span class="w">  </span><span class="mf">269.82366853938</span><span class="p">,</span><span class="w">  </span><span class="mf">464.20374836087</span><span class="p">;</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="mf">40032.364670267</span><span class="p">,</span><span class="w">  </span><span class="mf">268.77493858153</span><span class="p">,</span><span class="w">  </span><span class="mf">464.18513138978</span><span class="p">;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="mf">40035.61509136</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mf">262.38393588741</span><span class="p">,</span><span class="w">  </span><span class="mf">466.45744915188</span><span class="p">];</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sum</span><span class="p">(</span><span class="n">Nodes</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="o">+</span><span class="p">[</span><span class="mi">100</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="p">];</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">tic</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="s">disp(&#39;vector judge method test tetra elem(not include)&#39;)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nb">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">InPolyhedronByVJM</span><span class="p">(</span><span class="n">Nodes</span><span class="p">,</span><span class="w"> </span><span class="n">P</span><span class="p">);</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nb">disp</span><span class="p">(</span><span class="nb">flag</span><span class="p">)</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="nb">toc</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="nb">clear</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="c">%% volume judge method test tetra elem (not include)</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="n">Nodes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">40033.883285119</span><span class="p">,</span><span class="w">  </span><span class="mf">264.5168630711</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mf">460.70942035982</span><span class="p">;</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="mf">40038.586165682</span><span class="p">,</span><span class="w">  </span><span class="mf">269.82366853938</span><span class="p">,</span><span class="w">  </span><span class="mf">464.20374836087</span><span class="p">;</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="mf">40032.364670267</span><span class="p">,</span><span class="w">  </span><span class="mf">268.77493858153</span><span class="p">,</span><span class="w">  </span><span class="mf">464.18513138978</span><span class="p">;</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="mf">40035.61509136</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mf">262.38393588741</span><span class="p">,</span><span class="w">  </span><span class="mf">466.45744915188</span><span class="p">];</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sum</span><span class="p">(</span><span class="n">Nodes</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="o">+</span><span class="p">[</span><span class="mi">100</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="p">];</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="n">tic</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="s">disp(&#39;volume judge method test tetra elem(not include)&#39;)</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="nb">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">inpolyhedronByVolCal</span><span class="p">(</span><span class="n">Nodes</span><span class="p">,</span><span class="w"> </span><span class="n">P</span><span class="p">);</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="nb">disp</span><span class="p">(</span><span class="nb">flag</span><span class="p">)</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="nb">toc</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="nb">clear</span>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="c">%% vector judge method test tetra elem (include)</span>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="n">Nodes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">40033.883285119</span><span class="p">,</span><span class="w">  </span><span class="mf">264.5168630711</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mf">460.70942035982</span><span class="p">;</span>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">    </span><span class="mf">40038.586165682</span><span class="p">,</span><span class="w">  </span><span class="mf">269.82366853938</span><span class="p">,</span><span class="w">  </span><span class="mf">464.20374836087</span><span class="p">;</span>
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="w">    </span><span class="mf">40032.364670267</span><span class="p">,</span><span class="w">  </span><span class="mf">268.77493858153</span><span class="p">,</span><span class="w">  </span><span class="mf">464.18513138978</span><span class="p">;</span>
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="w">    </span><span class="mf">40035.61509136</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mf">262.38393588741</span><span class="p">,</span><span class="w">  </span><span class="mf">466.45744915188</span><span class="p">];</span>
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sum</span><span class="p">(</span><span class="n">Nodes</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">;</span>
+</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="n">tic</span>
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="s">disp(&#39;vector judge method test tetra elem(include)&#39;)</span>
+</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="nb">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">InPolyhedronByVJM</span><span class="p">(</span><span class="n">Nodes</span><span class="p">,</span><span class="w"> </span><span class="n">P</span><span class="p">);</span>
+</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="nb">disp</span><span class="p">(</span><span class="nb">flag</span><span class="p">)</span>
+</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="nb">toc</span>
+</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="nb">clear</span>
+</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="c">%% volume judge method test tetra elem (include)</span>
+</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a><span class="n">Nodes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">40033.883285119</span><span class="p">,</span><span class="w">  </span><span class="mf">264.5168630711</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mf">460.70942035982</span><span class="p">;</span>
+</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a><span class="w">    </span><span class="mf">40038.586165682</span><span class="p">,</span><span class="w">  </span><span class="mf">269.82366853938</span><span class="p">,</span><span class="w">  </span><span class="mf">464.20374836087</span><span class="p">;</span>
+</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a><span class="w">    </span><span class="mf">40032.364670267</span><span class="p">,</span><span class="w">  </span><span class="mf">268.77493858153</span><span class="p">,</span><span class="w">  </span><span class="mf">464.18513138978</span><span class="p">;</span>
+</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a><span class="w">    </span><span class="mf">40035.61509136</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="mf">262.38393588741</span><span class="p">,</span><span class="w">  </span><span class="mf">466.45744915188</span><span class="p">];</span>
+</span><span id="__span-4-42"><a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a><span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sum</span><span class="p">(</span><span class="n">Nodes</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">;</span>
+</span><span id="__span-4-43"><a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a><span class="n">tic</span>
+</span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a><span class="s">disp(&#39;volume judge method test tetra elem(include)&#39;)</span>
+</span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a><span class="nb">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">inpolyhedronByVolCal</span><span class="p">(</span><span class="n">Nodes</span><span class="p">,</span><span class="w"> </span><span class="n">P</span><span class="p">);</span>
+</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a><span class="nb">disp</span><span class="p">(</span><span class="nb">flag</span><span class="p">)</span>
+</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a><span class="nb">toc</span>
+</span><span id="__span-4-48"><a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a><span class="nb">clear</span>
+</span><span id="__span-4-49"><a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a><span class="c">%% vector judge method test parymid elem</span>
+</span><span id="__span-4-50"><a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a><span class="c">% node connectivity satisfy abaqus rule </span>
+</span><span id="__span-4-51"><a id="__codelineno-4-51" name="__codelineno-4-51" href="#__codelineno-4-51"></a><span class="n">Nodes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">40074.01489458</span><span class="p">,</span><span class="w"> </span><span class="mf">184.27859731629</span><span class="p">,</span><span class="w"> </span><span class="mf">355.37056669335</span><span class="p">;</span>
+</span><span id="__span-4-52"><a id="__codelineno-4-52" name="__codelineno-4-52" href="#__codelineno-4-52"></a><span class="w">    </span><span class="mf">40081.032227826</span><span class="p">,</span><span class="w"> </span><span class="mf">179.72253222636</span><span class="p">,</span><span class="w"> </span><span class="mf">357.32796879472</span><span class="p">;</span>
+</span><span id="__span-4-53"><a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a><span class="w">    </span><span class="mf">40080.400160415</span><span class="p">,</span><span class="w"> </span><span class="mf">184.49866619658</span><span class="p">,</span><span class="w"> </span><span class="mf">366.02835222196</span><span class="p">;</span>
+</span><span id="__span-4-54"><a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a><span class="w">    </span><span class="mf">40073.363546048</span><span class="p">,</span><span class="w"> </span><span class="mf">189.104242665</span><span class="p">,</span><span class="w"> </span><span class="mf">363.93134923301</span><span class="p">;</span>
+</span><span id="__span-4-55"><a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a><span class="w">    </span><span class="mf">40077.379811862</span><span class="p">,</span><span class="w"> </span><span class="mf">179.07892353029</span><span class="p">,</span><span class="w"> </span><span class="mf">363.81547779482</span><span class="p">;</span><span class="w"> </span><span class="p">];</span>
+</span><span id="__span-4-56"><a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a><span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">40077.2381281462</span><span class="o">+</span><span class="mi">100</span><span class="w">   </span><span class="mf">183.336592386904</span><span class="w">    </span><span class="mf">361.294742947572</span><span class="p">];</span>
+</span><span id="__span-4-57"><a id="__codelineno-4-57" name="__codelineno-4-57" href="#__codelineno-4-57"></a><span class="n">tic</span>
+</span><span id="__span-4-58"><a id="__codelineno-4-58" name="__codelineno-4-58" href="#__codelineno-4-58"></a><span class="s">disp(&#39;test parymid elem&#39;)</span>
+</span><span id="__span-4-59"><a id="__codelineno-4-59" name="__codelineno-4-59" href="#__codelineno-4-59"></a><span class="nb">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">InPolyhedronByVJM</span><span class="p">(</span><span class="n">Nodes</span><span class="p">,</span><span class="w"> </span><span class="n">P</span><span class="p">);</span>
+</span><span id="__span-4-60"><a id="__codelineno-4-60" name="__codelineno-4-60" href="#__codelineno-4-60"></a><span class="nb">disp</span><span class="p">(</span><span class="nb">flag</span><span class="p">)</span>
+</span><span id="__span-4-61"><a id="__codelineno-4-61" name="__codelineno-4-61" href="#__codelineno-4-61"></a><span class="nb">toc</span>
+</span><span id="__span-4-62"><a id="__codelineno-4-62" name="__codelineno-4-62" href="#__codelineno-4-62"></a><span class="nb">clear</span>
+</span></code></pre></div>
+<img alt="img" src="../FILES/Note_Others_%E7%82%B9%E4%B8%8E%E5%A4%9A%E9%9D%A2%E4%BD%93%E4%BD%8D%E7%BD%AE%E5%85%B3%E7%B3%BB.md/2026433-20230729164850138-756654860.png" /></p>
+<h2 id="_3">方法二:体积判别法</h2>
+<blockquote>
+<p>这个代码是我在网上找的,出处已经忘了.</p>
+</blockquote>
+<h3 id="matlab_2">Matlab实现(仅限四面体)</h3>
+<div class="language-matlab highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">function</span><span class="w"> </span>inflag<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">inpolyhedronByVolCal</span><span class="p">(</span>points_mat, p_detected<span class="p">)</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c">% input:</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c">%     + points_set : 4 point&#39;s x y z coordinate,integrated in a 4X3 matrix</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c">%     + p_detected : a point needed to detect ,1X3 matrix contain x y z</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c">%                    coordinate</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c">% return : inflag: 0 or 1</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">D0</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">det</span><span class="p">([</span><span class="n">points_mat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="n">points_mat</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="n">points_mat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="n">points_mat</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">]);</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="n">D1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">det</span><span class="p">([</span><span class="n">p_detected</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="n">points_mat</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="n">points_mat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="n">points_mat</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">]);</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="n">D2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">det</span><span class="p">([</span><span class="n">points_mat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="n">p_detected</span><span class="w">      </span><span class="s">1</span><span class="p">;</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="n">points_mat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="n">points_mat</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">]);</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="n">D3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">det</span><span class="p">([</span><span class="n">points_mat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">    </span><span class="n">points_mat</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">    </span><span class="n">p_detected</span><span class="w">      </span><span class="s">1</span><span class="p">;</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">    </span><span class="n">points_mat</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">]);</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="n">D4</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">det</span><span class="p">([</span><span class="n">points_mat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">    </span><span class="n">points_mat</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">    </span><span class="n">points_mat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">    </span><span class="n">p_detected</span><span class="w">      </span><span class="s">1])</span><span class="p">;</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">D0</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">D1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">D2</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">D3</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">D4</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">((</span><span class="n">D0</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">D1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">D2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">D3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">D4</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">    </span><span class="n">inflag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="k">else</span>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="w">    </span><span class="n">inflag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="k">end</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="k">end</span>
+</span></code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "content.code.copy"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

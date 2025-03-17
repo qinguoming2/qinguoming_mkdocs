@@ -1,0 +1,1651 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Note_Others_%E6%8F%90%E5%8F%96Fibersim%20xml%E4%BF%A1%E6%81%AF/">
+      
+      
+        <link rel="next" href="../Note_Others_Abaqus%E7%9A%84py%E6%8A%A5%E9%94%99/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.2.7">
+    
+    
+      
+        <title>Py&Matlab处理ODB数据 - Qinguoming Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#note_others_pymatlabodb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Qinguoming Notes" class="md-header__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Qinguoming Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Py&Matlab处理ODB数据
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Qinguoming Notes" class="md-nav__button md-logo" aria-label="Qinguoming Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Qinguoming Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    数值分析算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            数值分析算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    蒙特卡洛实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%26%E5%BE%AE%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数值积分+微分方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95code%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    线性方程组的迭代解法CODE实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E6%B1%82%E6%A0%B9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    非线性方程求根
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E5%88%9D%26%E8%BE%B9%E5%80%BC%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    常微分方程初&边值问题数值解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NAA_%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/Note_NAA_Crout%E5%88%86%E8%A7%A3%E8%BF%BD%E8%B5%B6%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crout分解追赶法的线性方程组求解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    FEM算法原理及编程
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            FEM算法原理及编程
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Mindlin%E6%9D%BFQ4%E5%8D%95%E5%85%83%E6%8E%A8%E5%AF%BC-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mindlin Q4单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_Kirchhoff%E6%9D%BF%E7%90%86%E8%AE%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基尔霍夫板理论
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E5%B1%82%E5%90%88%E6%9D%BF%E5%8D%95%E5%85%83%E6%A0%BC%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    层合板单元格式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0-gitbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FEM边界条件处理方法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Fem_FEM%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E7%A8%8B/Note_Fem_%E7%BB%93%E6%9E%84%E5%8A%A8%E5%8A%9B%E5%AD%A6%E6%95%99%E6%9D%90%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    结构动力学教材笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python数值计算
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Python数值计算
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_%E6%9D%90%E6%96%99%E5%88%9A%E5%BA%A6%E8%BD%AC%E6%8D%A2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    材料刚度矩阵转换
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Vtk%E6%96%87%E4%BB%B6%E8%A7%84%E5%88%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vtk文件规则
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_2%263%E7%BB%B4%E9%AB%98%E6%96%AF%E7%A7%AF%E5%88%86py%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2&3维高斯积分Python实现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Mpmath%E5%BA%93%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mpmath库
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    multiprocessing多线程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Py_Python%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/Note_Py_Matlab2Python%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Matlab2Python索引
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CNC_Cpp%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cpp数值计算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Abaqus 建模
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Abaqus 建模
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_CompositeLayup%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus CompositeLayup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%A4%B9%E8%8A%AF%E6%9D%BF%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus Sandwich建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%A4%B1%E6%95%88/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材失效建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E7%A6%BB%E6%95%A3%E5%A2%9E%E5%BC%BA%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复材离散增强建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_SolidSection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus SolidSection KeyWord
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E8%BE%93%E5%87%BA%E5%8D%95%E5%85%83%E5%88%9A%E5%BA%A6%E7%9F%A9%E9%98%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 输出单元刚度矩阵
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E8%BE%93%E5%87%BA%E6%80%BB%E4%BD%93%E5%88%9A%E5%BA%A6%E7%9F%A9%E9%98%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 输出总体刚度矩阵
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 复合材料分析基础
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E5%8E%8B%E7%94%B5%E5%88%86%E6%9E%90%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 压电分析入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E7%83%AD%E8%86%A8%E8%83%80%E7%B3%BB%E6%95%B0%E8%AE%BE%E7%BD%AE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 热膨胀系数设置
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E6%9D%90%E6%96%99%E9%9D%9E%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 材料非均匀分布
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E9%A2%84%E5%BA%94%E5%8A%9B%E6%A8%A1%E6%80%81/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 预应力模态
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Abaqus_Modeling/Note_Abaqus_%E6%A8%A1%E6%80%81%E7%A8%B3%E6%80%81%E5%88%86%E6%9E%90%E5%8E%9F%E7%90%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus 模态稳态分析原理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    其他
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            其他
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git常用命令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_%E5%87%A0%E7%AF%87%E6%A8%A1%E6%80%81%E5%BA%94%E5%8F%98%E8%83%BD%E8%AE%BA%E6%96%87/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    几篇模态应变能论文
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_%E7%82%B9%E4%B8%8E%E5%A4%9A%E9%9D%A2%E4%BD%93%E4%BD%8D%E7%BD%AE%E5%85%B3%E7%B3%BB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    点与多面体位置关系
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_%E5%9F%BA%E4%BA%8EKdTree%E7%9A%84%E7%A9%BA%E9%97%B4%E6%90%9C%E7%B4%A2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    KdTree的空间搜索
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_HM%E5%9B%9B%E9%9D%A2%E4%BD%93%E7%BD%91%E6%A0%BC%E5%88%92%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HM四面体网格划分
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Mathtype%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MathType使用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Python%E7%9A%84%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python的函数传参
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Matlab%E5%85%83%E8%83%9E%E6%95%B0%E7%BB%84%E7%94%A8%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Matlab元胞数组
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_%E6%8F%90%E5%8F%96Fibersim%20xml%E4%BF%A1%E6%81%AF/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    提取Fibersim xml信息
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Py&Matlab处理ODB数据
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Py&Matlab处理ODB数据
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pythonodb" class="md-nav__link">
+    方法一:python访问odb文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#edit-keywords-datmatlab" class="md-nav__link">
+    方法二:edit keywords 输出到dat文件，然后用MATLAB编程计算
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Abaqus%E7%9A%84py%E6%8A%A5%E9%94%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus几个py报错
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Catia%E8%AE%B8%E5%8F%AF%E8%AF%81%E7%A0%B4%E8%A7%A3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Catia许可证破解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_%E8%BE%93%E5%87%BA%E7%A7%AF%E5%88%86%E7%82%B9%E6%95%B0%E6%8D%AE%E5%88%B0dat%E6%96%87%E4%BB%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    输出积分点数据到dat文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Abaqus%26UG%E6%97%A0%E6%B3%95%E5%90%8C%E6%97%B6%E5%90%AF%E5%8A%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Abaqus&UG无法同时启动
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_Fibersim%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fibersim安装破解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Note_Others_%E8%BD%AF%E4%BB%B6%E6%8A%A5%E9%94%99%E5%90%88%E9%9B%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    软件报错合集
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../About/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Me
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pythonodb" class="md-nav__link">
+    方法一:python访问odb文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#edit-keywords-datmatlab" class="md-nav__link">
+    方法二:edit keywords 输出到dat文件，然后用MATLAB编程计算
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="note_others_pymatlabodb">Note_Others_Py&amp;Matlab处理ODB数据</h1>
+<p>https://www.cnblogs.com/aksoam/p/17063398.html</p>
+<p>用conversion shell element （S4R单元）建模层合板，有6层ply,每个lamina（ply）有3个 integration point,共计18个integration point。我想得到集合SET-Middle-elem中所有integration point的E S TSHR13 TSHR23的output。</p>
+<p>提取出结果后，我还需要根据剪切模量计算出13 23方向的shear strain。得到10个vars的output后，利用他们计算出整个laminate的弹性应变能(将每个单元的每个ply的弹性应变能U计算出来进行累加).计算很麻烦。</p>
+<p><img alt="img" src="../FILES/Note_Others_Py%26Matlab%E5%A4%84%E7%90%86ODB%E6%95%B0%E6%8D%AE.md/2026433-20230120224334128-1293622306.png" /></p>
+<h2 id="pythonodb">方法一:python访问odb文件</h2>
+<p>通过python 脚本访问odb文件，然后多个循环进行嵌套提取出output结果。这个办法可行，能够一下子访问到每个element的每个point.
+<div class="language-py highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">odbAccess</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">E</span><span class="o">=</span><span class="n">session</span><span class="o">.</span><span class="n">odbs</span><span class="p">[</span><span class="s1">&#39;30d-50hz.odb&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="s2">&quot;Step-1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">frames</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">fieldOutputs</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+</span></code></pre></div>
+执行上述代码：
+<div class="language-py highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">odbAccess</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">E</span><span class="o">=</span><span class="n">session</span><span class="o">.</span><span class="n">odbs</span><span class="p">[</span><span class="s1">&#39;30d-50hz.odb&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="s2">&quot;Step-1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">frames</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">fieldOutputs</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">E</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">session</span><span class="o">.</span><span class="n">openOdb</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;G:/SIMULIA/workspace/Tanslate_repetition/DMAsimulia/30d-50hz.odb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="s1">&#39;Step-1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">frames</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">fieldOutputs</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">({</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="s1">&#39;baseElementType&#39;</span><span class="p">:</span> <span class="s1">&#39;S4R&#39;</span><span class="p">,</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="s1">&#39;conjugateData&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> 
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="s1">&#39;conjugateDataDouble&#39;</span><span class="p">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span> 
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="s1">&#39;f&#39;</span><span class="p">),</span> <span class="s1">&#39;dataDouble&#39;</span><span class="p">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span> 
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="s1">&#39;elementLabel&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> 
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="s1">&#39;face&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> 
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="s1">&#39;instance&#39;</span><span class="p">:</span> <span class="s1">&#39;OdbInstance object&#39;</span><span class="p">,</span> 
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="s1">&#39;integrationPoint&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> 
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="s1">&#39;inv3&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> 
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="s1">&#39;localCoordSystem&#39;</span><span class="p">:</span> <span class="p">((</span><span class="mf">0.866025388240814</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.866025388240814</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.999999940395355</span><span class="p">)),</span> 
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="s1">&#39;localCoordSystemDouble&#39;</span><span class="p">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span> 
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="s1">&#39;magnitude&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> 
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    <span class="s1">&#39;maxInPlanePrincipal&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> 
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>    <span class="s1">&#39;maxPrincipal&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> 
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    <span class="s1">&#39;midPrincipal&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> 
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="s1">&#39;minInPlanePrincipal&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> 
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    <span class="s1">&#39;minPrincipal&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> 
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="s1">&#39;mises&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> 
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="s1">&#39;nodeLabel&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> 
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    <span class="s1">&#39;outOfPlanePrincipal&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> 
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>    <span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="n">INTEGRATION_POINT</span><span class="p">,</span> 
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>    <span class="s1">&#39;precision&#39;</span><span class="p">:</span> <span class="n">SINGLE_PRECISION</span><span class="p">,</span> 
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>    <span class="s1">&#39;press&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.0</span><span class="p">,</span> 
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>    <span class="s1">&#39;sectionPoint&#39;</span><span class="p">:</span> <span class="s1">&#39;SectionPoint object&#39;</span><span class="p">,</span> 
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    <span class="s1">&#39;tresca&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> 
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">TENSOR_3D_PLANAR</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="p">}</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="p">)</span>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="mi">10800</span>
+</span></code></pre></div>
+可以看出，在用odb的话就会循环非常多次才能算完，并且不容易定位到单个element。我感觉用python的话会code会非常混乱，逻辑不容易理清，因此放弃。</p>
+<h2 id="edit-keywords-datmatlab">方法二:edit keywords 输出到dat文件，然后用MATLAB编程计算</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/aksoam/p/17056236.html">【Shell Element】一次获得多个积分点的输出到dat - hayden_william - 博客园</a></li>
+</ul>
+<p>通过关键字<code>*EL PRINT</code>可以将多个变量在指定积分点上的结果进行输出。这样输出有个好处就是，输出的结果ABAQUS会整理为 类似 table的样式。</p>
+<p><img alt="img" src="../FILES/Note_Others_Py%26Matlab%E5%A4%84%E7%90%86ODB%E6%95%B0%E6%8D%AE.md/2026433-20230120230450015-451360677.png" /></p>
+<p>这样的格式我可以用python进行处理，写入CSV文件。</p>
+<ul>
+<li><a href="https://www.cnblogs.com/aksoam/p/17034417.html">【ABAQUS 二次开发笔记】读入TXT分析结果&amp;输出csv文件 - hayden_william - 博客园</a>
+<img alt="img" src="../FILES/Note_Others_Py%26Matlab%E5%A4%84%E7%90%86ODB%E6%95%B0%E6%8D%AE.md/2026433-20230120231134972-119168600.png" /></li>
+</ul>
+<p>但是使用<code>*EL PRINT</code>有一个问题比较麻烦：<code>*EL PRINT</code>关键字语句的 first data line 一次最多16个section integration point ,多于16个integration point 则需要重复使用<code>*EL PRINT</code>来输出结果。而我有18个integration point 如果分两次输出的话。那输出的就是两个 table .得到结果我还需要整合成一个matrix。不方便。</p>
+<p>但是幸好，composite laminate 的每个ply之间是应力应变满足<code>连续性条件</code>。我可以不输出几个重合的integration point：
+<div class="language-py highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Aindex</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span> <span class="mi">5</span> <span class="mi">7</span> <span class="mi">9</span> <span class="mi">11</span><span class="p">]</span>
+</span></code></pre></div>
+后续需要在matlab中写一个function，恢复这五个integration point 的output。</p>
+<p><img alt="img" src="../FILES/Note_Others_Py%26Matlab%E5%A4%84%E7%90%86ODB%E6%95%B0%E6%8D%AE.md/2026433-20230120232121599-1558205903.png" />
+<div class="language-matlab highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">function</span><span class="w"> </span>B<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">expanMat</span><span class="p">(</span>A,Aindex<span class="p">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c">%将13个积分点数据展开为18个积分点的矩阵</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">B</span><span class="p">=[];</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">sizeAindex</span><span class="p">=</span><span class="nb">size</span><span class="p">(</span><span class="n">Aindex</span><span class="p">);</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">isempty</span><span class="p">(</span><span class="n">Aindex</span><span class="p">)</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="n">B</span><span class="p">=</span><span class="n">A</span><span class="p">;</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="nb">disp</span><span class="p">(</span><span class="s">&#39;A矩阵未改变&#39;</span><span class="p">)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="k">else</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="c">%如果only移动一行就不循环了</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">sizeAindex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">sizeAindex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">            </span><span class="n">B</span><span class="p">=</span><span class="nb">cat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">Aindex</span><span class="p">(</span><span class="mi">1</span><span class="p">),:),</span><span class="n">A</span><span class="p">(</span><span class="n">Aindex</span><span class="p">(</span><span class="mi">1</span><span class="p">),:),</span><span class="n">A</span><span class="p">(</span><span class="n">Aindex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="k">end</span><span class="p">,:));</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="k">else</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">            </span><span class="c">%把index向量升序排序</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">            </span><span class="n">Aindex</span><span class="p">=</span><span class="nb">sort</span><span class="p">(</span><span class="n">Aindex</span><span class="p">);</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">            </span><span class="c">%得到A的行数</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">            </span><span class="n">rows</span><span class="p">=</span><span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">            </span><span class="n">rows</span><span class="p">=</span><span class="n">rows</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">            </span><span class="c">%loop A matrix</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">rows</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">                </span><span class="n">temp</span><span class="p">=</span><span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,:);</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">                </span><span class="c">% if the row operated is the member of Aindex(a array containts indexs of all rows needed to copy)</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="nb">ismember</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="n">Aindex</span><span class="p">)</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">                    </span><span class="n">B</span><span class="p">=</span><span class="nb">cat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">B</span><span class="p">,[</span><span class="n">temp</span><span class="p">;</span><span class="n">temp</span><span class="p">]);</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">                </span><span class="k">else</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">                    </span><span class="n">B</span><span class="p">=</span><span class="nb">cat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">temp</span><span class="p">);</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">                </span><span class="k">end</span><span class="w">           </span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">            </span><span class="k">end</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">        </span><span class="k">end</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">    </span><span class="k">end</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="k">end</span>
+</span></code></pre></div>
+最后：
+<img alt="img" src="../FILES/Note_Others_Py%26Matlab%E5%A4%84%E7%90%86ODB%E6%95%B0%E6%8D%AE.md/2026433-20230120232255032-1711791881.png" /></p>
+<p>算出来的最小二乘结果，感觉误差比较大。</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "content.code.copy"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
